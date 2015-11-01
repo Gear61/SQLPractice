@@ -192,7 +192,7 @@ public class MisterDataSource {
             String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
             Cursor cursor = database.rawQuery(query, null);
             cursor.moveToNext();
-            if(cursor.getInt(0) > 0)
+            if (cursor.getInt(0) > 0)
             {
                 cursor.close();
                 close();

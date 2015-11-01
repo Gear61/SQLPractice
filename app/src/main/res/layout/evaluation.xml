@@ -86,23 +86,13 @@
         <Button
             android:id="@+id/give_up"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/return_to_list"
+            android:layout_below="@+id/retry_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:onClick="giveUp"
             android:text="@string/give_up"
             android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/return_to_list"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/retry_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="returnToQuestionList"
-            android:text="@string/return_to_list"/>
 
     </RelativeLayout>
 </ScrollView>

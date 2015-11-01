@@ -37,8 +37,6 @@ public class QuestionActivity extends AppCompatActivity
     AutoCompleteTextView queryHelper;
 
     // Menu items, don't want to find multiple times
-    MenuItem backward;
-    MenuItem forward;
 
     public boolean killKeyboard()
     {
@@ -84,11 +82,18 @@ public class QuestionActivity extends AppCompatActivity
             Intent intent = new Intent(context, AnswerCheckerActivity.class);
             intent.putExtra("QUESTION_NUM", currentQuestion);
             intent.putExtra("USER_QUERY", queryHelper.getText().toString());
-            context.startActivity(intent);
+            startActivityForResult(intent, 1);
         }
         else
         {
             Util.showDialog("Please enter a SELECT statement.", context, "");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK){
+            advanceQuestionFoward();
         }
     }
 
@@ -122,13 +127,22 @@ public class QuestionActivity extends AppCompatActivity
             queryHelper.setText(queryPreSet);
     }
 
+    public void advanceQuestionFoward() {
+        int numQuestions = QuestionServer.getNumQuestions();
+        currentQuestion++;
+        if (currentQuestion == numQuestions)
+        {
+            currentQuestion = 0;
+        }
+        setUpQuestion();
+        queryHelper.setText("");
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.question_menu, menu);
-        backward = menu.findItem(R.id.backward);
-        forward = menu.findItem(R.id.forward);
         return true;
     }
 
@@ -149,23 +163,11 @@ public class QuestionActivity extends AppCompatActivity
                     currentQuestion = numQuestions - 1;
                 }
                 setUpQuestion();
-
-                // Clear contents if we're coming here from a different question
                 queryHelper.setText("");
-
-                break;
+                return true;
             case R.id.forward:
-                currentQuestion++;
-                if (currentQuestion == numQuestions)
-                {
-                    currentQuestion = 0;
-                }
-                setUpQuestion();
-
-                // Clear contents if we're coming here from a different question
-                queryHelper.setText("");
-
-                break;
+                advanceQuestionFoward();
+                return true;
             default:
                 break;
         }

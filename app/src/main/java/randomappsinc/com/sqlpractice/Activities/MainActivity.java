@@ -15,6 +15,7 @@ import randomappsinc.com.sqlpractice.R;
 
 public class MainActivity extends AppCompatActivity {
     final Context context = this;
+    private QuestionAdapter questionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         // Populate the list, attach adapter to it
         setContentView(R.layout.question_list);
         final ListView questionList = (ListView) findViewById(R.id.questionList);
-        QuestionAdapter questionAdapter = new QuestionAdapter(context);
+        questionAdapter = new QuestionAdapter(context);
         questionList.setAdapter(questionAdapter);
         questionList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -40,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        questionAdapter.notifyDataSetChanged();
     }
 
     @Override

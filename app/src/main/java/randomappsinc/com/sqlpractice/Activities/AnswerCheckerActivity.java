@@ -137,11 +137,7 @@ public class AnswerCheckerActivity extends AppCompatActivity
 
     public void retryQuestion(View view)
     {
-        Intent intent = new Intent(context, QuestionActivity.class);
-        intent.putExtra("QUESTION_NUM", questionNum);
-        intent.putExtra("USER_QUERY", userQuery);
-        AnswerCheckerActivity.this.finish();
-        context.startActivity(intent);
+        finish();
     }
 
     public void giveUp(View view) {
@@ -151,24 +147,14 @@ public class AnswerCheckerActivity extends AppCompatActivity
 
     public void advanceToNextQuestion(View view)
     {
-        Intent intent = new Intent(context, QuestionActivity.class);
-        intent.putExtra("QUESTION_NUM", questionNum + 1);
-        AnswerCheckerActivity.this.finish();
-        context.startActivity(intent);
-    }
-
-    public void returnToQuestionList(View view)
-    {
-        Intent intent = new Intent(context, MainActivity.class);
-        AnswerCheckerActivity.this.finish();
-        context.startActivity(intent);
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.main, menu);
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
