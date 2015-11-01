@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/backward"
+        android:icon="@drawable/backward"
+        android:title="@string/back_arrow"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/forward"
+        android:icon="@drawable/forward"
+        android:title="@string/forward_arrow"
+        app:showAsAction="ifRoom" />
+
+</menu>

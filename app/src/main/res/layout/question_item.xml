@@ -1,0 +1,40 @@
+<!-- ListView item for a question. Simply has "Question #" and a
+check mark/X mark signifiying whether the user has completed this
+question before. -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/completion_status"
+        android:paddingLeft="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/completion_status"
+        android:gravity="center_vertical"
+        android:src="@drawable/x_mark_red"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/completion_status"
+        android:layout_alignParentLeft="true">
+
+        <TextView
+            android:id="@+id/question_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="#000"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

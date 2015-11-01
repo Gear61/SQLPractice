@@ -1,4 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SQL Practice</string>
+
+    <!-- Question List View -->
+    <string name="welcome">Simply click on a question to get started!</string>
+    <string name="our_table">Relevant Table(s):</string>
+    <string name="completion_status">Completion Status of Question</string>
+
+    <!-- Question Menu -->
+    <string name="back_arrow">Return to the previous question</string>
+    <string name="forward_arrow">Advance to the next question</string>
+
+    <!-- Query Submission Form -->
+    <string name="submit_query">Run Query!</string>
+
+    <!-- Answer Evaluation -->
+    <string name="correct_answers">Here is what our answer query returned:</string>
+    <string name="advance_forward">Next Question</string>
+    <string name="give_up">Give Up</string>
+    <string name="retry_question">Retry</string>
+    <string name="return_to_list">Return to Main Menu</string>
+
+    <!-- Activity Descriptions -->
+    <string name="question_activity_display_message">Question Prompt</string>
+    <string name="answer_checker_activity_display_message">Answer Checker</string>
+
+    <string name="app_name">SQL Practice PRO</string>
     <string name="action_settings">Settings</string>
+
 </resources>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "randomappsinc.com.sqlpractice"
+        applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
