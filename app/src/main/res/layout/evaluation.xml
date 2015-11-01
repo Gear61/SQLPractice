@@ -1,18 +1,17 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ScrollView01"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/verdict"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -20,28 +19,19 @@
 
         <TextView
             android:id="@+id/their_answers"
-            android:layout_below="@+id/verdict"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TableLayout
             android:id="@+id/their_answers_table"
-            android:layout_below="@+id/their_answers"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="6">
-            </TableRow>
         </TableLayout>
 
         <TextView
             android:id="@+id/correct_answers"
-            android:layout_below="@+id/their_answers_table"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,50 +39,31 @@
 
         <TableLayout
             android:id="@+id/correct_answers_table"
-            android:layout_below="@+id/correct_answers"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="6">
-            </TableRow>
         </TableLayout>
 
         <Button
             android:id="@+id/advance_forward"
-            android:layout_below="@+id/correct_answers_table"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:onClick="advanceToNextQuestion"
             android:text="@string/advance_forward"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/retry_question"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/correct_answers_table"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="retryQuestion"
             android:text="@string/retry_question"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/give_up"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/retry_question"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="giveUp"
             android:text="@string/give_up"
-            android:visibility="invisible" />
-
-    </RelativeLayout>
+            android:visibility="gone" />
+    </LinearLayout>
 </ScrollView>

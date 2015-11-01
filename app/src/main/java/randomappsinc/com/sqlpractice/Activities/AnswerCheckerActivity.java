@@ -14,6 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.BindString;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Database.AnswerChecker;
 import randomappsinc.com.sqlpractice.Database.AnswerServer;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
@@ -29,35 +33,35 @@ import randomappsinc.com.sqlpractice.Utils.Util;
 public class AnswerCheckerActivity extends AppCompatActivity
 {
     final Context context = this;
-    int questionNum;
-    String userQuery;
+    private int questionNum;
 
-    // Evaluation XML views
-    TextView verdict;
-    TextView their_answers;
-    Button advance_forward;
-    Button retry, give_up;
+    @Bind(R.id.verdict) TextView verdict;
+    @Bind(R.id.their_answers) TextView theirAnswers;
+    @Bind(R.id.advance_forward) Button nextQuestion;
+    @Bind(R.id.retry_question) Button retry;
+    @Bind(R.id.give_up) Button giveUp;
+
+    @BindString(R.string.correct_answer) String correctAnswer;
+    @BindString(R.string.incorrect_answer) String wrongAnswer;
+    @BindString(R.string.invalid_query) String invalidQuery;
+    @BindString(R.string.empty_resultset) String emptyResults;
+    @BindString(R.string.query_results_preamble) String resultsPreamble;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.evaluation);
+        ButterKnife.bind(this);
 
         // Grab relevant data needed to evaluate answers from Question Activity
         Intent intent = getIntent();
         questionNum = intent.getIntExtra("QUESTION_NUM", 0);
-        userQuery = intent.getStringExtra("USER_QUERY");
+        String userQuery = intent.getStringExtra("USER_QUERY");
 
         // Grab an evaluation of user's answer and display it
         AnswerChecker mrAnswer = new AnswerChecker(context);
-        setContentView(R.layout.evaluation);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        verdict = (TextView) findViewById(R.id.verdict);
-        their_answers = (TextView) findViewById(R.id.their_answers);
-        advance_forward = (Button) findViewById(R.id.advance_forward);
-        retry = (Button) findViewById(R.id.retry_question);
-        give_up = (Button) findViewById(R.id.give_up);
 
         displayResponse(mrAnswer.checkAnswer(questionNum, userQuery));
     }
@@ -68,31 +72,31 @@ public class AnswerCheckerActivity extends AppCompatActivity
         {
             MisterDataSource updateAnswer = new MisterDataSource(context);
             updateAnswer.addAnswer(questionNum);
-            verdict.setText("Congratulations! You got the correct answer!");
+            verdict.setText(correctAnswer);
             if (questionNum != QuestionServer.getNumQuestions() - 1)
             {
-                advance_forward.setVisibility(View.VISIBLE);
+                nextQuestion.setVisibility(View.VISIBLE);
             }
         }
         else
         {
             retry.setVisibility(View.VISIBLE);
-            give_up.setVisibility(View.VISIBLE);
-            verdict.setText("Your query was incorrect. Please try again.");
+            giveUp.setVisibility(View.VISIBLE);
+            verdict.setText(wrongAnswer);
         }
 
         // They got it wrong
         if (score.userResults().getData() == null)
         {
-            their_answers.setText("Your query wasn't a valid query.");
+            theirAnswers.setText(invalidQuery);
         }
         else if (score.userResults().getData().length == 0)
         {
-            their_answers.setText("Your query didn't return anything.");
+            theirAnswers.setText(emptyResults);
         }
         else
         {
-            their_answers.setText("Here is what your query returned.");
+            theirAnswers.setText(resultsPreamble);
             // Logic to display their table
             createTable((TableLayout) findViewById(R.id.their_answers_table),
                     score.userResults().getColumns(), score.userResults().getData());
@@ -107,10 +111,10 @@ public class AnswerCheckerActivity extends AppCompatActivity
         TableLayout.LayoutParams params1 = new TableLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.1f);
 
         LinearLayout topRow = new LinearLayout(this);
-        for (int i = 0; i < columns.length; i++)
+        for (String column : columns)
         {
             TextView text = new TextView(this);
-            text.setText(columns[i]);
+            text.setText(column);
             text.setLayoutParams(params1);
             text.setTypeface(null, Typeface.BOLD);
             topRow.addView(text);
@@ -120,13 +124,13 @@ public class AnswerCheckerActivity extends AppCompatActivity
         // add the TableRow to the TableLayout
         table.addView(topRow);
 
-        for (int i = 0; i < data.length; i++)
+        for (String[] dataRow : data)
         {
             LinearLayout tuple = new LinearLayout(this);
-            for (int j = 0; j < columns.length; j++)
+            for (String datum : dataRow)
             {
                 TextView text = new TextView(this);
-                text.setText(data[i][j]);
+                text.setText(datum);
                 text.setLayoutParams(params1);
                 tuple.addView(text);
             }
@@ -135,16 +139,19 @@ public class AnswerCheckerActivity extends AppCompatActivity
         }
     }
 
+    @OnClick(R.id.retry_question)
     public void retryQuestion(View view)
     {
         finish();
     }
 
+    @OnClick(R.id.give_up)
     public void giveUp(View view) {
         String giveUpAns = AnswerServer.getAnswer(questionNum);
         Util.showDialog(giveUpAns, context, "Our Answer Query");
     }
 
+    @OnClick(R.id.advance_forward)
     public void advanceToNextQuestion(View view)
     {
         setResult(RESULT_OK);

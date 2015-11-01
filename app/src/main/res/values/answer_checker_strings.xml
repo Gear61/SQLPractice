@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="answer_checker_label">Answer Checker</string>
+
+    <string name="correct_answer">Congratulations! You got the correct answer!</string>
+    <string name="incorrect_answer">Your query was incorrect. Please try again.</string>
+    <string name="invalid_query">Your query was not valid.</string>
+    <string name="empty_resultset">Your query did not return anything.</string>
+    <string name="query_results_preamble">Here is what your query returned.</string>
+</resources>
