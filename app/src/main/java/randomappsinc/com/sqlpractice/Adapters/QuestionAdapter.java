@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.FontAwesomeText;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.R;
@@ -19,11 +22,19 @@ public class QuestionAdapter extends BaseAdapter
 {
     private Context context;
     private String[] questionList = new String[QuestionServer.getNumQuestions()];
+    private String xIcon;
+    private String checkIcon;
+    private int red;
+    private int green;
 
     // Creates the "Question 1, Question 2, etc..." list
     public QuestionAdapter(Context context)
     {
         this.context = context;
+        this.xIcon = context.getString(R.string.x_icon);
+        this.checkIcon = context.getString(R.string.check_icon);
+        this.red = context.getResources().getColor(R.color.red);
+        this.green = context.getResources().getColor(R.color.green);
         populateList();
     }
 
@@ -53,41 +64,39 @@ public class QuestionAdapter extends BaseAdapter
 
     public static class ViewHolder
     {
-        public ImageView item1;
-        public TextView item2;
+        @Bind(R.id.question_number) TextView questionNumber;
+        @Bind(R.id.completion_icon) FontAwesomeText completionIcon;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     // Renders the ListView item that the user has scrolled to or is about to scroll to
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
-        View v = convertView;
+    public View getView(int position, View view, ViewGroup parent) {
         final ViewHolder holder;
-        if (v == null)
-        {
+        if (view == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.question_item, null);
-            holder = new ViewHolder();
-            holder.item1 = (ImageView) v.findViewById(R.id.completion_status);
-            holder.item2 = (TextView) v.findViewById(R.id.question_number);
-            v.setTag(holder);
+            view = vi.inflate(R.layout.question_item, parent, false);
+            holder = new ViewHolder(view);
+            view.setTag(holder);
         }
-        else
-        {
-            holder = (ViewHolder)v.getTag();
+        else {
+            holder = (ViewHolder) view.getTag();
         }
 
-        final String question = questionList[position];
-        if (question != null)
-        {
-            MisterDataSource theJudge = new MisterDataSource(context);
-            if (theJudge.checkAnswer(position))
-                holder.item1.setImageResource(R.drawable.check_mark);
-            else
-                holder.item1.setImageResource(R.drawable.x_mark_red);
-
-            // Load in "Question X"
-            holder.item2.setText(question);
+        MisterDataSource theJudge = new MisterDataSource(context);
+        if (theJudge.hasUserCompletedQuestion(position)) {
+            holder.completionIcon.setIcon(checkIcon);
+            holder.completionIcon.setTextColor(green);
         }
-        return v;
+        else {
+            holder.completionIcon.setIcon(xIcon);
+            holder.completionIcon.setTextColor(red);
+        }
+
+        // Load in "Question X"
+        holder.questionNumber.setText(questionList[position]);
+        return view;
     }
 }

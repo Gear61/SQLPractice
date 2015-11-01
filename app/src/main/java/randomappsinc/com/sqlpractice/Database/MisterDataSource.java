@@ -183,12 +183,12 @@ public class MisterDataSource {
         }
     }
 
-    public boolean checkAnswer(int qNumi)
+    public boolean hasUserCompletedQuestion(int questionNumber)
     {
         open();
         try
         {
-            String qNum = Integer.toString(qNumi);
+            String qNum = Integer.toString(questionNumber);
             String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
             Cursor cursor = database.rawQuery(query, null);
             cursor.moveToNext();
@@ -211,23 +211,6 @@ public class MisterDataSource {
             return false;
         }
     }
-
-	/* public void printTable()
-    {
-		open();
-		String query = "SELECT * FROM COMPLETION_STATUS;";
-		Cursor cursor = database.rawQuery(query, null);
-		int row = cursor.getCount();
-		while (cursor.moveToNext())
-        {
-			for (int i = 0; i < row; i++)
-            {
-				System.out.println(cursor.getString(0));
-			}
-		}
-		cursor.close();
-		close();
-	} */
 
     public ResultSet getData(String queryString)
     {
