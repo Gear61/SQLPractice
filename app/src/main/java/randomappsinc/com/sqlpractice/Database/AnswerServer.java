@@ -26,9 +26,6 @@ public class AnswerServer
                     "SELECT DISTINCT First_Name, Last_Name FROM CHECKED_OUT INNER JOIN BOOKS " +
                             "ON CHECKED_OUT.Book_ID = BOOKS.Book_ID WHERE Author = \"Terry Crews\";",
                     "SELECT * FROM BOOKS"};
-    //"MINUS " +
-    //"(SELECT BOOKS.Book_ID, Book_Name, Author " +
-    //"FROM BOOKS INNER JOIN CHECKED_OUT ON CHECKED_OUT.Book_ID = BOOKS.Book_ID);"};
 
     public static String getAnswer(int position)
     {
