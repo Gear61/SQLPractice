@@ -12,6 +12,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+
 import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Database.SchemaServer;
@@ -143,6 +146,14 @@ public class QuestionActivity extends AppCompatActivity
     {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.question_menu, menu);
+        menu.findItem(R.id.backward).setIcon(
+                new IconDrawable(this, FontAwesomeIcons.fa_arrow_left)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        menu.findItem(R.id.forward).setIcon(
+                new IconDrawable(this, FontAwesomeIcons.fa_arrow_right)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
         return true;
     }
 

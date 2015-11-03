@@ -25,5 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.beardedhen:androidbootstrap:1.2.3'
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
 }

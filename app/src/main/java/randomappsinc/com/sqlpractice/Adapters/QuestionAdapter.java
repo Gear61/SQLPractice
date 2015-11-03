@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.beardedhen.androidbootstrap.FontAwesomeText;
+import com.joanzapata.iconify.widget.IconTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -65,7 +65,7 @@ public class QuestionAdapter extends BaseAdapter
     public static class ViewHolder
     {
         @Bind(R.id.question_number) TextView questionNumber;
-        @Bind(R.id.completion_icon) FontAwesomeText completionIcon;
+        @Bind(R.id.completion_icon) IconTextView completionIcon;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -77,7 +77,7 @@ public class QuestionAdapter extends BaseAdapter
         final ViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = vi.inflate(R.layout.question_item, parent, false);
+            view = vi.inflate(R.layout.question_list_item, parent, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
         }
@@ -87,11 +87,11 @@ public class QuestionAdapter extends BaseAdapter
 
         MisterDataSource theJudge = new MisterDataSource(context);
         if (theJudge.hasUserCompletedQuestion(position)) {
-            holder.completionIcon.setIcon(checkIcon);
+            holder.completionIcon.setText(checkIcon);
             holder.completionIcon.setTextColor(green);
         }
         else {
-            holder.completionIcon.setIcon(xIcon);
+            holder.completionIcon.setText(xIcon);
             holder.completionIcon.setTextColor(red);
         }
 
