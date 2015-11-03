@@ -1,29 +1,39 @@
-<RelativeLayout
+<com.balysv.materialripple.MaterialRippleLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:mrl_rippleInAdapter="true"
+    app:mrl_rippleDuration="200"
+    app:mrl_rippleColor="@color/app_turquoise"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/question_number"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/completion_icon"
-        android:layout_marginRight="5dp"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:textSize="18dp"
-        android:textColor="#000"/>
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp">
 
-    <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/completion_icon"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:layout_height="25dp"
-        android:layout_width="25dp"
-        android:textSize="22dp"/>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/question_number"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/completion_icon"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="18dp"
+            android:textColor="#000"/>
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/completion_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_height="25dp"
+            android:layout_width="25dp"
+            android:textSize="22dp"/>
+    </RelativeLayout>
+</com.balysv.materialripple.MaterialRippleLayout>

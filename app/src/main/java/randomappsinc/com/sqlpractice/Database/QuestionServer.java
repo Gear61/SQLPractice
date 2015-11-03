@@ -14,21 +14,9 @@ public class QuestionServer
     // Hooray for strange 0 indexing.
     // Question 1 -> Table 2 = {0, 1}, so the first element of this array would be 1
     private static int[][] questionTablePairings =
-            {{1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {1},
-                    {2},
-                    {2, 3},
-                    {2, 3}};
+            {{1}, {1}, {1}, {1}, {1},
+             {1}, {1}, {1}, {1}, {1},
+             {1}, {1}, {2}, {2, 3}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -49,8 +37,7 @@ public class QuestionServer
                     "Write a query that returns the third highest salary in the table. " +
                     "Duplicate salaries count as one. For example, if you have 20, 20, 10, and 5, 10 is the second highest salary.",
                     "Write a query that returns all people who share their last name with somebody else.",
-                    "Write a query that returns the first and last name of all people who have checked out a book by Terry Crews.",
-                    "Write a query that returns all the books that haven't been checked out."};
+                    "Write a query that returns the first and last name of all people who have checked out a book by Terry Crews."};
 
     private Question[] allQuestions = new Question[questions.length];
 
