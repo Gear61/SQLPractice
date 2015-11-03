@@ -2,4 +2,5 @@
 <resources>
     <string name="x_icon">{fa-close}</string>
     <string name="check_icon">{fa-check}</string>
+    <string name="question_number">Question #</string>
 </resources>

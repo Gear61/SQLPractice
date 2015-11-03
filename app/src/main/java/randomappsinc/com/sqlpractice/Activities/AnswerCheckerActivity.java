@@ -23,8 +23,9 @@ import randomappsinc.com.sqlpractice.Database.AnswerServer;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Database.Models.ResponseBundle;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
+import randomappsinc.com.sqlpractice.Misc.Constants;
+import randomappsinc.com.sqlpractice.Misc.Util;
 import randomappsinc.com.sqlpractice.R;
-import randomappsinc.com.sqlpractice.Utils.Util;
 
 /**
  * Created by alexanderchiou on 10/31/15.
@@ -56,8 +57,8 @@ public class AnswerCheckerActivity extends AppCompatActivity
 
         // Grab relevant data needed to evaluate answers from Question Activity
         Intent intent = getIntent();
-        questionNum = intent.getIntExtra("QUESTION_NUM", 0);
-        String userQuery = intent.getStringExtra("USER_QUERY");
+        questionNum = intent.getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
+        String userQuery = intent.getStringExtra(Constants.USER_QUERY_KEY);
 
         // Grab an evaluation of user's answer and display it
         AnswerChecker mrAnswer = new AnswerChecker(context);

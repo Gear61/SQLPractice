@@ -1,10 +1,13 @@
-package randomappsinc.com.sqlpractice.Utils;
+package randomappsinc.com.sqlpractice.Misc;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.Html;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Created by alexanderchiou on 10/31/15.
@@ -29,6 +32,14 @@ public class Util
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.setTitle(title);
         alertDialog.show();
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @SuppressLint("DefaultLocale")

@@ -1,4 +1,4 @@
-package randomappsinc.com.sqlpractice.Utils;
+package randomappsinc.com.sqlpractice.Misc;
 
 import android.app.Application;
 import android.content.Context;

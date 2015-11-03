@@ -3,7 +3,7 @@
     package="randomappsinc.com.sqlpractice" >
 
     <application
-        android:name=".Utils.MyApplication"
+        android:name=".Misc.MyApplication"
         android:fullBackupContent="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

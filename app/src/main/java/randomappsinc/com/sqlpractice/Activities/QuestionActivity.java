@@ -1,25 +1,26 @@
 package randomappsinc.com.sqlpractice.Activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
+import butterknife.Bind;
+import butterknife.BindString;
+import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Database.SchemaServer;
+import randomappsinc.com.sqlpractice.Misc.Constants;
+import randomappsinc.com.sqlpractice.Misc.Util;
 import randomappsinc.com.sqlpractice.R;
-import randomappsinc.com.sqlpractice.Utils.Util;
 
 /**
  * Created by alexanderchiou on 10/31/15.
@@ -27,69 +28,41 @@ import randomappsinc.com.sqlpractice.Utils.Util;
 // Loads questions for users to answer
 public class QuestionActivity extends AppCompatActivity
 {
-    final Context context = this;
-    SchemaServer m_SS = SchemaServer.getSchemaServer();
-    QuestionServer m_QS = QuestionServer.getQuestionServer();
+    private SchemaServer schemaServer;
+    private QuestionServer questionServer;
     int currentQuestion;
-    String queryPreSet;
 
     // Question form views
-    TextView questionNumber;
-    TextView tableDesign;
-    TextView questionPrompt;
-    AutoCompleteTextView queryHelper;
-
-    // Menu items, don't want to find multiple times
-
-    public boolean killKeyboard()
-    {
-        View view = this.getWindow().getDecorView().findViewById(android.R.id.content);
-        Rect r = new Rect();
-        view.getWindowVisibleDisplayFrame(r);
-
-        int heightDiff = view.getRootView().getHeight() - (r.bottom - r.top);
-        if (heightDiff > 100)
-        {
-            InputMethodManager inputManager = (InputMethodManager) context
-                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-        return false;
-    }
+    @Bind(R.id.question_number) TextView questionNumber;
+    @Bind(R.id.table_design) TextView tableDesign;
+    @Bind(R.id.problem) TextView questionPrompt;
+    @Bind(R.id.query_entry) AutoCompleteTextView queryHelper;
+    @BindString(R.string.question_number) String questionPrefix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_form);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ButterKnife.bind(this);
+        schemaServer = SchemaServer.getSchemaServer();
+        questionServer = QuestionServer.getQuestionServer();
 
         Intent intent = getIntent();
-        currentQuestion = intent.getIntExtra("QUESTION_NUM", 0);
-
-        questionNumber = (TextView) findViewById(R.id.question_number);
-        tableDesign = (TextView) findViewById(R.id.table_design);
-        questionPrompt = (TextView) findViewById(R.id.problem);
-        queryHelper = (AutoCompleteTextView) findViewById(R.id.query_entry);
-        queryPreSet = intent.getStringExtra("USER_QUERY");
-
+        currentQuestion = intent.getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
         setUpQuestion();
     }
 
-    public void checkAnswer(View view)
-    {
-        if (Util.validSELECT(queryHelper.getText().toString()))
-        {
-            Intent intent = new Intent(context, AnswerCheckerActivity.class);
-            intent.putExtra("QUESTION_NUM", currentQuestion);
-            intent.putExtra("USER_QUERY", queryHelper.getText().toString());
+    public void checkAnswer(View view) {
+        if (Util.validSELECT(queryHelper.getText().toString())) {
+            Intent intent = new Intent(this, AnswerCheckerActivity.class);
+            intent.putExtra(Constants.QUESTION_NUMBER_KEY, currentQuestion);
+            intent.putExtra(Constants.USER_QUERY_KEY, queryHelper.getText().toString());
             startActivityForResult(intent, 1);
         }
-        else
-        {
-            Util.showDialog("Please enter a SELECT statement.", context, "");
+        else {
+            Util.showDialog("Please enter a SELECT statement.", this, "");
         }
     }
 
@@ -104,30 +77,30 @@ public class QuestionActivity extends AppCompatActivity
     private void setUpQuestion()
     {
         // Set up simple title
-        questionNumber.setText("Question #" + String.valueOf(currentQuestion + 1));
+        String title = questionPrefix = String.valueOf(currentQuestion + 1);
+        questionNumber.setText(title);
 
         // Get descriptions of the tables we're supposed to use.
         String tableDescriptions = "";
-        int[] relevantTables = m_QS.getQuestion(currentQuestion).giveNeededTables();
+        int[] relevantTables = questionServer.getQuestion(currentQuestion).giveNeededTables();
         for (int i = 0; i < relevantTables.length; i++)
         {
             if (i != 0)
             {
                 tableDescriptions += "\n\n";
             }
-            tableDescriptions += m_SS.serveTable(relevantTables[i]).description();
+            tableDescriptions += schemaServer.serveTable(relevantTables[i]).description();
         }
         tableDesign.setText(tableDescriptions);
 
         // Load the problem
-        questionPrompt.setText(m_QS.getQuestion(currentQuestion).giveQuestionText());
+        questionPrompt.setText(questionServer.getQuestion(currentQuestion).giveQuestionText());
 
         // Set up Auto Complete
-        QueryACAdapter adapter = new QueryACAdapter(context, android.R.layout.simple_dropdown_item_1line,
-                m_SS.serveSomeTables(relevantTables), queryHelper);
+        QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
+                schemaServer.serveSomeTables(relevantTables), queryHelper);
         queryHelper.setAdapter(adapter);
-        if (queryPreSet != null)
-            queryHelper.setText(queryPreSet);
+
     }
 
     public void advanceQuestionFoward() {
@@ -160,13 +133,13 @@ public class QuestionActivity extends AppCompatActivity
     // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        killKeyboard();
+        Util.hideKeyboard(this);
         int numQuestions = QuestionServer.getNumQuestions();
         switch (item.getItemId())
         {
             case android.R.id.home:
                 finish();
-                break;
+                return true;
             case R.id.backward:
                 currentQuestion--;
                 if (currentQuestion < 0)
@@ -182,7 +155,6 @@ public class QuestionActivity extends AppCompatActivity
             default:
                 break;
         }
-        invalidateOptionsMenu();
         return super.onOptionsItemSelected(item);
     }
 }
