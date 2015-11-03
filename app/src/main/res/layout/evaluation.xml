@@ -1,5 +1,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -40,30 +41,44 @@
         <TableLayout
             android:id="@+id/correct_answers_table"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </TableLayout>
 
-        <Button
+        <com.rey.material.widget.Button
+            style="@style/ButtonStyle"
             android:id="@+id/advance_forward"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/advance_forward"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:rd_rippleType="touch"
+            app:rd_backgroundAnimDuration="0"
+            app:rd_backgroundColor="@android:color/transparent"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleAnimDuration="150"
+            app:rd_enable="true"/>
 
-        <Button
+        <com.rey.material.widget.Button
+            style="@style/ButtonStyle"
             android:id="@+id/retry_question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/retry_question"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:rd_rippleType="touch"
+            app:rd_backgroundAnimDuration="0"
+            app:rd_backgroundColor="@android:color/transparent"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleAnimDuration="150"
+            app:rd_enable="true"/>
 
-        <Button
+        <com.rey.material.widget.Button
+            style="@style/ButtonStyle"
             android:id="@+id/give_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/give_up"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:rd_rippleType="touch"
+            app:rd_backgroundAnimDuration="0"
+            app:rd_backgroundColor="@android:color/transparent"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleAnimDuration="150"
+            app:rd_enable="true"/>
     </LinearLayout>
 </ScrollView>

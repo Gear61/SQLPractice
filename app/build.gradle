@@ -27,4 +27,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
     compile 'com.balysv:material-ripple:1.0.2'
+    compile 'com.github.rey5137:material:1.2.1'
 }

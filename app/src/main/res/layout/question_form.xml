@@ -35,17 +35,21 @@
         <AutoCompleteTextView
             android:id="@+id/query_entry"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/text_input_border"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <Button
+        <com.rey.material.widget.Button
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/ButtonStyle"
             android:id="@+id/submit_query"
             android:text="@string/submit_query"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="checkAnswer"/>
+            app:rd_rippleType="touch"
+            app:rd_backgroundAnimDuration="0"
+            app:rd_backgroundColor="@android:color/transparent"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleAnimDuration="150"
+            app:rd_enable="true"/>
     </LinearLayout>
 </ScrollView>

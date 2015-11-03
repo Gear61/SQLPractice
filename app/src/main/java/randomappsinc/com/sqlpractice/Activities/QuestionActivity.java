@@ -15,6 +15,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Database.SchemaServer;
@@ -30,7 +31,6 @@ public class QuestionActivity extends AppCompatActivity
 {
     private SchemaServer schemaServer;
     private QuestionServer questionServer;
-    private QueryACAdapter queryACAdapter;
     int currentQuestion;
 
     // Question form views
@@ -55,6 +55,7 @@ public class QuestionActivity extends AppCompatActivity
         setUpQuestion();
     }
 
+    @OnClick(R.id.submit_query)
     public void checkAnswer(View view) {
         if (Util.validSELECT(queryHelper.getText().toString())) {
             Intent intent = new Intent(this, AnswerCheckerActivity.class);
@@ -94,9 +95,9 @@ public class QuestionActivity extends AppCompatActivity
         questionPrompt.setText(questionServer.getQuestion(currentQuestion).giveQuestionText());
 
         // Set up Auto Complete
-        queryACAdapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
+        QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
                 schemaServer.serveSomeTables(relevantTables), queryHelper);
-        queryHelper.setAdapter(queryACAdapter);
+        queryHelper.setAdapter(adapter);
     }
 
     public void changeQuestion(int increment) {
