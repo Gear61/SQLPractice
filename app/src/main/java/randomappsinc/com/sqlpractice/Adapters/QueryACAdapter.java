@@ -55,32 +55,27 @@ public class QueryACAdapter extends ArrayAdapter<String>
         addRowInformation();
 
         this.itemsAll = (ArrayList<String>) QueryACAdapter.items.clone();
-        this.suggestions = new ArrayList<String>();
+        this.suggestions = new ArrayList<>();
+    }
+
+    public String getSuggestion(int position) {
+        return suggestions.get(position);
     }
 
     // Add SQLite keywords (SELECT, FROM, WHERE, etc) to suggestions
-    private void addConstants()
-    {
-        for (int i = 0; i < constants.size(); i++)
-        {
+    private void addConstants() {
+        for (int i = 0; i < constants.size(); i++) {
             items.add(constants.get(i));
         }
     }
 
     // Add table terms (table name, column names) to suggestions
-    private void addTableInformation()
-    {
-        for (int i = 0; i < currentSchemas.length; i++)
-        {
-            items.add(currentSchemas[i].getName());
-        }
-
-        for (int i = 0; i < currentSchemas.length; i++)
-        {
-            Column[] allCols = currentSchemas[i].getColumns();
-            for (int j = 0; j < allCols.length; j++)
-            {
-                items.add(allCols[j].getRowName());
+    private void addTableInformation() {
+        for (Schema schema : currentSchemas) {
+            items.add(schema.getName());
+            Column[] allCols = schema.getColumns();
+            for (Column column : allCols) {
+                items.add(column.getRowName());
             }
         }
     }
@@ -89,9 +84,9 @@ public class QueryACAdapter extends ArrayAdapter<String>
     // Ain't nobody got time to type out Computer Science or Zaniolo
     private void addRowInformation()
     {
-        for (int i = 0; i < currentSchemas.length; i++)
+        for (Schema schema : currentSchemas)
         {
-            items.addAll(currentSchemas[i].createSuggestions());
+            items.addAll(schema.createSuggestions());
         }
     }
 
@@ -133,13 +128,8 @@ public class QueryACAdapter extends ArrayAdapter<String>
                 autoFill += parent.getItemAtPosition(position).toString();
                 pieces[pieces.length - 1] = autoFill;
                 String longerQuery = "";
-                for (int i = 0; i < pieces.length; i++)
-                {
-                    longerQuery += pieces[i];
-                    if (i != pieces.length - 1)
-                    {
-                        longerQuery += " ";
-                    }
+                for (String piece : pieces) {
+                    longerQuery += piece + " ";
                 }
                 userQuery.setText(longerQuery);
                 userQuery.setSelection(longerQuery.length());
@@ -210,8 +200,8 @@ public class QueryACAdapter extends ArrayAdapter<String>
                     // Linear search to populate suggestions
                     for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++)
                     {
-                        if (itemsAll.get(i).toString().toLowerCase().startsWith((target.toLowerCase()))
-                                && !itemsAll.get(i).toString().toLowerCase().equals(target.toLowerCase())
+                        if (itemsAll.get(i).toLowerCase().startsWith((target.toLowerCase()))
+                                && !itemsAll.get(i).toLowerCase().equals(target.toLowerCase())
                                 && !suggestions.contains(itemsAll.get(i)))
                         {
                             j++;

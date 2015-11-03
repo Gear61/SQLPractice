@@ -26,6 +26,7 @@
         <activity
             android:label="@string/question_page_label"
             android:name=".Activities.QuestionActivity"
+            android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize">
         </activity>
     </application>

@@ -30,10 +30,10 @@ public class QuestionActivity extends AppCompatActivity
 {
     private SchemaServer schemaServer;
     private QuestionServer questionServer;
+    private QueryACAdapter queryACAdapter;
     int currentQuestion;
 
     // Question form views
-    @Bind(R.id.question_number) TextView questionNumber;
     @Bind(R.id.table_design) TextView tableDesign;
     @Bind(R.id.problem) TextView questionPrompt;
     @Bind(R.id.query_entry) AutoCompleteTextView queryHelper;
@@ -44,8 +44,9 @@ public class QuestionActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_form);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
         schemaServer = SchemaServer.getSchemaServer();
         questionServer = QuestionServer.getQuestionServer();
 
@@ -69,17 +70,13 @@ public class QuestionActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK){
-            advanceQuestionFoward();
+            changeQuestion(1);
         }
     }
 
     // Sets up a question given the number
     private void setUpQuestion()
     {
-        // Set up simple title
-        String title = questionPrefix = String.valueOf(currentQuestion + 1);
-        questionNumber.setText(title);
-
         // Get descriptions of the tables we're supposed to use.
         String tableDescriptions = "";
         int[] relevantTables = questionServer.getQuestion(currentQuestion).giveNeededTables();
@@ -97,21 +94,25 @@ public class QuestionActivity extends AppCompatActivity
         questionPrompt.setText(questionServer.getQuestion(currentQuestion).giveQuestionText());
 
         // Set up Auto Complete
-        QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
+        queryACAdapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
                 schemaServer.serveSomeTables(relevantTables), queryHelper);
-        queryHelper.setAdapter(adapter);
-
+        queryHelper.setAdapter(queryACAdapter);
     }
 
-    public void advanceQuestionFoward() {
+    public void changeQuestion(int increment) {
         int numQuestions = QuestionServer.getNumQuestions();
-        currentQuestion++;
+        currentQuestion += increment;
         if (currentQuestion == numQuestions)
         {
             currentQuestion = 0;
         }
+        else if (currentQuestion < 0)
+        {
+            currentQuestion = numQuestions - 1;
+        }
         setUpQuestion();
         queryHelper.setText("");
+        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
     }
 
     @Override
@@ -134,23 +135,16 @@ public class QuestionActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item)
     {
         Util.hideKeyboard(this);
-        int numQuestions = QuestionServer.getNumQuestions();
         switch (item.getItemId())
         {
             case android.R.id.home:
                 finish();
                 return true;
             case R.id.backward:
-                currentQuestion--;
-                if (currentQuestion < 0)
-                {
-                    currentQuestion = numQuestions - 1;
-                }
-                setUpQuestion();
-                queryHelper.setText("");
+                changeQuestion(-1);
                 return true;
             case R.id.forward:
-                advanceQuestionFoward();
+                changeQuestion(1);
                 return true;
             default:
                 break;
