@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -15,6 +20,7 @@ import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.Adapters.QuestionAdapter;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Misc.Constants;
+import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        if (PreferencesManager.get().getFirstTimeUser()) {
+            new MaterialDialog.Builder(this)
+                    .title(R.string.welcome)
+                    .content(R.string.ask_for_help)
+                    .positiveText(android.R.string.yes)
+                    .show();
+            PreferencesManager.get().setFirstTimeUser(false);
+        }
 
         MisterDataSource m_dataSource = new MisterDataSource(context);
         m_dataSource.refreshTables();
@@ -52,10 +67,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.settings).setIcon(
+                new IconDrawable(this, FontAwesomeIcons.fa_gear)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
         return true;
+    }
+
+    // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

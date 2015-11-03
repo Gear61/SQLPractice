@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="@string/welcome"
+        android:text="@string/intro"
         android:gravity="center"/>
 
     <ListView

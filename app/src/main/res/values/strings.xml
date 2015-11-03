@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">SQL Practice PRO</string>
+    <string name="settings">Settings</string>
 
     <!-- Question List View -->
-    <string name="welcome">Simply click on a question to get started!</string>
+    <string name="intro">Simply click on a question to get started!</string>
     <string name="our_table">Relevant Table(s):</string>
     <string name="completion_status">Completion Status of Question</string>
 
@@ -24,7 +26,9 @@
     <string name="question_activity_display_message">Question Prompt</string>
     <string name="answer_checker_activity_display_message">Answer Checker</string>
 
-    <string name="app_name">SQL Practice PRO</string>
-    <string name="action_settings">Settings</string>
-
+    <string name="welcome">Welcome</string>
+    <string name="ask_for_help">Hey there, I\'m Alex! I\'m always looking to make my work as awesome as possible
+        for the community, so if you have any ideas on how to improve this app (question suggestion(s), bug fix,
+        feature request), please use the send feedback option in the settings to tell me! Thank you!
+    </string>
 </resources>
