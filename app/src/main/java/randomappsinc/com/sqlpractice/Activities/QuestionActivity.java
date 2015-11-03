@@ -2,6 +2,7 @@ package randomappsinc.com.sqlpractice.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,7 +39,12 @@ public class QuestionActivity extends AppCompatActivity
     @Bind(R.id.table_design) TextView tableDesign;
     @Bind(R.id.problem) TextView questionPrompt;
     @Bind(R.id.query_entry) AutoCompleteTextView queryHelper;
+    @Bind(R.id.coordinator_layout) CoordinatorLayout parent;
+
     @BindString(R.string.question_number) String questionPrefix;
+    @BindString(R.string.invalid_select) String invalidSelect;
+    @BindColor(R.color.app_turquoise) int turquoise;
+    @BindColor(R.color.white) int white;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,7 +71,7 @@ public class QuestionActivity extends AppCompatActivity
             startActivityForResult(intent, 1);
         }
         else {
-            Util.showDialog("Please enter a SELECT statement.", this, "");
+            Util.showSnackbar(parent, invalidSelect, turquoise, white);
         }
     }
 

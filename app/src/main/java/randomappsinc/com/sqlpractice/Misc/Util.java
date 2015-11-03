@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 /**
  * Created by alexanderchiou on 10/31/15.
@@ -34,6 +36,15 @@ public class Util
         alertDialog.show();
     }
 
+    public static void showSnackbar(View parent, String content, int backgroundColor, int textColor) {
+        Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);
+        View view = snackbar.getView();
+        view.setBackgroundColor(backgroundColor);
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTextColor(textColor);
+        snackbar.show();
+    }
+
     public static void hideKeyboard(Activity activity) {
         View view = activity.getCurrentFocus();
         if (view != null) {
@@ -45,10 +56,6 @@ public class Util
     @SuppressLint("DefaultLocale")
     public static boolean validSELECT(String query)
     {
-        if (!(query.split(" ")[0].toLowerCase().equals("select")))
-        {
-            return false;
-        }
-        return true;
+        return query.trim().toLowerCase().startsWith("select");
     }
 }

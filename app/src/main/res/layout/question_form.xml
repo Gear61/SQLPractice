@@ -1,55 +1,62 @@
-<ScrollView
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
-        <TextView
-            android:id="@+id/relevant_tables"
-            android:textSize="20sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/our_table"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/table_design"
-            android:textSize="16sp"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/problem"
-            android:layout_marginTop="20dp"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <AutoCompleteTextView
-            android:id="@+id/query_entry"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/text_input_border"
-            android:padding="10dp"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
-        <com.rey.material.widget.Button
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            style="@style/ButtonStyle"
-            android:id="@+id/submit_query"
-            android:text="@string/submit_query"
-            app:rd_rippleType="touch"
-            app:rd_backgroundAnimDuration="0"
-            app:rd_backgroundColor="@android:color/transparent"
-            app:rd_maxRippleRadius="match_view"
-            app:rd_rippleAnimDuration="150"
-            app:rd_enable="true"/>
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/relevant_tables"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/our_table"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/table_design"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/problem"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/query_entry"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/text_input_border"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.rey.material.widget.Button
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@style/ButtonStyle"
+                android:id="@+id/submit_query"
+                android:text="@string/submit_query"
+                app:rd_rippleType="touch"
+                app:rd_backgroundAnimDuration="0"
+                app:rd_backgroundColor="@android:color/transparent"
+                app:rd_maxRippleRadius="match_view"
+                app:rd_rippleAnimDuration="150"
+                app:rd_enable="true"/>
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

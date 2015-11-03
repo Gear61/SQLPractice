@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
 }
 
 dependencies {
@@ -28,4 +31,7 @@ dependencies {
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.github.rey5137:material:1.2.1'
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.0@aar') {
+        transitive = true
+    }
 }
