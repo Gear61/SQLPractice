@@ -2,11 +2,8 @@ package randomappsinc.com.sqlpractice.Misc;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
-import android.text.Html;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -16,26 +13,6 @@ import android.widget.TextView;
  */
 public class Util
 {
-    public static void showDialog(String message, Context context, String title)
-    {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-        // Set dialog message
-        alertDialogBuilder.setMessage(Html.fromHtml(message)).setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        dialog.cancel();
-                    }
-                });
-
-        // Create alert dialog and show it
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.setTitle(title);
-        alertDialog.show();
-    }
-
     public static void showSnackbar(View parent, String content, int backgroundColor, int textColor) {
         Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);
         View view = snackbar.getView();

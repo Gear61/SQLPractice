@@ -7,4 +7,5 @@
     <string name="invalid_query">Your query was not valid.</string>
     <string name="empty_resultset">Your query did not return anything.</string>
     <string name="query_results_preamble">Here is what your query returned.</string>
+    <string name="our_answer_query">Our Answer Query</string>
 </resources>

@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
@@ -24,7 +26,6 @@ import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Database.Models.ResponseBundle;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Misc.Constants;
-import randomappsinc.com.sqlpractice.Misc.Util;
 import randomappsinc.com.sqlpractice.R;
 
 /**
@@ -35,6 +36,7 @@ public class AnswerCheckerActivity extends AppCompatActivity
 {
     final Context context = this;
     private int questionNum;
+    private MaterialDialog answerDialog;
 
     @Bind(R.id.verdict) TextView verdict;
     @Bind(R.id.their_answers) TextView theirAnswers;
@@ -65,6 +67,11 @@ public class AnswerCheckerActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         displayResponse(mrAnswer.checkAnswer(questionNum, userQuery));
+        answerDialog = new MaterialDialog.Builder(this)
+                .title(R.string.our_answer_query)
+                .content(AnswerServer.getAnswer(questionNum))
+                .positiveText(android.R.string.yes)
+                .build();
     }
 
     private void displayResponse(ResponseBundle score)
@@ -148,8 +155,7 @@ public class AnswerCheckerActivity extends AppCompatActivity
 
     @OnClick(R.id.give_up)
     public void giveUp(View view) {
-        String giveUpAns = AnswerServer.getAnswer(questionNum);
-        Util.showDialog(giveUpAns, context, "Our Answer Query");
+        answerDialog.show();
     }
 
     @OnClick(R.id.advance_forward)
