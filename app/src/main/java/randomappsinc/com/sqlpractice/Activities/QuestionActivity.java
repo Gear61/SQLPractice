@@ -53,12 +53,12 @@ public class QuestionActivity extends AppCompatActivity
         setContentView(R.layout.question_form);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
         schemaServer = SchemaServer.getSchemaServer();
         questionServer = QuestionServer.getQuestionServer();
 
         Intent intent = getIntent();
         currentQuestion = intent.getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
+        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
         setUpQuestion();
     }
 

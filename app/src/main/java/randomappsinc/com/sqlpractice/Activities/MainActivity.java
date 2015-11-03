@@ -9,12 +9,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.Adapters.QuestionAdapter;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
+import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.R;
 
 public class MainActivity extends AppCompatActivity {
     final Context context = this;
+    @Bind(R.id.question_list) ListView questionList;
+
     private QuestionAdapter questionAdapter;
 
     @Override
@@ -27,20 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Populate the list, attach adapter to it
         setContentView(R.layout.question_list);
-        final ListView questionList = (ListView) findViewById(R.id.questionList);
+        ButterKnife.bind(this);
         questionAdapter = new QuestionAdapter(context);
         questionList.setAdapter(questionAdapter);
-        questionList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-                    throws IllegalArgumentException, IllegalStateException
-            {
-                Intent intent = new Intent(context, QuestionActivity.class);
-                intent.putExtra("QUESTION_NUM", position);
-                context.startActivity(intent);
-            }
-        });
+    }
+
+    @OnItemClick(R.id.question_list)
+    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+        Intent intent = new Intent(this, QuestionActivity.class);
+        intent.putExtra(Constants.QUESTION_NUMBER_KEY, position);
+        startActivity(intent);
     }
 
     @Override
