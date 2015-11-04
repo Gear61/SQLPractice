@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private QuestionAdapter questionAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (PreferencesManager.get().getFirstTimeUser()) {

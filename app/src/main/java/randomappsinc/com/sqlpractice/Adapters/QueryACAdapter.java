@@ -33,7 +33,8 @@ public class QueryACAdapter extends ArrayAdapter<String>
 
     private ArrayList<String> constants = new ArrayList<String>
             (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
-                    "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE"));
+                    "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
+                    "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN"));
 
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;

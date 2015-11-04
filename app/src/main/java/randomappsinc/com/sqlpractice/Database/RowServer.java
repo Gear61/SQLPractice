@@ -39,7 +39,8 @@ public class RowServer
                     {"Nate", "Bailey", "3422"},
                     {"Derek", "Ng", "3242"},
                     {"John", "Smith", "2394"},
-                    {"Soap", "MacTavish", "1234"}},
+                    {"Soap", "MacTavish", "1234"},
+                    {"John", "Cena", "2122"}},
 
             // BOOKS (Book_ID (INT), Book_Name (TEXT), Author (TEXT))
             {{"9024", "Acting for Dummies", "Nicolas Cage"},

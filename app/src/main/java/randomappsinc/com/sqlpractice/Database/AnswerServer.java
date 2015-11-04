@@ -24,7 +24,10 @@ public class AnswerServer
                     "SELECT DISTINCT a.First_Name, a.Last_Name from CHECKED_OUT a, CHECKED_OUT b where a.Last_Name = b.Last_Name " +
                             "AND a.First_Name != b.First_Name",
                     "SELECT DISTINCT First_Name, Last_Name FROM CHECKED_OUT INNER JOIN BOOKS " +
-                            "ON CHECKED_OUT.Book_ID = BOOKS.Book_ID WHERE Author = \"Terry Crews\";"};
+                            "ON CHECKED_OUT.Book_ID = BOOKS.Book_ID WHERE Author = \"Terry Crews\";",
+                    "SELECT DISTINCT First_Name, Last_Name FROM CHECKED_OUT INNER JOIN BOOKS " +
+                            "ON CHECKED_OUT.Book_ID = BOOKS.Book_ID WHERE Author = \"Harper Lee\" " +
+                            "AND BOOK_NAME = \"To Kill a Mockingbird\";"};
 
     public static String getAnswer(int position)
     {

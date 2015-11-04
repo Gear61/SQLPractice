@@ -94,7 +94,7 @@ public class QuestionActivity extends AppCompatActivity
             {
                 tableDescriptions += "\n\n";
             }
-            tableDescriptions += schemaServer.serveTable(relevantTables[i]).description();
+            tableDescriptions += schemaServer.serveTable(relevantTables[i]).getDescription();
         }
         tableDesign.setText(tableDescriptions);
 

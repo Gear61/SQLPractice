@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="database_tables_intro">Here are the database tables that SQL Practice Pro uses.
-        Useful if you want to submit questions to be added to the app.</string>
+        Useful if you want to submit questions to be added to the app:</string>
 </resources>

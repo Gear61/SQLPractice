@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textSize="18dp"
-            android:textColor="#000"/>
+            android:textColor="@color/black"/>
 
         <com.joanzapata.iconify.widget.IconTextView
             android:id="@+id/completion_icon"

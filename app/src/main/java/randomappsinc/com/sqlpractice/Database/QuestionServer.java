@@ -14,7 +14,7 @@ public class QuestionServer
     private static int[][] questionTablePairings =
             {{0}, {0}, {0}, {0}, {0},
              {0}, {0}, {0}, {0}, {0},
-             {0}, {0}, {1}, {1, 2}};
+             {0}, {0}, {1}, {1, 2}, {1, 2}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -34,8 +34,11 @@ public class QuestionServer
                     "Write a query that returns all the professor names that begin with the letter 'C'.",
                     "Write a query that returns the third highest salary in the table. " +
                     "Duplicate salaries count as one. For example, if you have 20, 20, 10, and 5, 10 is the second highest salary.",
-                    "Write a query that returns all people who share their last name with somebody else.",
-                    "Write a query that returns the first and last name of all people who have checked out a book by Terry Crews."};
+                    "Write a query that returns the first and last name (in this column order) of people who share their last name " +
+                            "with someone that has also checked out a book.",
+                    "Write a query that returns the first and last name of all people who checked out a book by Terry Crews.",
+                    "Write a query that returns the first and last names of all people who checked out \"To Kill a Mockingbird\"" +
+                            " by Harper Lee."};
 
     private Question[] allQuestions = new Question[questions.length];
 

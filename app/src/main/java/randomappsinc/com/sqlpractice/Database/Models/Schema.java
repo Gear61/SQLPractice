@@ -64,7 +64,7 @@ public class Schema {
 
     // Returns a string describing itself to the app user
     // Example: SALARIES (Professor_Name (TEXT), Department (TEXT), SALARY (INT))
-    public String description()
+    public String getDescription()
     {
         String description = tableName + " (";
         for (int i = 0; i < columns.length; i++)
