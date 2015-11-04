@@ -1,0 +1,32 @@
+<com.balysv.materialripple.MaterialRippleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:mrl_rippleInAdapter="true"
+    app:mrl_rippleDuration="200"
+    app:mrl_rippleColor="@color/app_turquoise"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/option_icon"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_height="25dp"
+            android:layout_width="25dp"
+            android:textSize="22dp"/>
+
+        <TextView
+            android:id="@+id/settings_option"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp"/>
+    </LinearLayout>
+</com.balysv.materialripple.MaterialRippleLayout>

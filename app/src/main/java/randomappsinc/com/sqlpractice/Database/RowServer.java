@@ -7,9 +7,6 @@ public class RowServer
 {
     // Database rows stored here in this ghetto hard-coded array
     private static String[][][] rows = {
-            // COMPLETION_STATUS (Question_Number (TEXT))
-            {},
-
             // SALARIES (Professor_Name (TEXT), Department (TEXT), Salary (INT))
             {{"Zaniolo", "Computer Science", "130000"},
                     {"Eggert", "Computer Science", "170000"},

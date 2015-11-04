@@ -1,9 +1,5 @@
 package randomappsinc.com.sqlpractice.Database;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import randomappsinc.com.sqlpractice.Database.Models.Column;
 import randomappsinc.com.sqlpractice.Database.Models.Schema;
 
@@ -17,17 +13,11 @@ public class SchemaServer {
 
     // Hardcoded table names + columns here
     // TABLE NAMES
-    private String[] tableNames = {"COMPLETION_STATUS", "SALARIES", "CHECKED_OUT", "BOOKS"};
-
-    // PERSISTENT TABLE NAMES (THOSE THAT ARE NEVER "RENEWED")
-    private String[] persistentNames = {"COMPLETION_STATUS"};
+    private String[] tableNames = {"SALARIES", "CHECKED_OUT", "BOOKS"};
 
     // COLUMNS FOR THE TABLES
     private Column[][] tableColumns =
             {
-                    {
-                            new Column("Question_Number", "TEXT"),
-                    },
                     {
                             new Column("Professor_Name", "TEXT"),
                             new Column("Department", "TEXT"),
@@ -105,14 +95,8 @@ public class SchemaServer {
     }
 
     // Serve all non-persistent table names (presumably so they can be updated)
-    public String[] serveNPTableNames()
+    public String[] serveTableNames()
     {
-        Set<String> TableNamesSet = new HashSet<>(Arrays.asList(tableNames));
-        Set<String> persistentNamesSet = new HashSet(Arrays.asList(persistentNames));
-
-        String[] NPTables = {};
-        TableNamesSet.removeAll(persistentNamesSet);
-        NPTables = TableNamesSet.toArray(NPTables);
-        return NPTables;
+        return tableNames;
     }
 }

@@ -11,8 +11,8 @@ import com.joanzapata.iconify.widget.IconTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
+import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.R;
 
 /**
@@ -85,8 +85,7 @@ public class QuestionAdapter extends BaseAdapter
             holder = (ViewHolder) view.getTag();
         }
 
-        MisterDataSource theJudge = new MisterDataSource(context);
-        if (theJudge.hasUserCompletedQuestion(position)) {
+        if (PreferencesManager.get().hasCompletedQuestion(position)) {
             holder.completionIcon.setText(checkIcon);
             holder.completionIcon.setTextColor(green);
         }

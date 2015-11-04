@@ -22,10 +22,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Database.AnswerChecker;
 import randomappsinc.com.sqlpractice.Database.AnswerServer;
-import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Database.Models.ResponseBundle;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Misc.Constants;
+import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.R;
 
 /**
@@ -78,8 +78,7 @@ public class AnswerCheckerActivity extends AppCompatActivity
     {
         if (score.getWasCorrect())
         {
-            MisterDataSource updateAnswer = new MisterDataSource(context);
-            updateAnswer.addAnswer(questionNum);
+            PreferencesManager.get().addCompletedQuestion(questionNum);
             verdict.setText(correctAnswer);
             if (questionNum != QuestionServer.getNumQuestions() - 1)
             {
@@ -166,24 +165,16 @@ public class AnswerCheckerActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.blank_menu, menu);
         return true;
     }
 
-    // Make sure that hitting the home/back button brings us back to the question we were working on
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                break;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
-        invalidateOptionsMenu();
         return super.onOptionsItemSelected(item);
     }
 }

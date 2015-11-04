@@ -4,7 +4,7 @@
     <string name="settings">Settings</string>
 
     <!-- Question List View -->
-    <string name="intro">Simply click on a question to get started!</string>
+    <string name="question_list_intro">Simply click on a question to get started!</string>
     <string name="our_table">Relevant Table(s):</string>
     <string name="completion_status">Completion Status of Question</string>
 
@@ -28,7 +28,7 @@
 
     <string name="welcome">Welcome</string>
     <string name="ask_for_help">Hey there, I\'m Alex! I\'m always looking to make my work as awesome as possible
-        for the community, so if you have any ideas on how to improve this app (question suggestion(s), bug fix,
-        feature request), please use the send feedback option in the settings to tell me! Thank you!
+        for the community, so if you have any ideas on how to improve this app (question suggestions, bug fixes,
+        feature requests), please use the send feedback option in the settings to tell me! Thank you!
     </string>
 </resources>

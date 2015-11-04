@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="database_tables">Database tables</string>
+    <string name="send_feedback">Send feedback</string>
+    <string name="rate_this_app">Rate this app</string>
+    <string name="source_code">Source code</string>
+    <array name="settings_options">
+        <item>@string/database_tables</item>
+        <item>@string/send_feedback</item>
+        <item>@string/rate_this_app</item>
+        <item>@string/source_code</item>
+    </array>
+    <string name="play_store_error">Unable to open the Play Store.</string>
+    <string name="feedback_subject">SQL Practice PRO Feedback</string>
+    <string name="send_email">Send email</string>
+
+    <!-- Font Awesome Icons -->
+    <string name="database_icon">{fa-database}</string>
+    <string name="email_icon">{fa-envelope}</string>
+    <string name="rate_icon">{fa-thumbs-up}</string>
+    <string name="github_icon">{fa-github}</string>
+</resources>

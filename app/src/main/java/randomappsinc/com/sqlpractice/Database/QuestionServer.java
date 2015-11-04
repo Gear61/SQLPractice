@@ -11,12 +11,10 @@ public class QuestionServer
     // Our singleton
     public static QuestionServer instance = null;
 
-    // Hooray for strange 0 indexing.
-    // Question 1 -> Table 2 = {0, 1}, so the first element of this array would be 1
     private static int[][] questionTablePairings =
-            {{1}, {1}, {1}, {1}, {1},
-             {1}, {1}, {1}, {1}, {1},
-             {1}, {1}, {2}, {2, 3}};
+            {{0}, {0}, {0}, {0}, {0},
+             {0}, {0}, {0}, {0}, {0},
+             {0}, {0}, {1}, {1, 2}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =

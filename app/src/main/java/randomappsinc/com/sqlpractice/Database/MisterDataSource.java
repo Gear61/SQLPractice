@@ -1,6 +1,5 @@
 package randomappsinc.com.sqlpractice.Database;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -51,7 +50,7 @@ public class MisterDataSource {
         }
 
         // Get list of tables that can renewed from schema server
-        String[] targetTables = schemaServer.serveNPTableNames();
+        String[] targetTables = schemaServer.serveTableNames();
 
         // For each of those tables, check its current row count with what it should be
         // Then destroy/rebuild it if those numbers don't match
@@ -145,71 +144,6 @@ public class MisterDataSource {
         cursor.close();
         close();
         return numRows;
-    }
-
-    public boolean addAnswer(int qNumi)
-    {
-        open();
-        try
-        {
-            long ret = -1;
-            String qNum = Integer.toString(qNumi);
-            String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
-            Cursor cursor = database.rawQuery(query, null);
-            cursor.moveToNext();
-            if (cursor.getInt(0) == 0)
-            {
-                // query = "INSERT INTO COMPLETION_STATUS VALUES ('" + qNum + "');";
-                ContentValues cv = new ContentValues(1);
-                cv.put("Question_Number", qNum);
-                ret = database.insertOrThrow("COMPLETION_STATUS", null, cv);
-                cursor.close();
-            }
-            else
-            {
-                cursor.close();
-            }
-            close();
-            if (ret >= 0)
-            {
-                return true;
-            }
-            return false;
-        }
-        catch (SQLiteException e)
-        {
-            close();
-            return false;
-        }
-    }
-
-    public boolean hasUserCompletedQuestion(int questionNumber)
-    {
-        open();
-        try
-        {
-            String qNum = Integer.toString(questionNumber);
-            String query = "SELECT COUNT(Question_Number) FROM COMPLETION_STATUS WHERE Question_Number = \""+ qNum +"\";";
-            Cursor cursor = database.rawQuery(query, null);
-            cursor.moveToNext();
-            if (cursor.getInt(0) > 0)
-            {
-                cursor.close();
-                close();
-                return true;
-            }
-            else
-            {
-                cursor.close();
-                close();
-                return false;
-            }
-        }
-        catch (SQLiteException e)
-        {
-            close();
-            return false;
-        }
     }
 
     public ResultSet getData(String queryString)
