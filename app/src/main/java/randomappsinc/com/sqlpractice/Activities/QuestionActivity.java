@@ -139,6 +139,12 @@ public class QuestionActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_right_out, R.anim.slide_right_in);
+    }
+
     // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
     public boolean onOptionsItemSelected(MenuItem item)
     {

@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra(Constants.QUESTION_NUMBER_KEY, position);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_left_out, R.anim.slide_left_in);
     }
 
     @Override
