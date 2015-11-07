@@ -3,7 +3,6 @@ package randomappsinc.com.sqlpractice.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +28,7 @@ import randomappsinc.com.sqlpractice.R;
  * Created by alexanderchiou on 10/31/15.
  */
 // Loads questions for users to answer
-public class QuestionActivity extends AppCompatActivity
+public class QuestionActivity extends StandardActivity
 {
     private SchemaServer schemaServer;
     private QuestionServer questionServer;
@@ -139,21 +138,12 @@ public class QuestionActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_right_out, R.anim.slide_right_in);
-    }
-
     // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
     public boolean onOptionsItemSelected(MenuItem item)
     {
         Util.hideKeyboard(this);
         switch (item.getItemId())
         {
-            case android.R.id.home:
-                finish();
-                return true;
             case R.id.backward:
                 changeQuestion(-1);
                 return true;

@@ -3,7 +3,6 @@ package randomappsinc.com.sqlpractice.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +22,7 @@ import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends StandardActivity {
     final Context context = this;
     @Bind(R.id.question_list) ListView questionList;
 
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra(Constants.QUESTION_NUMBER_KEY, position);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_left_out, R.anim.slide_left_in);
     }
 
     @Override

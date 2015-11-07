@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,7 +30,7 @@ import randomappsinc.com.sqlpractice.R;
  * Created by alexanderchiou on 10/31/15.
  */
 // Evaluates the answer that the user gave from QuestionActivity
-public class AnswerCheckerActivity extends AppCompatActivity
+public class AnswerCheckerActivity extends StandardActivity
 {
     final Context context = this;
     private int questionNum;
@@ -168,13 +166,5 @@ public class AnswerCheckerActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.blank_menu, menu);
         return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
