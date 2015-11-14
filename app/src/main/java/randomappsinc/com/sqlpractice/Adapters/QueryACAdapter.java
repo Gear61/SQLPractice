@@ -29,12 +29,12 @@ public class QueryACAdapter extends ArrayAdapter<String>
     private Context context;
 
     // SQLite constructs
-    private static ArrayList<String> items = new ArrayList<String>();
+    private static ArrayList<String> items = new ArrayList<>();
 
     private ArrayList<String> constants = new ArrayList<String>
             (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
                     "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
-                    "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN"));
+                    "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG"));
 
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;

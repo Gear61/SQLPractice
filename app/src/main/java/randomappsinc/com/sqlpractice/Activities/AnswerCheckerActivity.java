@@ -113,14 +113,15 @@ public class AnswerCheckerActivity extends StandardActivity
 
     public void createTable(TableLayout table, String[] columns, String[][] data)
     {
-        TableLayout.LayoutParams params1 = new TableLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.1f);
+        TableLayout.LayoutParams dataParams = new TableLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.1f);
+        dataParams.setMargins(0, 0, 5, 0);
 
         LinearLayout topRow = new LinearLayout(this);
         for (String column : columns)
         {
             TextView text = new TextView(this);
             text.setText(column);
-            text.setLayoutParams(params1);
+            text.setLayoutParams(dataParams);
             text.setTypeface(null, Typeface.BOLD);
             topRow.addView(text);
         }
@@ -136,7 +137,7 @@ public class AnswerCheckerActivity extends StandardActivity
             {
                 TextView text = new TextView(this);
                 text.setText(datum);
-                text.setLayoutParams(params1);
+                text.setLayoutParams(dataParams);
                 tuple.addView(text);
             }
             tuple.setOrientation(LinearLayout.HORIZONTAL);

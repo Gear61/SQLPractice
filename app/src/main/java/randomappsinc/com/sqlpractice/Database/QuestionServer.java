@@ -14,7 +14,7 @@ public class QuestionServer
     private static int[][] questionTablePairings =
             {{0}, {0}, {0}, {0}, {0},
              {0}, {0}, {0}, {0}, {0},
-             {0}, {0}, {1}, {1, 2}, {1, 2}};
+             {0}, {0}, {1}, {1, 2}, {1, 2}, {0}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -38,7 +38,8 @@ public class QuestionServer
                             "with someone that has also checked out a book.",
                     "Write a query that returns the first and last name of all people who checked out a book by Terry Crews.",
                     "Write a query that returns the first and last names of all people who checked out \"To Kill a Mockingbird\"" +
-                            " by Harper Lee."};
+                            " by Harper Lee.",
+                    "Write a query that returns the average salary of the professors in the table."};
 
     private Question[] allQuestions = new Question[questions.length];
 

@@ -27,7 +27,8 @@ public class AnswerServer
                             "ON CHECKED_OUT.Book_ID = BOOKS.Book_ID WHERE Author = \"Terry Crews\";",
                     "SELECT DISTINCT First_Name, Last_Name FROM CHECKED_OUT INNER JOIN BOOKS " +
                             "ON CHECKED_OUT.Book_ID = BOOKS.Book_ID WHERE Author = \"Harper Lee\" " +
-                            "AND BOOK_NAME = \"To Kill a Mockingbird\";"};
+                            "AND BOOK_NAME = \"To Kill a Mockingbird\";",
+                    "SELECT AVG(Salary) FROM SALARIES;"};
 
     public static String getAnswer(int position)
     {
