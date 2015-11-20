@@ -52,7 +52,7 @@ public class AnswerCheckerActivity extends StandardActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.evaluation);
+        setContentView(R.layout.answer_checker);
         ButterKnife.bind(this);
 
         // Grab relevant data needed to evaluate answers from Question Activity

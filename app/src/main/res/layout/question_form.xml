@@ -48,15 +48,10 @@
 
             <com.rey.material.widget.Button
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                style="@style/ButtonStyle"
                 android:id="@+id/submit_query"
                 android:text="@string/submit_query"
-                app:rd_rippleType="touch"
-                app:rd_backgroundAnimDuration="0"
-                app:rd_backgroundColor="@android:color/transparent"
-                app:rd_maxRippleRadius="match_view"
-                app:rd_rippleAnimDuration="150"
-                app:rd_enable="true"/>
+                style="@style/regular_button"
+                app:rd_style="@style/button_ripple"/>
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

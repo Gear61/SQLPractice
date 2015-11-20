@@ -46,39 +46,24 @@
         </TableLayout>
 
         <com.rey.material.widget.Button
-            style="@style/ButtonStyle"
+            style="@style/regular_button"
             android:id="@+id/advance_forward"
             android:text="@string/advance_forward"
             android:visibility="gone"
-            app:rd_rippleType="touch"
-            app:rd_backgroundAnimDuration="0"
-            app:rd_backgroundColor="@android:color/transparent"
-            app:rd_maxRippleRadius="match_view"
-            app:rd_rippleAnimDuration="150"
-            app:rd_enable="true"/>
+            app:rd_style="@style/button_ripple"/>
 
         <com.rey.material.widget.Button
-            style="@style/ButtonStyle"
             android:id="@+id/retry_question"
             android:text="@string/retry_question"
             android:visibility="gone"
-            app:rd_rippleType="touch"
-            app:rd_backgroundAnimDuration="0"
-            app:rd_backgroundColor="@android:color/transparent"
-            app:rd_maxRippleRadius="match_view"
-            app:rd_rippleAnimDuration="150"
-            app:rd_enable="true"/>
+            style="@style/regular_button"
+            app:rd_style="@style/button_ripple"/>
 
         <com.rey.material.widget.Button
-            style="@style/ButtonStyle"
+            style="@style/regular_button"
             android:id="@+id/give_up"
             android:text="@string/give_up"
             android:visibility="gone"
-            app:rd_rippleType="touch"
-            app:rd_backgroundAnimDuration="0"
-            app:rd_backgroundColor="@android:color/transparent"
-            app:rd_maxRippleRadius="match_view"
-            app:rd_rippleAnimDuration="150"
-            app:rd_enable="true"/>
+            app:rd_style="@style/button_ripple"/>
     </LinearLayout>
 </ScrollView>
