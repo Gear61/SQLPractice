@@ -1,12 +1,17 @@
 package randomappsinc.com.sqlpractice.Misc;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import randomappsinc.com.sqlpractice.Database.QuestionServer;
 
 /**
  * Created by alexanderchiou on 10/31/15.
@@ -30,9 +35,19 @@ public class Util
         }
     }
 
-    @SuppressLint("DefaultLocale")
-    public static boolean validSELECT(String query)
-    {
+    public static boolean validSELECT(String query) {
         return query.trim().toLowerCase().startsWith("select");
+    }
+
+    // For the choose multiple names at once case. We're just generating indices
+    public static int getRandomQuestionIndex(int currentQuestionIndex) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < QuestionServer.getNumQuestions(); i++) {
+            if (i != currentQuestionIndex) {
+                list.add(i);
+            }
+        }
+        Collections.shuffle(list);
+        return list.get(0);
     }
 }

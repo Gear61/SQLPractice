@@ -28,8 +28,7 @@ import randomappsinc.com.sqlpractice.R;
  * Created by alexanderchiou on 10/31/15.
  */
 // Loads questions for users to answer
-public class QuestionActivity extends StandardActivity
-{
+public class QuestionActivity extends StandardActivity {
     private SchemaServer schemaServer;
     private QuestionServer questionServer;
     int currentQuestion;
@@ -46,8 +45,7 @@ public class QuestionActivity extends StandardActivity
     @BindColor(R.color.white) int white;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_form);
         ButterKnife.bind(this);
@@ -82,15 +80,12 @@ public class QuestionActivity extends StandardActivity
     }
 
     // Sets up a question given the number
-    private void setUpQuestion()
-    {
+    private void setUpQuestion() {
         // Get descriptions of the tables we're supposed to use.
         String tableDescriptions = "";
         int[] relevantTables = questionServer.getQuestion(currentQuestion).giveNeededTables();
-        for (int i = 0; i < relevantTables.length; i++)
-        {
-            if (i != 0)
-            {
+        for (int i = 0; i < relevantTables.length; i++) {
+            if (i != 0) {
                 tableDescriptions += "\n\n";
             }
             tableDescriptions += schemaServer.serveTable(relevantTables[i]).getDescription();
@@ -104,6 +99,8 @@ public class QuestionActivity extends StandardActivity
         QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
                 schemaServer.serveSomeTables(relevantTables), queryHelper);
         queryHelper.setAdapter(adapter);
+        queryHelper.setText("");
+        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
     }
 
     public void changeQuestion(int increment) {
@@ -116,8 +113,6 @@ public class QuestionActivity extends StandardActivity
             currentQuestion = numQuestions - 1;
         }
         setUpQuestion();
-        queryHelper.setText("");
-        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
     }
 
     @Override
@@ -143,6 +138,10 @@ public class QuestionActivity extends StandardActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         Util.hideKeyboard(this);
         switch (item.getItemId()) {
+            case R.id.random:
+                currentQuestion = Util.getRandomQuestionIndex(currentQuestion);
+                setUpQuestion();
+                return true;
             case R.id.backward:
                 changeQuestion(-1);
                 return true;
