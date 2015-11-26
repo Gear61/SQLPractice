@@ -109,12 +109,10 @@ public class QuestionActivity extends StandardActivity
     public void changeQuestion(int increment) {
         int numQuestions = QuestionServer.getNumQuestions();
         currentQuestion += increment;
-        if (currentQuestion == numQuestions)
-        {
+        if (currentQuestion == numQuestions) {
             currentQuestion = 0;
         }
-        else if (currentQuestion < 0)
-        {
+        else if (currentQuestion < 0) {
             currentQuestion = numQuestions - 1;
         }
         setUpQuestion();
@@ -123,10 +121,13 @@ public class QuestionActivity extends StandardActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.question_menu, menu);
+        menu.findItem(R.id.random).setIcon(
+                new IconDrawable(this, FontAwesomeIcons.fa_random)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
         menu.findItem(R.id.backward).setIcon(
                 new IconDrawable(this, FontAwesomeIcons.fa_arrow_left)
                         .colorRes(R.color.white)
@@ -139,11 +140,9 @@ public class QuestionActivity extends StandardActivity
     }
 
     // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         Util.hideKeyboard(this);
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.backward:
                 changeQuestion(-1);
                 return true;

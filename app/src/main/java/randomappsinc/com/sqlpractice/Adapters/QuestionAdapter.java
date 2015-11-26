@@ -28,8 +28,7 @@ public class QuestionAdapter extends BaseAdapter
     private int green;
 
     // Creates the "Question 1, Question 2, etc..." list
-    public QuestionAdapter(Context context)
-    {
+    public QuestionAdapter(Context context) {
         this.context = context;
         this.xIcon = context.getString(R.string.x_icon);
         this.checkIcon = context.getString(R.string.check_icon);
@@ -39,10 +38,8 @@ public class QuestionAdapter extends BaseAdapter
     }
 
     // Fills in "Question 1, Question 2, etc..." list
-    private void populateList()
-    {
-        for (int i = 1; i <= QuestionServer.getNumQuestions(); i++)
-        {
+    private void populateList() {
+        for (int i = 1; i <= QuestionServer.getNumQuestions(); i++) {
             this.questionList[i-1] = "Question " + String.valueOf(i);
         }
     }

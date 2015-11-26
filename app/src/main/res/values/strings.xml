@@ -7,10 +7,8 @@
     <string name="question_list_intro">Simply click on a question to get started!</string>
     <string name="our_table">Relevant Table(s):</string>
     <string name="completion_status">Completion Status of Question</string>
-
-    <!-- Question Menu -->
-    <string name="back_arrow">Return to the previous question</string>
-    <string name="forward_arrow">Advance to the next question</string>
+    <string name="x_icon">{fa-close}</string>
+    <string name="check_icon">{fa-check}</string>
 
     <!-- Query Submission Form -->
     <string name="submit_query">Run Query!</string>

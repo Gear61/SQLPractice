@@ -1,12 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/random"
+        android:title="@string/random_question"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/backward"
-        android:title="@string/back_arrow"
+        android:title="@string/previous_question"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/forward"
-        android:title="@string/forward_arrow"
+        android:title="@string/next_question"
         app:showAsAction="ifRoom" />
-
 </menu>

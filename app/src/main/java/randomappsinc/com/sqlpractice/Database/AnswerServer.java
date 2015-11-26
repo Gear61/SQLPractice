@@ -29,7 +29,11 @@ public class AnswerServer
                             "ON CHECKED_OUT.Book_ID = BOOKS.Book_ID WHERE Author = \"Harper Lee\" " +
                             "AND BOOK_NAME = \"To Kill a Mockingbird\";",
                     "SELECT AVG(Salary) FROM SALARIES;",
-                    "SELECT Professor_Name, Salary + 10000 FROM SALARIES WHERE Department = \"Computer Science\";"};
+                    "SELECT Professor_Name, Salary + 10000 FROM SALARIES WHERE Department = \"Computer Science\";",
+                    "SELECT sql FROM sqlite_master WHERE type = \"table\" AND tbl_name = \"CHECKED_OUT\";",
+                    "SELECT Professor_Name, Salary FROM SALARIES WHERE Salary > " +
+                            "(SELECT MIN(Salary) FROM SALARIES) * 4;",
+                    "SELECT COUNT(DISTINCT(AUTHOR)) FROM BOOKS;"};
 
     public static String getAnswer(int position)
     {

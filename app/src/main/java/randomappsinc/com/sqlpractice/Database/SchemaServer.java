@@ -38,18 +38,15 @@ public class SchemaServer {
     // Array of all our schemas
     private Schema[] allSchemas = new Schema[tableNames.length];
 
-    public static SchemaServer getSchemaServer()
-    {
+    public static SchemaServer getSchemaServer() {
         if (instance == null) {
             instance = new SchemaServer();
         }
         return instance;
     }
 
-    private SchemaServer()
-    {
-        for (int i = 0; i < tableNames.length; i++)
-        {
+    private SchemaServer() {
+        for (int i = 0; i < tableNames.length; i++) {
             allSchemas[i] = new Schema(tableNames[i], tableColumns[i], RowServer.getRows(i));
         }
     }
@@ -60,12 +57,9 @@ public class SchemaServer {
     }
 
     // Return a table based on name
-    public Schema serveTable(String tableName)
-    {
-        for (int i = 0; i < tableNames.length; i++)
-        {
-            if (allSchemas[i].getName().equals(tableName))
-            {
+    public Schema serveTable(String tableName) {
+        for (int i = 0; i < tableNames.length; i++) {
+            if (allSchemas[i].getName().equals(tableName)) {
                 return allSchemas[i];
             }
         }
@@ -73,19 +67,16 @@ public class SchemaServer {
     }
 
     // Return a subset of tables
-    public Schema[] serveSomeTables(int[] targetTables)
-    {
+    public Schema[] serveSomeTables(int[] targetTables) {
         Schema[] targetSubset = new Schema[targetTables.length];
-        for (int i = 0; i < targetTables.length; i++)
-        {
+        for (int i = 0; i < targetTables.length; i++) {
             targetSubset[i] = allSchemas[targetTables[i]];
         }
         return targetSubset;
     }
 
     // Creates and serves all tables
-    public Schema[] serveAllTables()
-    {
+    public Schema[] serveAllTables() {
         return allSchemas;
     }
 

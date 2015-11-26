@@ -15,7 +15,7 @@ public class QuestionServer
             {{0}, {0}, {0}, {0}, {0},
              {0}, {0}, {0}, {0}, {0},
              {0}, {0}, {1}, {1, 2}, {1, 2},
-             {0}, {0}};
+             {0}, {0}, {1}, {0}, {2}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -43,34 +43,32 @@ public class QuestionServer
                     "Write a query that returns the average salary of the professors in the table.",
                     "Each professor in the Computer Science department just got a 10,000 dollar raise. " +
                             "Write a query that gives the names and new salaries (in this column order) of the " +
-                            "Computer Science professors."};
+                            "Computer Science professors.",
+                    "Write a query that outputs the SQL statement used to create the above table.",
+                    "Write a query that returns the name and salary (in this column order) of all professors who make more than " +
+                            "4 times as much as the lowest paid professor.",
+                    "Write a query that returns the amount of unique authors who have written books in this table."};
 
     private Question[] allQuestions = new Question[questions.length];
 
-    private QuestionServer ()
-    {
-        for (int i = 0; i < questions.length; i++)
-        {
+    private QuestionServer () {
+        for (int i = 0; i < questions.length; i++) {
             allQuestions[i] = new Question(questions[i], questionTablePairings[i]);
         }
     }
 
-    public static QuestionServer getQuestionServer()
-    {
-        if (instance == null)
-        {
+    public static QuestionServer getQuestionServer() {
+        if (instance == null) {
             instance = new QuestionServer();
         }
         return instance;
     }
 
-    public static int getNumQuestions()
-    {
+    public static int getNumQuestions() {
         return questions.length;
     }
 
-    public Question getQuestion(int position)
-    {
+    public Question getQuestion(int position) {
         return allQuestions[position];
     }
 }

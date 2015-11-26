@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="question_page_label">Question Page</string>
+    <string name="question_number">Question #</string>
     <string name="invalid_select">Please enter in a valid SELECT statement.</string>
+
+    <string name="random_question">Random question</string>
+    <string name="previous_question">Previous question</string>
+    <string name="next_question">Next question</string>
 </resources>

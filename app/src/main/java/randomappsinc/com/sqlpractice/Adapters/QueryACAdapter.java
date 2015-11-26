@@ -24,8 +24,7 @@ import randomappsinc.com.sqlpractice.R;
  * Created by alexanderchiou on 10/31/15.
  */
 // Auto-Complete adapter for the query to make users' lives easier
-public class QueryACAdapter extends ArrayAdapter<String>
-{
+public class QueryACAdapter extends ArrayAdapter<String> {
     private Context context;
 
     // SQLite constructs
@@ -34,7 +33,8 @@ public class QueryACAdapter extends ArrayAdapter<String>
     private ArrayList<String> constants = new ArrayList<String>
             (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
                     "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
-                    "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG"));
+                    "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG", "sql", "sqlite_master",
+                    "tbl_name", "type", "table"));
 
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;
