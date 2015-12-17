@@ -33,7 +33,9 @@ public class AnswerServer
                     "SELECT sql FROM sqlite_master WHERE type = \"table\" AND tbl_name = \"CHECKED_OUT\";",
                     "SELECT Professor_Name, Salary FROM SALARIES WHERE Salary > " +
                             "(SELECT MIN(Salary) FROM SALARIES) * 4;",
-                    "SELECT COUNT(DISTINCT(AUTHOR)) FROM BOOKS;"};
+                    "SELECT COUNT(DISTINCT(AUTHOR)) FROM BOOKS;",
+                    "SELECT Professor_Name, Salary FROM SALARIES WHERE Salary BETWEEN 120000 AND 250000;",
+                    "SELECT * FROM SALARIES WHERE Department = \"Anthropology\" OR Salary > 150000;"};
 
     public static String getAnswer(int position)
     {

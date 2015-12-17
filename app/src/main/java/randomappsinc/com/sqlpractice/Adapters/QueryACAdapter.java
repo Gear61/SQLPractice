@@ -34,7 +34,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
             (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
                     "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
                     "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG", "sql", "sqlite_master",
-                    "tbl_name", "type", "table"));
+                    "tbl_name", "type", "table", "BETWEEN"));
 
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;

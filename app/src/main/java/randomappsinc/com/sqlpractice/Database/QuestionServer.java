@@ -15,7 +15,8 @@ public class QuestionServer
             {{0}, {0}, {0}, {0}, {0},
              {0}, {0}, {0}, {0}, {0},
              {0}, {0}, {1}, {1, 2}, {1, 2},
-             {0}, {0}, {1}, {0}, {2}};
+             {0}, {0}, {1}, {0}, {2},
+             {0}, {0}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -47,7 +48,11 @@ public class QuestionServer
                     "Write a query that outputs the SQL statement used to create the above table.",
                     "Write a query that returns the name and salary (in this column order) of all professors who make more than " +
                             "4 times as much as the lowest paid professor.",
-                    "Write a query that returns the amount of unique authors who have written books in this table."};
+                    "Write a query that returns the amount of unique authors who have written books in this table.",
+                    "Write a query that returns the name and salary (in this column order) of professors who earn " +
+                            "between 120000 and 250000 a year (inclusive).",
+                    "Write a query that returns all professors (all columns) who either work in the \"Anthropology\" " +
+                            "department or makes more than 150000 a year."};
 
     private Question[] allQuestions = new Question[questions.length];
 
