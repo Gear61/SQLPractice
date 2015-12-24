@@ -42,8 +42,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     private String currentInput;
     private Schema[] currentSchemas;
 
-    public QueryACAdapter(Context context, int viewResourceId, Schema[] currentSchemas, AutoCompleteTextView userQuery)
-    {
+    public QueryACAdapter(Context context, int viewResourceId, Schema[] currentSchemas, AutoCompleteTextView userQuery) {
         super(context, viewResourceId, items);
         this.context = context;
         this.userQuery = userQuery;
@@ -83,18 +82,14 @@ public class QueryACAdapter extends ArrayAdapter<String> {
 
     // Adds suggestions from contents of each table.
     // Ain't nobody got time to type out Computer Science or Zaniolo
-    private void addRowInformation()
-    {
-        for (Schema schema : currentSchemas)
-        {
+    private void addRowInformation() {
+        for (Schema schema : currentSchemas) {
             items.addAll(schema.createSuggestions());
         }
     }
 
-    private void setProgressTracker()
-    {
-        this.userQuery.addTextChangedListener(new TextWatcher()
-        {
+    private void setProgressTracker() {
+        this.userQuery.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
@@ -108,8 +103,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     }
 
     // Set it up so that selecting an item doesn't erase everything
-    private void setUpAC()
-    {
+    private void setUpAC() {
         this.userQuery.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -118,12 +112,10 @@ public class QueryACAdapter extends ArrayAdapter<String> {
             {
                 String[] pieces = currentInput.split(" ");
                 String autoFill = "";
-                if (pieces[pieces.length - 1].contains("("))
-                {
+                if (pieces[pieces.length - 1].contains("(")) {
                     autoFill += pieces[pieces.length - 1].split("\\(")[0] + "(";
                 }
-                else if (pieces[pieces.length - 1].contains("\""))
-                {
+                else if (pieces[pieces.length - 1].contains("\"")) {
                     autoFill += pieces[pieces.length - 1].split("\"")[0] + "\"";
                 }
                 autoFill += parent.getItemAtPosition(position).toString();
@@ -138,73 +130,56 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         });
     }
 
-    public static class ViewHolder
-    {
-        public TextView item1;
+    public static class ViewHolder {
+        public TextView suggestion;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         ViewHolder holder;
-        if (v == null)
-        {
+        if (v == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.acquery_item, null);
             holder = new ViewHolder();
-            holder.item1 = (TextView) v.findViewById(R.id.suggestion);
+            holder.suggestion = (TextView) v.findViewById(R.id.suggestion);
             v.setTag(holder);
         }
-        else
-        {
-            holder = (ViewHolder)v.getTag();
+        else {
+            holder = (ViewHolder) v.getTag();
         }
 
-        final String item = (items.get(position)).toString();
-        if (item != null)
-        {
-            holder.item1.setText(item);
-        }
+        holder.suggestion.setText(items.get(position));
         return v;
     }
 
     @Override
-    public android.widget.Filter getFilter()
-    {
+    public android.widget.Filter getFilter() {
         return nameFilter;
     }
 
     @SuppressLint("DefaultLocale")
-    Filter nameFilter = new Filter()
-    {
-        public String convertResultToString(Object resultValue)
-        {
-            String str = (resultValue).toString();
-            return str;
+    Filter nameFilter = new Filter() {
+        public String convertResultToString(Object resultValue) {
+            return (resultValue).toString();
         }
 
         @SuppressLint("DefaultLocale")
         @Override
-        protected FilterResults performFiltering(CharSequence constraint)
-        {
+        protected FilterResults performFiltering(CharSequence constraint) {
             suggestions.clear();
-            if (constraint != null)
-            {
+            if (constraint != null) {
                 String pieces[] = constraint.toString().split(" ");
                 String target = pieces[pieces.length - 1];
                 pieces = target.split("\\(");
                 target = pieces[pieces.length - 1];
                 pieces = target.split("\"");
                 target = pieces[pieces.length - 1];
-                if (!target.equals(""))
-                {
+                if (!target.equals("")) {
                     // Linear search to populate suggestions
-                    for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++)
-                    {
+                    for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++) {
                         if (itemsAll.get(i).toLowerCase().startsWith((target.toLowerCase()))
                                 && !itemsAll.get(i).toLowerCase().equals(target.toLowerCase())
-                                && !suggestions.contains(itemsAll.get(i)))
-                        {
+                                && !suggestions.contains(itemsAll.get(i))) {
                             j++;
                             suggestions.add(itemsAll.get(i));
                         }
@@ -215,22 +190,18 @@ public class QueryACAdapter extends ArrayAdapter<String> {
                 filterResults.count = suggestions.size();
                 return filterResults;
             }
-            else
-            {
+            else {
                 return new FilterResults();
             }
         }
 
         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results)
-        {
+        protected void publishResults(CharSequence constraint, FilterResults results) {
             @SuppressWarnings("unchecked")
             ArrayList<String> filteredList = (ArrayList<String>) results.values;
-            if (results != null && results.count > 0)
-            {
+            if (results.count > 0) {
                 clear();
-                for (String c : filteredList)
-                {
+                for (String c : filteredList) {
                     add(c);
                 }
                 notifyDataSetChanged();
