@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,8 +29,7 @@ import randomappsinc.com.sqlpractice.R;
  * Created by alexanderchiou on 10/31/15.
  */
 // Evaluates the answer that the user gave from QuestionActivity
-public class AnswerCheckerActivity extends StandardActivity
-{
+public class AnswerCheckerActivity extends StandardActivity {
     final Context context = this;
     private int questionNum;
     private MaterialDialog answerDialog;
@@ -49,8 +47,7 @@ public class AnswerCheckerActivity extends StandardActivity
     @BindString(R.string.query_results_preamble) String resultsPreamble;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.answer_checker);
         ButterKnife.bind(this);
@@ -72,35 +69,28 @@ public class AnswerCheckerActivity extends StandardActivity
                 .build();
     }
 
-    private void displayResponse(ResponseBundle score)
-    {
-        if (score.getWasCorrect())
-        {
+    private void displayResponse(ResponseBundle score) {
+        if (score.getWasCorrect()) {
             PreferencesManager.get().addCompletedQuestion(questionNum);
             verdict.setText(correctAnswer);
-            if (questionNum != QuestionServer.getNumQuestions() - 1)
-            {
+            if (questionNum != QuestionServer.getNumQuestions() - 1) {
                 nextQuestion.setVisibility(View.VISIBLE);
             }
         }
-        else
-        {
+        else {
             retry.setVisibility(View.VISIBLE);
             giveUp.setVisibility(View.VISIBLE);
             verdict.setText(wrongAnswer);
         }
 
         // They got it wrong
-        if (score.userResults().getData() == null)
-        {
+        if (score.userResults().getData() == null) {
             theirAnswers.setText(invalidQuery);
         }
-        else if (score.userResults().getData().length == 0)
-        {
+        else if (score.userResults().getData().length == 0) {
             theirAnswers.setText(emptyResults);
         }
-        else
-        {
+        else {
             theirAnswers.setText(resultsPreamble);
             // Logic to display their table
             createTable((TableLayout) findViewById(R.id.their_answers_table),
@@ -111,14 +101,12 @@ public class AnswerCheckerActivity extends StandardActivity
                 score.correctAnswers().getColumns(), score.correctAnswers().getData());
     }
 
-    public void createTable(TableLayout table, String[] columns, String[][] data)
-    {
+    public void createTable(TableLayout table, String[] columns, String[][] data) {
         TableLayout.LayoutParams dataParams = new TableLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.1f);
         dataParams.setMargins(0, 0, 5, 0);
 
         LinearLayout topRow = new LinearLayout(this);
-        for (String column : columns)
-        {
+        for (String column : columns) {
             TextView text = new TextView(this);
             text.setText(column);
             text.setLayoutParams(dataParams);
@@ -130,11 +118,9 @@ public class AnswerCheckerActivity extends StandardActivity
         // add the TableRow to the TableLayout
         table.addView(topRow);
 
-        for (String[] dataRow : data)
-        {
+        for (String[] dataRow : data) {
             LinearLayout tuple = new LinearLayout(this);
-            for (String datum : dataRow)
-            {
+            for (String datum : dataRow) {
                 TextView text = new TextView(this);
                 text.setText(datum);
                 text.setLayoutParams(dataParams);
@@ -157,15 +143,8 @@ public class AnswerCheckerActivity extends StandardActivity
     }
 
     @OnClick(R.id.advance_forward)
-    public void advanceToNextQuestion(View view)
-    {
+    public void advanceToNextQuestion(View view) {
         setResult(RESULT_OK);
         finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.blank_menu, menu);
-        return true;
     }
 }

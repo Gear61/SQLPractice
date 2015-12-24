@@ -1,7 +1,6 @@
 package randomappsinc.com.sqlpractice.Activities;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -17,8 +16,7 @@ public class DatabaseTablesActivity extends StandardActivity {
     @Bind(R.id.all_tables) TextView allTableDescriptions;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.database_tables);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -29,20 +27,12 @@ public class DatabaseTablesActivity extends StandardActivity {
     public void populateTableDescriptions() {
         StringBuilder tableDescriptions = new StringBuilder();
         Schema[] allTables = SchemaServer.getSchemaServer().serveAllTables();
-        for (int i = 0; i < allTables.length; i++)
-        {
-            if (i != 0)
-            {
+        for (int i = 0; i < allTables.length; i++) {
+            if (i != 0) {
                 tableDescriptions.append("\n\n");
             }
             tableDescriptions.append(allTables[i].getDescription());
         }
         allTableDescriptions.setText(tableDescriptions.toString());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.blank_menu, menu);
-        return true;
     }
 }

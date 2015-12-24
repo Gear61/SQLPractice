@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="database_tables">Database tables</string>
     <string name="send_feedback">Send feedback</string>
+    <string name="my_other_apps">My other apps</string>
     <string name="rate_this_app">Rate this app</string>
     <string name="source_code">Source code</string>
-    <array name="settings_options">
-        <item>@string/database_tables</item>
+    <string name="database_tables">Database tables</string>
+    <string-array name="settings_options">
         <item>@string/send_feedback</item>
+        <item>@string/my_other_apps</item>
         <item>@string/rate_this_app</item>
         <item>@string/source_code</item>
-    </array>
+        <item>@string/database_tables</item>
+    </string-array>
     <string name="play_store_error">Unable to open the Play Store.</string>
     <string name="feedback_subject">SQL Practice PRO Feedback</string>
     <string name="send_email">Send email</string>
 
     <!-- Font Awesome Icons -->
-    <string name="database_icon">{fa-database}</string>
     <string name="email_icon">{fa-envelope}</string>
+    <string name="android_icon">{fa-android}</string>
     <string name="rate_icon">{fa-thumbs-up}</string>
     <string name="github_icon">{fa-github}</string>
+    <string name="database_icon">{fa-database}</string>
+    <string-array name="settings_icons">
+        <item>@string/email_icon</item>
+        <item>@string/android_icon</item>
+        <item>@string/rate_icon</item>
+        <item>@string/github_icon</item>
+        <item>@string/database_icon</item>
+    </string-array>
 </resources>

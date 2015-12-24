@@ -18,35 +18,31 @@ import randomappsinc.com.sqlpractice.R;
  */
 public class SettingsAdapter extends BaseAdapter {
     private String[] optionNames;
+    private String[] optionIcons;
     private Context context;
 
-    @SuppressWarnings("unchecked")
-    public SettingsAdapter(Context context)
-    {
+    public SettingsAdapter(Context context) {
         this.context = context;
         this.optionNames = context.getResources().getStringArray(R.array.settings_options);
+        this.optionIcons = context.getResources().getStringArray(R.array.settings_icons);
     }
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return optionNames.length;
     }
 
     @Override
-    public String getItem(int position)
-    {
+    public String getItem(int position) {
         return optionNames[position];
     }
 
     @Override
-    public long getItemId(int position)
-    {
-        return 0;
+    public long getItemId(int position) {
+        return getItem(position).hashCode();
     }
 
-    public static class SettingsViewHolder
-    {
+    public static class SettingsViewHolder {
         @Bind(R.id.option_icon) IconTextView settingsIcon;
         @Bind(R.id.settings_option) TextView settingsOption;
 
@@ -55,37 +51,22 @@ public class SettingsAdapter extends BaseAdapter {
         }
     }
 
-    public View getView(int position, View view, ViewGroup parent)
-    {
+    public View getView(int position, View view, ViewGroup parent) {
         SettingsViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R.layout.settings_list_item, parent, false);
             holder = new SettingsViewHolder(view);
             view.setTag(holder);
-        } else {
+        }
+        else {
             holder = (SettingsViewHolder) view.getTag();
         }
 
         String tabName = optionNames[position];
         holder.settingsOption.setText(tabName);
+        holder.settingsIcon.setText(optionIcons[position]);
 
-        if (tabName.equals(context.getString(R.string.database_tables)))
-        {
-            holder.settingsIcon.setText(context.getString(R.string.database_icon));
-        }
-        else if (tabName.equals(context.getString(R.string.send_feedback)))
-        {
-            holder.settingsIcon.setText(context.getString(R.string.email_icon));
-        }
-        else if (tabName.equals(context.getString(R.string.rate_this_app)))
-        {
-            holder.settingsIcon.setText(context.getString(R.string.rate_icon));
-        }
-        else if (tabName.equals(context.getString(R.string.source_code)))
-        {
-            holder.settingsIcon.setText(context.getString(R.string.github_icon));
-        }
         return view;
     }
 }

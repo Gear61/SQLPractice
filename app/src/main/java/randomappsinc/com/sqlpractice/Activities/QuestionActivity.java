@@ -2,7 +2,6 @@ package randomappsinc.com.sqlpractice.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +36,7 @@ public class QuestionActivity extends StandardActivity {
     @Bind(R.id.table_design) TextView tableDesign;
     @Bind(R.id.problem) TextView questionPrompt;
     @Bind(R.id.query_entry) AutoCompleteTextView queryHelper;
-    @Bind(R.id.coordinator_layout) CoordinatorLayout parent;
+    @Bind(R.id.parent) View parent;
 
     @BindString(R.string.question_number) String questionPrefix;
     @BindString(R.string.invalid_select) String invalidSelect;
