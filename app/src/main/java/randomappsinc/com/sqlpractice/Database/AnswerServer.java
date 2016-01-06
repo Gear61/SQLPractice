@@ -36,7 +36,9 @@ public class AnswerServer
                     "SELECT COUNT(DISTINCT(AUTHOR)) FROM BOOKS;",
                     "SELECT Professor_Name, Salary FROM SALARIES WHERE Salary BETWEEN 120000 AND 250000;",
                     "SELECT * FROM SALARIES WHERE Department = \"Anthropology\" OR Salary > 150000;",
-                    "SELECT MAX(Salary) FROM SALARIES WHERE Department = \"Computer Science\";"};
+                    "SELECT MAX(Salary) FROM SALARIES WHERE Department = \"Computer Science\";",
+                    "SELECT COUNT(*) FROM SALARIES WHERE Salary > 2 * " +
+                            "(SELECT MIN(Salary) FROM SALARIES WHERE Department = \"Political Science\");"};
 
     public static String getAnswer(int position)
     {
