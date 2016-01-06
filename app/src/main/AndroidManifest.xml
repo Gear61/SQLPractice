@@ -38,10 +38,5 @@
             android:name=".Activities.DatabaseTablesActivity"
             android:configChanges="orientation|screenSize">
         </activity>
-        <activity
-            android:label="@string/my_other_apps"
-            android:name=".Activities.OtherAppsActivity"
-            android:configChanges="orientation|screenSize">
-        </activity>
     </application>
 </manifest>

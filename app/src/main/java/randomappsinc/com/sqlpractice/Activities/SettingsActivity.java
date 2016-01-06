@@ -20,6 +20,7 @@ import randomappsinc.com.sqlpractice.R;
  */
 public class SettingsActivity extends StandardActivity {
     public static final String SUPPORT_EMAIL = "chessnone@gmail.com";
+    public static final String OTHER_APPS_URL = "https://play.google.com/store/apps/developer?id=RandomAppsInc";
     public static final String REPO_URL = "https://github.com/Gear61/SQLPractice";
 
     @Bind(R.id.parent) View parent;
@@ -50,7 +51,7 @@ public class SettingsActivity extends StandardActivity {
                 startActivity(Intent.createChooser(sendIntent, sendEmail));
                 return;
             case 1:
-                intent = new Intent(this, OtherAppsActivity.class);
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(OTHER_APPS_URL));
                 break;
             case 2:
                 Uri uri =  Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
