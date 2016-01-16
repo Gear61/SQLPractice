@@ -15,7 +15,7 @@ public class QuestionServer {
              {0}, {0}, {0}, {0}, {0},
              {0}, {0}, {1}, {1, 2}, {1, 2},
              {0}, {0}, {1}, {0}, {2},
-             {0}, {0}, {0}, {0}};
+             {0}, {0}, {0}, {0}, {1, 2}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -54,7 +54,8 @@ public class QuestionServer {
                             "department or makes more than 150000 a year.",
                     "Write a query that returns the highest salary in the \"Computer Science\" department.",
                     "Write a query that returns the amount of professors who earn more than twice as much as the " +
-                            "lowest paid professor in the \"Political Science\" department."};
+                            "lowest paid professor in the \"Political Science\" department.",
+                    "Write a query that returns the names of all books checked out by Justin (first name) Lee (last name)."};
 
     private Question[] allQuestions = new Question[questions.length];
 

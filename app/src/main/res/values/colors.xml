@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app_turquoise">#009688</color>
+    <color name="dark_teal">#00796B</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#E50000</color>
     <color name="green">#009900</color>

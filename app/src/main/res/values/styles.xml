@@ -1,7 +1,7 @@
 <resources>
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/app_turquoise</item>
-        <item name="colorPrimaryDark">@color/app_turquoise</item>
+        <item name="colorPrimaryDark">@color/dark_teal</item>
         <item name="colorAccent">@color/app_turquoise</item>
     </style>
 

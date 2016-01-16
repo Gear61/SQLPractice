@@ -38,7 +38,9 @@ public class AnswerServer
                     "SELECT * FROM SALARIES WHERE Department = \"Anthropology\" OR Salary > 150000;",
                     "SELECT MAX(Salary) FROM SALARIES WHERE Department = \"Computer Science\";",
                     "SELECT COUNT(*) FROM SALARIES WHERE Salary > 2 * " +
-                            "(SELECT MIN(Salary) FROM SALARIES WHERE Department = \"Political Science\");"};
+                            "(SELECT MIN(Salary) FROM SALARIES WHERE Department = \"Political Science\");",
+                    "SELECT Book_Name FROM CHECKED_OUT INNER JOIN BOOKS ON CHECKED_OUT.Book_ID = BOOKS.Book_ID " +
+                            "WHERE First_Name = \"Justin\" AND Last_Name = \"Lee\";"};
 
     public static String getAnswer(int position)
     {
