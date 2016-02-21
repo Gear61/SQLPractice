@@ -7,15 +7,15 @@ import randomappsinc.com.sqlpractice.Database.Models.Question;
  */
 // This class contains the questions our app contains
 public class QuestionServer {
-    // Our singleton
-    public static QuestionServer instance = null;
+    public static QuestionServer instance;
 
     private static int[][] questionTablePairings =
             {{0}, {0}, {0}, {0}, {0},
              {0}, {0}, {0}, {0}, {0},
              {0}, {0}, {1}, {1, 2}, {1, 2},
              {0}, {0}, {1}, {0}, {2},
-             {0}, {0}, {0}, {0}, {1, 2}};
+             {0}, {0}, {0}, {0}, {1, 2},
+             {1}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -55,7 +55,9 @@ public class QuestionServer {
                     "Write a query that returns the highest salary in the \"Computer Science\" department.",
                     "Write a query that returns the amount of professors who earn more than twice as much as the " +
                             "lowest paid professor in the \"Political Science\" department.",
-                    "Write a query that returns the names of all books checked out by Justin (first name) Lee (last name)."};
+                    "Write a query that returns the names of all books checked out by Justin (first name) Lee (last name).",
+                    "Write a query that returns the full names (full name is first name followed by a space " +
+                            "and then last name) of everyone who has checked out a book. No duplicates!"};
 
     private Question[] allQuestions = new Question[questions.length];
 

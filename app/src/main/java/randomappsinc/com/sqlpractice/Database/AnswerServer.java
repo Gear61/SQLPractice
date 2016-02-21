@@ -40,7 +40,9 @@ public class AnswerServer
                     "SELECT COUNT(*) FROM SALARIES WHERE Salary > 2 * " +
                             "(SELECT MIN(Salary) FROM SALARIES WHERE Department = \"Political Science\");",
                     "SELECT Book_Name FROM CHECKED_OUT INNER JOIN BOOKS ON CHECKED_OUT.Book_ID = BOOKS.Book_ID " +
-                            "WHERE First_Name = \"Justin\" AND Last_Name = \"Lee\";"};
+                            "WHERE First_Name = \"Justin\" AND Last_Name = \"Lee\";",
+                    "SELECT DISTINCT(COALESCE(First_Name, '') || ' ' || COALESCE(Last_Name, '')) " +
+                            "AS Name FROM CHECKED_OUT;"};
 
     public static String getAnswer(int position)
     {
