@@ -28,10 +28,6 @@ import randomappsinc.com.sqlpractice.R;
  */
 // Loads questions for users to answer
 public class QuestionActivity extends StandardActivity {
-    private SchemaServer schemaServer;
-    private QuestionServer questionServer;
-    int currentQuestion;
-
     // Question form views
     @Bind(R.id.table_design) TextView tableDesign;
     @Bind(R.id.problem) TextView questionPrompt;
@@ -43,6 +39,10 @@ public class QuestionActivity extends StandardActivity {
     @BindColor(R.color.app_turquoise) int turquoise;
     @BindColor(R.color.white) int white;
 
+    private SchemaServer schemaServer;
+    private QuestionServer questionServer;
+    int currentQuestion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +52,13 @@ public class QuestionActivity extends StandardActivity {
         schemaServer = SchemaServer.getSchemaServer();
         questionServer = QuestionServer.getQuestionServer();
 
-        Intent intent = getIntent();
-        currentQuestion = intent.getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
+        currentQuestion = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
         setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
         setUpQuestion();
     }
 
     @OnClick(R.id.submit_query)
-    public void checkAnswer(View view) {
+    public void checkAnswer() {
         if (Util.validSELECT(queryHelper.getText().toString())) {
             Intent intent = new Intent(this, AnswerCheckerActivity.class);
             intent.putExtra(Constants.QUESTION_NUMBER_KEY, currentQuestion);
@@ -116,7 +115,6 @@ public class QuestionActivity extends StandardActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.question_menu, menu);
         menu.findItem(R.id.random).setIcon(
                 new IconDrawable(this, FontAwesomeIcons.fa_random)
@@ -133,7 +131,6 @@ public class QuestionActivity extends StandardActivity {
         return true;
     }
 
-    // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
     public boolean onOptionsItemSelected(MenuItem item) {
         Util.hideKeyboard(this);
         switch (item.getItemId()) {

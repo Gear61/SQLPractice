@@ -1,12 +1,9 @@
 package randomappsinc.com.sqlpractice.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -23,7 +20,6 @@ import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.R;
 
 public class MainActivity extends StandardActivity {
-    final Context context = this;
     @Bind(R.id.question_list) ListView questionList;
 
     private QuestionAdapter questionAdapter;
@@ -31,6 +27,8 @@ public class MainActivity extends StandardActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.question_list);
+        ButterKnife.bind(this);
 
         if (PreferencesManager.get().getFirstTimeUser()) {
             new MaterialDialog.Builder(this)
@@ -41,18 +39,15 @@ public class MainActivity extends StandardActivity {
             PreferencesManager.get().setFirstTimeUser(false);
         }
 
-        MisterDataSource m_dataSource = new MisterDataSource(context);
+        MisterDataSource m_dataSource = new MisterDataSource();
         m_dataSource.refreshTables();
 
-        // Populate the list, attach adapter to it
-        setContentView(R.layout.question_list);
-        ButterKnife.bind(this);
-        questionAdapter = new QuestionAdapter(context);
+        questionAdapter = new QuestionAdapter(this);
         questionList.setAdapter(questionAdapter);
     }
 
     @OnItemClick(R.id.question_list)
-    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+    public void onItemClick(int position) {
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra(Constants.QUESTION_NUMBER_KEY, position);
         startActivity(intent);
@@ -66,7 +61,6 @@ public class MainActivity extends StandardActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         menu.findItem(R.id.settings).setIcon(
                 new IconDrawable(this, FontAwesomeIcons.fa_gear)
@@ -75,7 +69,6 @@ public class MainActivity extends StandardActivity {
         return true;
     }
 
-    // Handles menu clicks. Home (back) button goes back to question list, back/forward go through the questions
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.settings) {
             startActivity(new Intent(this, SettingsActivity.class));

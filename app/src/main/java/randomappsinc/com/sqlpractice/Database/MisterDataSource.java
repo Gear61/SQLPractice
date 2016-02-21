@@ -1,6 +1,5 @@
 package randomappsinc.com.sqlpractice.Database;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,9 +17,8 @@ public class MisterDataSource {
     SchemaServer schemaServer;
 
     // Constructor
-    public MisterDataSource(Context context)
-    {
-        dbHelper = new MySQLiteHelper(context);
+    public MisterDataSource() {
+        dbHelper = new MySQLiteHelper();
         schemaServer = SchemaServer.getSchemaServer();
     }
 
@@ -37,14 +35,11 @@ public class MisterDataSource {
     // 1. Create any tables that haven't been created yet
     // 2. Check all non-persistent tables to see if they need an update. If so, rebuild them
     // NOTE: This doesn't need an open()/close() pair since it's a collection of other commands
-    public void refreshTables()
-    {
+    public void refreshTables() {
         // Create any missing tables
         String[] allTables = schemaServer.serveAllTableNames();
-        for (int i = 0; i < allTables.length; i++)
-        {
-            if (!tableExists(allTables[i]))
-            {
+        for (int i = 0; i < allTables.length; i++) {
+            if (!tableExists(allTables[i])) {
                 createTable(allTables[i]);
             }
         }
@@ -54,11 +49,9 @@ public class MisterDataSource {
 
         // For each of those tables, check its current row count with what it should be
         // Then destroy/rebuild it if those numbers don't match
-        for (int i = 0; i < targetTables.length; i++)
-        {
+        for (int i = 0; i < targetTables.length; i++) {
             if (getNumRowsInTable(targetTables[i]) !=
-                    schemaServer.serveTable(targetTables[i]).numRows())
-            {
+                    schemaServer.serveTable(targetTables[i]).numRows()) {
                 clearTable(targetTables[i]);
                 repopulateTable(targetTables[i]);
             }
@@ -66,25 +59,21 @@ public class MisterDataSource {
     }
 
     // Clear a table's contents based on name
-    public void clearTable(String tableName)
-    {
+    public void clearTable(String tableName) {
         open();
         database.delete(tableName, null, null);
         close();
     }
 
     // Repopulate a table based on name
-    public void repopulateTable(String tableName)
-    {
+    public void repopulateTable(String tableName) {
         open();
         Schema mrTable = schemaServer.serveTable(tableName);
         String[] Inserts = mrTable.insertStatements();
 
-        if (Inserts != null)
-        {
+        if (Inserts != null) {
             // Run each of the table's inserts
-            for (int j = 0; j < Inserts.length; j++)
-            {
+            for (int j = 0; j < Inserts.length; j++) {
                 database.execSQL(Inserts[j]);
             }
         }
@@ -92,8 +81,7 @@ public class MisterDataSource {
     }
 
     // Creates a table
-    public void createTable(String tableName)
-    {
+    public void createTable(String tableName) {
         open();
 
         // Create the table
@@ -106,37 +94,31 @@ public class MisterDataSource {
     }
 
     // Checks to see if the table with the given name exists
-    public boolean tableExists(String tableName)
-    {
+    public boolean tableExists(String tableName) {
         open();
         Cursor cursor = database.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
-        if (cursor != null)
-        {
-            if (cursor.getCount() > 0)
-            {
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
                 cursor.close();
                 close();
                 return true;
             }
+            cursor.close();
         }
-        cursor.close();
         close();
         return false;
     }
 
     // Return the number of tuples in a certain table. This number may be outdated
-    public int getNumRowsInTable(String tableName)
-    {
+    public int getNumRowsInTable(String tableName) {
         open();
         int numRows = 0;
         String query = "SELECT COUNT(*) FROM " + tableName + ";";
         Cursor cursor = database.rawQuery(query, null);
-        if (cursor.getCount() == 0)
-        {
+        if (cursor.getCount() == 0) {
             System.out.println("Table not found.");
         }
-        else
-        {
+        else {
             cursor.moveToNext();
             numRows = cursor.getInt(0);
         }
@@ -146,22 +128,18 @@ public class MisterDataSource {
         return numRows;
     }
 
-    public ResultSet getData(String queryString)
-    {
+    public ResultSet getData(String queryString) {
         open();
-        try
-        {
+        try {
             Cursor cursor = database.rawQuery(queryString, null);
             int row = cursor.getCount(), col = cursor.getColumnCount();
             String columns[] = new String[col];
-            for (int i = 0; i < col; i++)
-            {
+            for (int i = 0; i < col; i++) {
                 columns[i] = cursor.getColumnName(i);
             }
 
             // If no data was gotten, return null
-            if (row == 0)
-            {
+            if (row == 0) {
                 String[][] empty = {};
                 return new ResultSet(columns, empty);
             }
@@ -170,19 +148,15 @@ public class MisterDataSource {
             int[] typeDict = new int[col];
 
             cursor.moveToNext();
-            for (int i = 0; i < col; i++)
-            {
+            for (int i = 0; i < col; i++) {
                 typeDict[i] = cursor.getType(i);
             }
             cursor.moveToPrevious();
 
             int eye = 0;
-            while (cursor.moveToNext())
-            {
-                for (int i = 0; i < col; i++)
-                {
-                    switch (typeDict[i])
-                    {
+            while (cursor.moveToNext()) {
+                for (int i = 0; i < col; i++) {
+                    switch (typeDict[i]) {
                         case Cursor.FIELD_TYPE_STRING:
                             ourData[eye][i] = cursor.getString(i);
                             break;
@@ -209,8 +183,7 @@ public class MisterDataSource {
             close();
             return new ResultSet(columns, ourData);
         }
-        catch (SQLiteException e)
-        {
+        catch (SQLiteException e) {
             return new ResultSet(null, null);
         }
     }

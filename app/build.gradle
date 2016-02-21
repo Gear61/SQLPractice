@@ -8,17 +8,14 @@ android {
         applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 123
-        versionName "1.2.3"
+        versionCode 124
+        versionName "1.2.4"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    repositories {
-        maven { url "https://jitpack.io" }
     }
 }
 
@@ -31,7 +28,7 @@ dependencies {
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.github.rey5137:material:1.2.1'
-    compile('com.github.afollestad.material-dialogs:core:0.8.5.0@aar') {
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.4@aar') {
         transitive = true
     }
 }

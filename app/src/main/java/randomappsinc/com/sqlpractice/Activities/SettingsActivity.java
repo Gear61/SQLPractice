@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import butterknife.Bind;
@@ -20,7 +19,7 @@ import randomappsinc.com.sqlpractice.R;
  */
 public class SettingsActivity extends StandardActivity {
     public static final String SUPPORT_EMAIL = "chessnone@gmail.com";
-    public static final String OTHER_APPS_URL = "https://play.google.com/store/apps/developer?id=RandomAppsInc";
+    public static final String OTHER_APPS_URL = "https://play.google.com/store/apps/dev?id=9093438553713389916";
     public static final String REPO_URL = "https://github.com/Gear61/SQLPractice";
 
     @Bind(R.id.parent) View parent;
@@ -40,7 +39,7 @@ public class SettingsActivity extends StandardActivity {
     }
 
     @OnItemClick(R.id.settings_options)
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+    public void onItemClick(int position) {
         Intent intent = null;
         switch (position) {
             case 0:

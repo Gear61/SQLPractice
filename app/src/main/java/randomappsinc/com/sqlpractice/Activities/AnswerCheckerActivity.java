@@ -1,6 +1,5 @@
 package randomappsinc.com.sqlpractice.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import randomappsinc.com.sqlpractice.R;
  */
 // Evaluates the answer that the user gave from QuestionActivity
 public class AnswerCheckerActivity extends StandardActivity {
-    final Context context = this;
     private int questionNum;
     private MaterialDialog answerDialog;
 
@@ -58,7 +56,7 @@ public class AnswerCheckerActivity extends StandardActivity {
         String userQuery = intent.getStringExtra(Constants.USER_QUERY_KEY);
 
         // Grab an evaluation of user's answer and display it
-        AnswerChecker mrAnswer = new AnswerChecker(context);
+        AnswerChecker mrAnswer = new AnswerChecker();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         displayResponse(mrAnswer.checkAnswer(questionNum, userQuery));
@@ -132,18 +130,18 @@ public class AnswerCheckerActivity extends StandardActivity {
     }
 
     @OnClick(R.id.retry_question)
-    public void retryQuestion(View view)
+    public void retryQuestion()
     {
         finish();
     }
 
     @OnClick(R.id.give_up)
-    public void giveUp(View view) {
+    public void giveUp() {
         answerDialog.show();
     }
 
     @OnClick(R.id.advance_forward)
-    public void advanceToNextQuestion(View view) {
+    public void advanceToNextQuestion() {
         setResult(RESULT_OK);
         finish();
     }
