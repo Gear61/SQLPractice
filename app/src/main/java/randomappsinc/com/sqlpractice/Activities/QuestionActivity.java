@@ -12,7 +12,6 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.Bind;
-import butterknife.BindColor;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,7 +19,7 @@ import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Database.SchemaServer;
 import randomappsinc.com.sqlpractice.Misc.Constants;
-import randomappsinc.com.sqlpractice.Misc.Util;
+import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
 /**
@@ -36,8 +35,6 @@ public class QuestionActivity extends StandardActivity {
 
     @BindString(R.string.question_number) String questionPrefix;
     @BindString(R.string.invalid_select) String invalidSelect;
-    @BindColor(R.color.app_turquoise) int turquoise;
-    @BindColor(R.color.white) int white;
 
     private SchemaServer schemaServer;
     private QuestionServer questionServer;
@@ -59,14 +56,14 @@ public class QuestionActivity extends StandardActivity {
 
     @OnClick(R.id.submit_query)
     public void checkAnswer() {
-        if (Util.validSELECT(queryHelper.getText().toString())) {
+        if (Utils.validSELECT(queryHelper.getText().toString())) {
             Intent intent = new Intent(this, AnswerCheckerActivity.class);
             intent.putExtra(Constants.QUESTION_NUMBER_KEY, currentQuestion);
             intent.putExtra(Constants.USER_QUERY_KEY, queryHelper.getText().toString());
             startActivityForResult(intent, 1);
         }
         else {
-            Util.showSnackbar(parent, invalidSelect, turquoise, white);
+            Utils.showSnackbar(parent, invalidSelect);
         }
     }
 
@@ -132,10 +129,10 @@ public class QuestionActivity extends StandardActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        Util.hideKeyboard(this);
+        Utils.hideKeyboard(this);
         switch (item.getItemId()) {
             case R.id.random:
-                currentQuestion = Util.getRandomQuestionIndex(currentQuestion);
+                currentQuestion = Utils.getRandomQuestionIndex(currentQuestion);
                 setUpQuestion();
                 return true;
             case R.id.backward:

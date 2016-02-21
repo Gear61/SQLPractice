@@ -12,18 +12,20 @@ import java.util.Collections;
 import java.util.List;
 
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
+import randomappsinc.com.sqlpractice.R;
 
 /**
  * Created by alexanderchiou on 10/31/15.
  */
-public class Util
-{
-    public static void showSnackbar(View parent, String content, int backgroundColor, int textColor) {
+public class Utils {
+    public static void showSnackbar(View parent, String content) {
+        Context context = MyApplication.getAppContext();
+
         Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);
         View view = snackbar.getView();
-        view.setBackgroundColor(backgroundColor);
+        view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
         TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(textColor);
+        tv.setTextColor(context.getResources().getColor(R.color.white));
         snackbar.show();
     }
 

@@ -1,6 +1,5 @@
 package randomappsinc.com.sqlpractice.Misc;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -10,45 +9,37 @@ import java.util.Set;
 /**
  * Created by alexanderchiou on 11/2/15.
  */
-public class PreferencesManager
-{
+public class PreferencesManager {
     private SharedPreferences prefs;
 
     private static final String FIRST_TIME_KEY = "firstTime";
     private static final String COMPLETED_QUESTIONS_KEY = "completedQuestions";
+    private static final String NUM_APP_OPENS_KEY = "numAppOpens";
     private static PreferencesManager instance;
 
-    public static PreferencesManager get()
-    {
-        if (instance == null)
-        {
+    public static PreferencesManager get() {
+        if (instance == null) {
             instance = getSync();
         }
         return instance;
     }
 
-    private static synchronized PreferencesManager getSync()
-    {
-        if (instance == null)
-        {
+    private static synchronized PreferencesManager getSync() {
+        if (instance == null) {
             instance = new PreferencesManager();
         }
         return instance;
     }
 
-    private PreferencesManager()
-    {
-        Context context = MyApplication.getAppContext();
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    private PreferencesManager() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
     }
 
-    public boolean getFirstTimeUser()
-    {
+    public boolean getFirstTimeUser() {
         return prefs.getBoolean(FIRST_TIME_KEY, true);
     }
 
-    public void setFirstTimeUser(boolean firstTimeUser)
-    {
+    public void setFirstTimeUser(boolean firstTimeUser) {
         prefs.edit().putBoolean(FIRST_TIME_KEY, firstTimeUser).apply();
     }
 
@@ -69,5 +60,12 @@ public class PreferencesManager
         Set<String> completedQuestions = getCompletedQuestions();
         completedQuestions.add(String.valueOf(questionNumber));
         setCompletedQuestion(completedQuestions);
+    }
+
+    public boolean shouldAskToRate() {
+        int numAppOpens = prefs.getInt(NUM_APP_OPENS_KEY, 0);
+        numAppOpens++;
+        prefs.edit().putInt(NUM_APP_OPENS_KEY, numAppOpens).apply();
+        return numAppOpens == 5;
     }
 }

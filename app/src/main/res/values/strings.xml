@@ -29,4 +29,12 @@
         for the community, so if you have any ideas on how to improve this app (question suggestions, bug fixes,
         feature requests), please use the send feedback option in the settings to tell me! Thank you!
     </string>
+
+    <string name="please_rate">Hey, it looks like you\'re a frequent user of SQL Practice PRO!
+        If you have a couple seconds, I would be incredibly grateful if you could rate this app in the Play Store.
+        Don\'t worry, I won\'t bother you with this ever again no matter what you choose.
+        Thank you again for even downloading this app to begin with.
+    </string>
+    <string name="will_rate">Sure, I\'ll help</string>
+    <string name="no_im_good">No, I\'m good</string>
 </resources>

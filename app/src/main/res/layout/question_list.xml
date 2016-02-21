@@ -1,22 +1,28 @@
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/parent"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:textSize="16sp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="@string/question_list_intro"
-        android:gravity="center"/>
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
-    <ListView
-        android:id="@+id/question_list"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        <TextView
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/question_list_intro"
+            android:gravity="center"/>
+
+        <ListView
+            android:id="@+id/question_list"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

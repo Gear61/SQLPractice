@@ -3,7 +3,6 @@ package randomappsinc.com.sqlpractice.Activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.ListView;
 
@@ -12,6 +11,7 @@ import butterknife.BindString;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.Adapters.SettingsAdapter;
+import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
 /**
@@ -24,7 +24,6 @@ public class SettingsActivity extends StandardActivity {
 
     @Bind(R.id.parent) View parent;
     @Bind(R.id.settings_options) ListView settingsOptions;
-    @BindString(R.string.play_store_error) String playStoreError;
     @BindString(R.string.feedback_subject) String feedbackSubject;
     @BindString(R.string.send_email) String sendEmail;
 
@@ -55,9 +54,8 @@ public class SettingsActivity extends StandardActivity {
             case 2:
                 Uri uri =  Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
                 intent = new Intent(Intent.ACTION_VIEW, uri);
-                if (!(getPackageManager().queryIntentActivities(intent, 0).size() > 0))
-                {
-                    Snackbar.make(parent, playStoreError, Snackbar.LENGTH_LONG).show();
+                if (!(getPackageManager().queryIntentActivities(intent, 0).size() > 0)) {
+                    Utils.showSnackbar(parent, getString(R.string.play_store_error));
                     return;
                 }
                 break;
