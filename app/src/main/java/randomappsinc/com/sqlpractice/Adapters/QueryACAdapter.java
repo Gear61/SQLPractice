@@ -58,10 +58,6 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         this.suggestions = new ArrayList<>();
     }
 
-    public String getSuggestion(int position) {
-        return suggestions.get(position);
-    }
-
     // Add SQLite keywords (SELECT, FROM, WHERE, etc) to suggestions
     private void addConstants() {
         for (int i = 0; i < constants.size(); i++) {
@@ -134,22 +130,21 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         public TextView suggestion;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
+    public View getView(int position, View view, ViewGroup parent) {
         ViewHolder holder;
-        if (v == null) {
+        if (view == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.acquery_item, null);
+            view = vi.inflate(R.layout.acquery_item, parent, false);
             holder = new ViewHolder();
-            holder.suggestion = (TextView) v.findViewById(R.id.suggestion);
-            v.setTag(holder);
+            holder.suggestion = (TextView) view.findViewById(R.id.suggestion);
+            view.setTag(holder);
         }
         else {
-            holder = (ViewHolder) v.getTag();
+            holder = (ViewHolder) view.getTag();
         }
 
         holder.suggestion.setText(items.get(position));
-        return v;
+        return view;
     }
 
     @Override

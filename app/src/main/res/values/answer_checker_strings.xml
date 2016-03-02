@@ -8,4 +8,8 @@
     <string name="empty_resultset">Your query did not return anything.</string>
     <string name="query_results_preamble">Here is what your query returned.</string>
     <string name="our_answer_query">Our Answer Query</string>
+
+    <string name="copy_answer">Copy answer</string>
+    <string name="copy_confirmation">The answer query has been copied to your clipboard.</string>
+    <string name="answer_query">Answer Query</string>
 </resources>

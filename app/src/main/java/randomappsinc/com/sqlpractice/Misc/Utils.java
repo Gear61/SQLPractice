@@ -1,6 +1,8 @@
 package randomappsinc.com.sqlpractice.Misc;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -20,7 +22,6 @@ import randomappsinc.com.sqlpractice.R;
 public class Utils {
     public static void showSnackbar(View parent, String content) {
         Context context = MyApplication.getAppContext();
-
         Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);
         View view = snackbar.getView();
         view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
@@ -37,7 +38,7 @@ public class Utils {
         }
     }
 
-    public static boolean validSELECT(String query) {
+    public static boolean isValidSelect(String query) {
         return query.trim().toLowerCase().startsWith("select");
     }
 
@@ -51,5 +52,12 @@ public class Utils {
         }
         Collections.shuffle(list);
         return list.get(0);
+    }
+
+    public static void copyTextToClipboard(String text) {
+        Context context = MyApplication.getAppContext();
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Activity.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(context.getString(R.string.answer_query), text);
+        clipboard.setPrimaryClip(clip);
     }
 }

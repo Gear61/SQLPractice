@@ -1,8 +1,8 @@
 package randomappsinc.com.sqlpractice.Activities;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.Bind;
@@ -22,6 +23,7 @@ import randomappsinc.com.sqlpractice.Database.Models.ResponseBundle;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
+import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
 /**
@@ -30,8 +32,8 @@ import randomappsinc.com.sqlpractice.R;
 // Evaluates the answer that the user gave from QuestionActivity
 public class AnswerCheckerActivity extends StandardActivity {
     private int questionNum;
-    private MaterialDialog answerDialog;
 
+    @Bind(R.id.parent) View parent;
     @Bind(R.id.verdict) TextView verdict;
     @Bind(R.id.their_answers) TextView theirAnswers;
     @Bind(R.id.advance_forward) Button nextQuestion;
@@ -49,22 +51,15 @@ public class AnswerCheckerActivity extends StandardActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.answer_checker);
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Grab relevant data needed to evaluate answers from Question Activity
-        Intent intent = getIntent();
-        questionNum = intent.getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
-        String userQuery = intent.getStringExtra(Constants.USER_QUERY_KEY);
+        questionNum = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
+        String userQuery = getIntent().getStringExtra(Constants.USER_QUERY_KEY);
 
         // Grab an evaluation of user's answer and display it
         AnswerChecker mrAnswer = new AnswerChecker();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         displayResponse(mrAnswer.checkAnswer(questionNum, userQuery));
-        answerDialog = new MaterialDialog.Builder(this)
-                .title(R.string.our_answer_query)
-                .content(AnswerServer.getAnswer(questionNum))
-                .positiveText(android.R.string.yes)
-                .build();
     }
 
     private void displayResponse(ResponseBundle score) {
@@ -130,14 +125,26 @@ public class AnswerCheckerActivity extends StandardActivity {
     }
 
     @OnClick(R.id.retry_question)
-    public void retryQuestion()
-    {
+    public void retryQuestion() {
         finish();
     }
 
     @OnClick(R.id.give_up)
     public void giveUp() {
-        answerDialog.show();
+        final String answer = AnswerServer.getAnswer(questionNum);
+        new MaterialDialog.Builder(this)
+                .title(R.string.our_answer_query)
+                .content(answer)
+                .positiveText(android.R.string.yes)
+                .neutralText(R.string.copy_answer)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Utils.copyTextToClipboard(answer);
+                        Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
+                    }
+                })
+                .show();
     }
 
     @OnClick(R.id.advance_forward)

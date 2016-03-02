@@ -56,7 +56,7 @@ public class QuestionActivity extends StandardActivity {
 
     @OnClick(R.id.submit_query)
     public void checkAnswer() {
-        if (Utils.validSELECT(queryHelper.getText().toString())) {
+        if (Utils.isValidSelect(queryHelper.getText().toString())) {
             Intent intent = new Intent(this, AnswerCheckerActivity.class);
             intent.putExtra(Constants.QUESTION_NUMBER_KEY, currentQuestion);
             intent.putExtra(Constants.USER_QUERY_KEY, queryHelper.getText().toString());
