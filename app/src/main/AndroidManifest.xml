@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="randomappsinc.com.sqlpractice" >
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="randomappsinc.com.sqlpractice">
 
     <application
         android:name=".Misc.MyApplication"
         android:fullBackupContent="true"
         android:allowBackup="true"
+        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation|screenSize"
@@ -34,7 +36,7 @@
             android:configChanges="orientation|screenSize">
         </activity>
         <activity
-            android:label="@string/database_tables"
+            android:label="@string/database_tables_title"
             android:name=".Activities.DatabaseTablesActivity"
             android:configChanges="orientation|screenSize">
         </activity>

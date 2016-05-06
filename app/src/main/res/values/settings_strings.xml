@@ -5,6 +5,7 @@
     <string name="rate_this_app">Rate this app</string>
     <string name="source_code">Source code</string>
     <string name="database_tables">Database tables</string>
+    <string name="database_tables_title">Database Tables</string>
     <string-array name="settings_options">
         <item>@string/send_feedback</item>
         <item>@string/my_other_apps</item>
@@ -16,7 +17,7 @@
     <string name="feedback_subject">SQL Practice PRO Feedback</string>
     <string name="send_email">Send email</string>
 
-    <!-- Font Awesome Icons -->
+    <!-- Icons -->
     <string name="email_icon">{fa-envelope}</string>
     <string name="android_icon">{fa-android}</string>
     <string name="rate_icon">{fa-thumbs-up}</string>

@@ -31,8 +31,6 @@ import randomappsinc.com.sqlpractice.R;
  */
 // Evaluates the answer that the user gave from QuestionActivity
 public class AnswerCheckerActivity extends StandardActivity {
-    private int questionNum;
-
     @Bind(R.id.parent) View parent;
     @Bind(R.id.verdict) TextView verdict;
     @Bind(R.id.their_answers) TextView theirAnswers;
@@ -45,6 +43,8 @@ public class AnswerCheckerActivity extends StandardActivity {
     @BindString(R.string.invalid_query) String invalidQuery;
     @BindString(R.string.empty_resultset) String emptyResults;
     @BindString(R.string.query_results_preamble) String resultsPreamble;
+
+    private int questionNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
