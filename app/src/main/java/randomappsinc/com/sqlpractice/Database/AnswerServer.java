@@ -42,7 +42,9 @@ public class AnswerServer
                     "SELECT Book_Name FROM CHECKED_OUT INNER JOIN BOOKS ON CHECKED_OUT.Book_ID = BOOKS.Book_ID " +
                             "WHERE First_Name = \"Justin\" AND Last_Name = \"Lee\";",
                     "SELECT DISTINCT(COALESCE(First_Name, '') || ' ' || COALESCE(Last_Name, '')) " +
-                            "AS Name FROM CHECKED_OUT;"};
+                            "AS Name FROM CHECKED_OUT;",
+                    "SELECT Department, SUM(Salary) FROM SALARIES GROUP BY DEPARTMENT " +
+                            "ORDER BY SUM(Salary) DESC LIMIT 1;"};
 
     public static String getAnswer(int position)
     {
