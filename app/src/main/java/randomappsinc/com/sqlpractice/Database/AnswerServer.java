@@ -44,7 +44,9 @@ public class AnswerServer
                     "SELECT DISTINCT(COALESCE(First_Name, '') || ' ' || COALESCE(Last_Name, '')) " +
                             "AS Name FROM CHECKED_OUT;",
                     "SELECT Department, SUM(Salary) FROM SALARIES GROUP BY DEPARTMENT " +
-                            "ORDER BY SUM(Salary) DESC LIMIT 1;"};
+                            "ORDER BY SUM(Salary) DESC LIMIT 1;",
+                    "SELECT Department, AVG(Salary) FROM SALARIES GROUP BY DEPARTMENT " +
+                            "ORDER BY AVG(Salary) DESC LIMIT 1;"};
 
     public static String getAnswer(int position)
     {

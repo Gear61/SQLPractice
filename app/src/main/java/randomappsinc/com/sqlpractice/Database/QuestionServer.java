@@ -15,7 +15,7 @@ public class QuestionServer {
              {0}, {0}, {1}, {1, 2}, {1, 2},
              {0}, {0}, {1}, {0}, {2},
              {0}, {0}, {0}, {0}, {1, 2},
-             {1}, {0}};
+             {1}, {0}, {0}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -59,7 +59,9 @@ public class QuestionServer {
                     "Write a query that returns the full names (full name is first name followed by a space " +
                             "and then last name) of everyone who has checked out a book. No duplicates!",
                     "Write a query that returns the department that makes the most along with that " +
-                            "department's total aggregate salary."};
+                            "department's total aggregate salary.",
+                    "Write a query that returns the department with the highest average salary " +
+                            "along with that average salary."};
 
     private Question[] allQuestions = new Question[questions.length];
 
