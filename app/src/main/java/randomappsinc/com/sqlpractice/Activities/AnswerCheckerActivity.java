@@ -36,7 +36,6 @@ public class AnswerCheckerActivity extends StandardActivity {
     @Bind(R.id.their_answers) TextView theirAnswers;
     @Bind(R.id.advance_forward) Button nextQuestion;
     @Bind(R.id.retry_question) Button retry;
-    @Bind(R.id.give_up) Button giveUp;
 
     @BindString(R.string.correct_answer) String correctAnswer;
     @BindString(R.string.incorrect_answer) String wrongAnswer;
@@ -69,21 +68,17 @@ public class AnswerCheckerActivity extends StandardActivity {
             if (questionNum != QuestionServer.getNumQuestions() - 1) {
                 nextQuestion.setVisibility(View.VISIBLE);
             }
-        }
-        else {
+        } else {
             retry.setVisibility(View.VISIBLE);
-            giveUp.setVisibility(View.VISIBLE);
             verdict.setText(wrongAnswer);
         }
 
         // They got it wrong
         if (score.userResults().getData() == null) {
             theirAnswers.setText(invalidQuery);
-        }
-        else if (score.userResults().getData().length == 0) {
+        } else if (score.userResults().getData().length == 0) {
             theirAnswers.setText(emptyResults);
-        }
-        else {
+        } else {
             theirAnswers.setText(resultsPreamble);
             // Logic to display their table
             createTable((TableLayout) findViewById(R.id.their_answers_table),
@@ -129,7 +124,7 @@ public class AnswerCheckerActivity extends StandardActivity {
         finish();
     }
 
-    @OnClick(R.id.give_up)
+    @OnClick(R.id.view_answer)
     public void giveUp() {
         final String answer = AnswerServer.getAnswer(questionNum);
         new MaterialDialog.Builder(this)

@@ -67,9 +67,8 @@
 
             <com.rey.material.widget.Button
                 style="@style/regular_button"
-                android:id="@+id/give_up"
-                android:text="@string/give_up"
-                android:visibility="gone"
+                android:id="@+id/view_answer"
+                android:text="@string/view_our_answer"
                 app:rd_style="@style/button_ripple"/>
         </LinearLayout>
     </ScrollView>

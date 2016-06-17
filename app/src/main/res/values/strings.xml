@@ -13,13 +13,6 @@
     <!-- Query Submission Form -->
     <string name="submit_query">Run Query!</string>
 
-    <!-- Answer Evaluation -->
-    <string name="correct_answers">Here is what our answer query returned:</string>
-    <string name="advance_forward">Next Question</string>
-    <string name="give_up">Give Up</string>
-    <string name="retry_question">Retry</string>
-    <string name="return_to_list">Return to Main Menu</string>
-
     <!-- Activity Descriptions -->
     <string name="question_activity_display_message">Question Prompt</string>
     <string name="answer_checker_activity_display_message">Answer Checker</string>

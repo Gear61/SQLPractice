@@ -12,4 +12,9 @@
     <string name="copy_answer">Copy answer</string>
     <string name="copy_confirmation">The answer query has been copied to your clipboard.</string>
     <string name="answer_query">Answer Query</string>
+
+    <string name="correct_answers">Here is what our answer query returned:</string>
+    <string name="advance_forward">Next Question</string>
+    <string name="view_our_answer">View Our Answer</string>
+    <string name="retry_question">Retry</string>
 </resources>
