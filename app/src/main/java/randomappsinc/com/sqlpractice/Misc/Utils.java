@@ -5,9 +5,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
+import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import com.joanzapata.iconify.Icon;
+import com.joanzapata.iconify.IconDrawable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,5 +63,12 @@ public class Utils {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Activity.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(context.getString(R.string.answer_query), text);
         clipboard.setPrimaryClip(clip);
+    }
+
+    public static void loadMenuIcon(Menu menu, int itemId, Icon icon) {
+        menu.findItem(itemId).setIcon(
+                new IconDrawable(MyApplication.getAppContext(), icon)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
     }
 }

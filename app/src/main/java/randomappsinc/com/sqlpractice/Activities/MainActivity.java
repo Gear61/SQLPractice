@@ -11,13 +11,12 @@ import android.widget.ListView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
-import randomappsinc.com.sqlpractice.Adapters.QuestionAdapter;
+import randomappsinc.com.sqlpractice.Adapters.QuestionsAdapter;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
@@ -28,7 +27,7 @@ public class MainActivity extends StandardActivity {
     @Bind(R.id.parent) View parent;
     @Bind(R.id.question_list) ListView questionList;
 
-    private QuestionAdapter questionAdapter;
+    private QuestionsAdapter questionsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +47,8 @@ public class MainActivity extends StandardActivity {
         MisterDataSource m_dataSource = new MisterDataSource();
         m_dataSource.refreshTables();
 
-        questionAdapter = new QuestionAdapter(this);
-        questionList.setAdapter(questionAdapter);
+        questionsAdapter = new QuestionsAdapter(this);
+        questionList.setAdapter(questionsAdapter);
 
         if (PreferencesManager.get().shouldAskToRate()) {
             showPleaseRateDialog();
@@ -86,16 +85,13 @@ public class MainActivity extends StandardActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        questionAdapter.notifyDataSetChanged();
+        questionsAdapter.notifyDataSetChanged();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        menu.findItem(R.id.settings).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_gear)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
+        Utils.loadMenuIcon(menu, R.id.settings, FontAwesomeIcons.fa_gear);
         return true;
     }
 

@@ -18,7 +18,7 @@ import randomappsinc.com.sqlpractice.R;
 /**
  * Created by alexanderchiou on 10/31/15.
  */
-public class QuestionAdapter extends BaseAdapter
+public class QuestionsAdapter extends BaseAdapter
 {
     private Context context;
     private String[] questionList = new String[QuestionServer.getNumQuestions()];
@@ -28,7 +28,7 @@ public class QuestionAdapter extends BaseAdapter
     private int green;
 
     // Creates the "Question 1, Question 2, etc..." list
-    public QuestionAdapter(Context context) {
+    public QuestionsAdapter(Context context) {
         this.context = context;
         this.xIcon = context.getString(R.string.x_icon);
         this.checkIcon = context.getString(R.string.check_icon);

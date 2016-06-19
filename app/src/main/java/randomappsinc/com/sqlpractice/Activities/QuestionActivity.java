@@ -2,23 +2,18 @@ package randomappsinc.com.sqlpractice.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
 
-import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
+import butterknife.OnPageChange;
+import randomappsinc.com.sqlpractice.Adapters.QuestionsPagerAdapter;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
-import randomappsinc.com.sqlpractice.Database.SchemaServer;
-import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
@@ -27,123 +22,59 @@ import randomappsinc.com.sqlpractice.R;
  */
 // Loads questions for users to answer
 public class QuestionActivity extends StandardActivity {
-    // Question form views
-    @Bind(R.id.table_design) TextView tableDesign;
-    @Bind(R.id.problem) TextView questionPrompt;
-    @Bind(R.id.query_entry) AutoCompleteTextView queryHelper;
-    @Bind(R.id.parent) View parent;
-
-    @BindString(R.string.question_number) String questionPrefix;
-    @BindString(R.string.invalid_select) String invalidSelect;
-
-    private SchemaServer schemaServer;
-    private QuestionServer questionServer;
-    int currentQuestion;
+    @Bind(R.id.question_pager) ViewPager questionPager;
+    @BindString(R.string.question_number) String questionNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.question_form);
+        setContentView(R.layout.question_container);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        schemaServer = SchemaServer.getSchemaServer();
-        questionServer = QuestionServer.getQuestionServer();
 
-        currentQuestion = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
-        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
-        setUpQuestion();
+        questionPager.setAdapter(new QuestionsPagerAdapter(getFragmentManager()));
     }
 
-    @OnClick(R.id.submit_query)
-    public void checkAnswer() {
-        if (Utils.isValidSelect(queryHelper.getText().toString())) {
-            Intent intent = new Intent(this, AnswerCheckerActivity.class);
-            intent.putExtra(Constants.QUESTION_NUMBER_KEY, currentQuestion);
-            intent.putExtra(Constants.USER_QUERY_KEY, queryHelper.getText().toString());
-            startActivityForResult(intent, 1);
-        }
-        else {
-            Utils.showSnackbar(parent, invalidSelect);
-        }
+    @OnPageChange(R.id.question_pager)
+    public void onQuestionChanged() {
+        String pageTitle = questionNumber + (String.valueOf(questionPager.getCurrentItem() + 1));
+        setTitle(pageTitle);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK){
-            changeQuestion(1);
+            questionPager.setCurrentItem(questionPager.getCurrentItem() + 1, true);
         }
-    }
-
-    // Sets up a question given the number
-    private void setUpQuestion() {
-        // Get descriptions of the tables we're supposed to use.
-        String tableDescriptions = "";
-        int[] relevantTables = questionServer.getQuestion(currentQuestion).giveNeededTables();
-        for (int i = 0; i < relevantTables.length; i++) {
-            if (i != 0) {
-                tableDescriptions += "\n\n";
-            }
-            tableDescriptions += schemaServer.serveTable(relevantTables[i]).getDescription();
-        }
-        tableDesign.setText(tableDescriptions);
-
-        // Load the problem
-        questionPrompt.setText(questionServer.getQuestion(currentQuestion).giveQuestionText());
-
-        // Set up Auto Complete
-        QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
-                schemaServer.serveSomeTables(relevantTables), queryHelper);
-        queryHelper.setAdapter(adapter);
-        queryHelper.setText("");
-        setTitle(questionPrefix + String.valueOf(currentQuestion + 1));
-    }
-
-    public void changeQuestion(int increment) {
-        int numQuestions = QuestionServer.getNumQuestions();
-        currentQuestion += increment;
-        if (currentQuestion == numQuestions) {
-            currentQuestion = 0;
-        }
-        else if (currentQuestion < 0) {
-            currentQuestion = numQuestions - 1;
-        }
-        setUpQuestion();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.question_menu, menu);
-        menu.findItem(R.id.random).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_random)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
-        menu.findItem(R.id.backward).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_arrow_left)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
-        menu.findItem(R.id.forward).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_arrow_right)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
+        Utils.loadMenuIcon(menu, R.id.random, FontAwesomeIcons.fa_random);
+        Utils.loadMenuIcon(menu, R.id.backward, FontAwesomeIcons.fa_arrow_left);
+        Utils.loadMenuIcon(menu, R.id.forward, FontAwesomeIcons.fa_arrow_right);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Utils.hideKeyboard(this);
+        int currentPosition = questionPager.getCurrentItem();
         switch (item.getItemId()) {
             case R.id.random:
-                currentQuestion = Utils.getRandomQuestionIndex(currentQuestion);
-                setUpQuestion();
+                int newPosition = Utils.getRandomQuestionIndex(currentPosition);
+                questionPager.setCurrentItem(newPosition, true);
                 return true;
             case R.id.backward:
-                changeQuestion(-1);
+                int previousQuestion = currentPosition == 0 ? QuestionServer.getNumQuestions() - 1 : currentPosition - 1;
+                questionPager.setCurrentItem(previousQuestion);
                 return true;
             case R.id.forward:
-                changeQuestion(1);
+                int nextQuestion = currentPosition == QuestionServer.getNumQuestions() - 1 ? 0 : currentPosition + 1;
+                questionPager.setCurrentItem(nextQuestion);
                 return true;
             default:
-                break;
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }
