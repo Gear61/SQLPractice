@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">SQL Practice PRO</string>
     <string name="settings">Settings</string>
-    <string name="question_one">Question #1</string>
 
     <!-- Question List View -->
     <string name="question_list_intro">Simply click on a question to get started!</string>

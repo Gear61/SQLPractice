@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnPageChange;
 import randomappsinc.com.sqlpractice.Adapters.QuestionsPagerAdapter;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
+import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
@@ -33,6 +34,9 @@ public class QuestionActivity extends StandardActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         questionPager.setAdapter(new QuestionsPagerAdapter(getFragmentManager()));
+
+        int initialQuestion = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
+        questionPager.setCurrentItem(initialQuestion);
     }
 
     @OnPageChange(R.id.question_pager)

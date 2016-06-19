@@ -27,7 +27,6 @@
         </activity>
         <activity
             android:name=".Activities.QuestionActivity"
-            android:label="@string/question_one"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize">
         </activity>
