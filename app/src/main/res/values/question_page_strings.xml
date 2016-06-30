@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="question_number">Question #</string>
+    <string name="question_number">Question #%d</string>
     <string name="invalid_select">Please enter in a valid SELECT statement.</string>
 
     <string name="random_question">Random question</string>

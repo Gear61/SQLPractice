@@ -36,13 +36,16 @@ public class QuestionActivity extends StandardActivity {
         questionPager.setAdapter(new QuestionsPagerAdapter(getFragmentManager()));
 
         int initialQuestion = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
-        questionPager.setCurrentItem(initialQuestion);
+        if (initialQuestion == 0) {
+            setTitle(String.format(questionNumber, initialQuestion + 1));
+        } else {
+            questionPager.setCurrentItem(initialQuestion);
+        }
     }
 
     @OnPageChange(R.id.question_pager)
     public void onQuestionChanged() {
-        String pageTitle = questionNumber + (String.valueOf(questionPager.getCurrentItem() + 1));
-        setTitle(pageTitle);
+        setTitle(String.format(questionNumber, questionPager.getCurrentItem() + 1));
     }
 
     @Override
