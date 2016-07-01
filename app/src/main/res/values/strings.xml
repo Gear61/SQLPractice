@@ -31,4 +31,8 @@
     </string>
     <string name="will_rate">Sure, I\'ll help</string>
     <string name="no_im_good">No, I\'m good</string>
+
+    <string name="page_load_progress">Page Load Progress</string>
+    <string name="loading_material">Loading instructional content&#8230;</string>
+    <string name="webpage_fail">We failed to load this webpage. Please try again later.</string>
 </resources>

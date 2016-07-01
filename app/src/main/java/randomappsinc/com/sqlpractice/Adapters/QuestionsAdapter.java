@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import butterknife.Bind;
+import butterknife.BindColor;
+import butterknife.BindString;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
@@ -18,29 +20,20 @@ import randomappsinc.com.sqlpractice.R;
 /**
  * Created by alexanderchiou on 10/31/15.
  */
-public class QuestionsAdapter extends BaseAdapter
-{
+public class QuestionsAdapter extends BaseAdapter {
     private Context context;
     private String[] questionList = new String[QuestionServer.getNumQuestions()];
-    private String xIcon;
-    private String checkIcon;
-    private int red;
-    private int green;
 
     // Creates the "Question 1, Question 2, etc..." list
     public QuestionsAdapter(Context context) {
         this.context = context;
-        this.xIcon = context.getString(R.string.x_icon);
-        this.checkIcon = context.getString(R.string.check_icon);
-        this.red = context.getResources().getColor(R.color.red);
-        this.green = context.getResources().getColor(R.color.green);
         populateList();
     }
 
     // Fills in "Question 1, Question 2, etc..." list
     private void populateList() {
         for (int i = 1; i <= QuestionServer.getNumQuestions(); i++) {
-            this.questionList[i-1] = "Question " + String.valueOf(i);
+            this.questionList[i-1] = String.format(context.getString(R.string.question_number), i);
         }
     }
 
@@ -49,7 +42,7 @@ public class QuestionsAdapter extends BaseAdapter
         return questionList.length;
     }
 
-    public Object getItem(int position)
+    public String getItem(int position)
     {
         return questionList[position];
     }
@@ -59,40 +52,46 @@ public class QuestionsAdapter extends BaseAdapter
         return position;
     }
 
-    public static class ViewHolder
-    {
+    public class QuestionViewHolder {
         @Bind(R.id.question_number) TextView questionNumber;
         @Bind(R.id.completion_icon) IconTextView completionIcon;
 
-        public ViewHolder(View view) {
+        @BindString(R.string.check_icon) String checkIcon;
+        @BindString(R.string.x_icon) String xIcon;
+
+        @BindColor(R.color.green) int green;
+        @BindColor(R.color.red) int red;
+
+        public QuestionViewHolder(View view) {
             ButterKnife.bind(this, view);
+        }
+
+        public void loadQuestion(int position) {
+            if (PreferencesManager.get().hasCompletedQuestion(position)) {
+                completionIcon.setText(checkIcon);
+                completionIcon.setTextColor(green);
+            } else {
+                completionIcon.setText(xIcon);
+                completionIcon.setTextColor(red);
+            }
+
+            // Load in "Question X"
+            questionNumber.setText(getItem(position));
         }
     }
 
     // Renders the ListView item that the user has scrolled to or is about to scroll to
     public View getView(int position, View view, ViewGroup parent) {
-        final ViewHolder holder;
+        QuestionViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R.layout.question_list_item, parent, false);
-            holder = new ViewHolder(view);
+            holder = new QuestionViewHolder(view);
             view.setTag(holder);
+        } else {
+            holder = (QuestionViewHolder) view.getTag();
         }
-        else {
-            holder = (ViewHolder) view.getTag();
-        }
-
-        if (PreferencesManager.get().hasCompletedQuestion(position)) {
-            holder.completionIcon.setText(checkIcon);
-            holder.completionIcon.setTextColor(green);
-        }
-        else {
-            holder.completionIcon.setText(xIcon);
-            holder.completionIcon.setTextColor(red);
-        }
-
-        // Load in "Question X"
-        holder.questionNumber.setText(questionList[position]);
+        holder.loadQuestion(position);
         return view;
     }
 }

@@ -8,8 +8,8 @@ android {
         applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 133
-        versionName "1.3.3"
+        versionCode 140
+        versionName "1.4.0"
         generatedDensities = []
     }
     aaptOptions {

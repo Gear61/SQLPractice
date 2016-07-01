@@ -3,13 +3,9 @@
 
     <item android:id="@+id/random"
         android:title="@string/random_question"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/backward"
-        android:title="@string/previous_question"
-        app:showAsAction="ifRoom" />
-
-    <item android:id="@+id/forward"
-        android:title="@string/next_question"
-        app:showAsAction="ifRoom" />
+    <item android:id="@+id/instructional_materials"
+        android:title="@string/instructional_materials"
+        app:showAsAction="ifRoom"/>
 </menu>

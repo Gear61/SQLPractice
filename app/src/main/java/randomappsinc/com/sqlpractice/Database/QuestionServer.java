@@ -1,6 +1,7 @@
 package randomappsinc.com.sqlpractice.Database;
 
 import randomappsinc.com.sqlpractice.Database.Models.Question;
+import randomappsinc.com.sqlpractice.Misc.TutorialServer;
 
 /**
  * Created by alexanderchiou on 10/31/15.
@@ -16,6 +17,36 @@ public class QuestionServer {
              {0}, {0}, {1}, {0}, {2},
              {0}, {0}, {0}, {0}, {1, 2},
              {1}, {0}, {0}};
+
+    private static String[][] questionIdeaPairings =
+           {{TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.DISTINCT},
+            {TutorialServer.WHERE},
+            {TutorialServer.GROUP_BY},
+            {TutorialServer.MAX, TutorialServer.SUBQUERIES},
+            {TutorialServer.MAX, TutorialServer.SUBQUERIES},
+            {TutorialServer.ORDER_BY, TutorialServer.LIMIT},
+            {TutorialServer.MIN, TutorialServer.SUBQUERIES},
+            {TutorialServer.WHERE},
+            {TutorialServer.LIKE},
+            {TutorialServer.ALIASES, TutorialServer.SUBQUERIES},
+            {TutorialServer.ALIASES, TutorialServer.SUBQUERIES, TutorialServer.AND_OR},
+            {TutorialServer.INNER_JOIN},
+            {TutorialServer.INNER_JOIN, TutorialServer.AND_OR},
+            {TutorialServer.AVG},
+            {TutorialServer.INTRO},
+            {TutorialServer.SQLITE_METADATA},
+            {TutorialServer.MIN, TutorialServer.SUBQUERIES},
+            {TutorialServer.COUNT, TutorialServer.DISTINCT},
+            {TutorialServer.WHERE, TutorialServer.AND_OR},
+            {TutorialServer.WHERE, TutorialServer.AND_OR},
+            {TutorialServer.MAX},
+            {TutorialServer.WHERE, TutorialServer.SUBQUERIES},
+            {TutorialServer.INNER_JOIN, TutorialServer.AND_OR},
+            {TutorialServer.COALESCE, TutorialServer.DISTINCT},
+            {TutorialServer.SUM, TutorialServer.GROUP_BY},
+            {TutorialServer.AVG, TutorialServer.GROUP_BY}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -67,7 +98,7 @@ public class QuestionServer {
 
     private QuestionServer () {
         for (int i = 0; i < questions.length; i++) {
-            allQuestions[i] = new Question(questions[i], questionTablePairings[i]);
+            allQuestions[i] = new Question(questions[i], questionTablePairings[i], questionIdeaPairings[i]);
         }
     }
 

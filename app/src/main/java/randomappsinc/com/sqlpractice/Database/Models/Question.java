@@ -5,24 +5,26 @@ package randomappsinc.com.sqlpractice.Database.Models;
  */
 // Represents a question.
 // Has the question text and an array of integers signifying which tables it's linked to
-public class Question
-{
+public class Question {
     private String questionText;
     private int[] neededTables;
+    private String[] ideas;
 
-    public Question (String questionText, int[] neededTables)
-    {
+    public Question (String questionText, int[] neededTables, String[] ideas) {
         this.questionText = questionText;
         this.neededTables = neededTables;
+        this.ideas = ideas;
     }
 
-    public String giveQuestionText ()
-    {
+    public String giveQuestionText() {
         return questionText;
     }
 
-    public int[] giveNeededTables ()
-    {
+    public int[] giveNeededTables() {
         return neededTables;
+    }
+
+    public String[] getIdeas() {
+        return ideas;
     }
 }

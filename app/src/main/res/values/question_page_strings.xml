@@ -4,6 +4,6 @@
     <string name="invalid_select">Please enter in a valid SELECT statement.</string>
 
     <string name="random_question">Random question</string>
-    <string name="previous_question">Previous question</string>
-    <string name="next_question">Next question</string>
+    <string name="instructional_materials">Instructional materials</string>
+    <string name="materials_title">Instructional Materials</string>
 </resources>

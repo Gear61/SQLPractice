@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="randomappsinc.com.sqlpractice">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".Misc.MyApplication"
         android:fullBackupContent="true"
@@ -10,35 +12,47 @@
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:label="@string/answer_checker_label"
             android:name=".Activities.AnswerCheckerActivity"
             android:configChanges="orientation|screenSize">
         </activity>
+
         <activity
             android:name=".Activities.QuestionActivity"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|screenSize">
         </activity>
+
         <activity
             android:label="@string/settings"
             android:name=".Activities.SettingsActivity"
             android:configChanges="orientation|screenSize">
         </activity>
+
         <activity
             android:label="@string/database_tables_title"
             android:name=".Activities.DatabaseTablesActivity"
             android:configChanges="orientation|screenSize">
         </activity>
+
+        <activity
+            android:name=".Activities.WebActivity"
+            android:configChanges="orientation|screenSize">
+        </activity>
+
     </application>
 </manifest>
