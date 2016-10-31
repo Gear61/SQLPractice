@@ -16,7 +16,7 @@ public class QuestionServer {
              {0}, {0}, {1}, {1, 2}, {1, 2},
              {0}, {0}, {1}, {0}, {2},
              {0}, {0}, {0}, {0}, {1, 2},
-             {1}, {0}, {0}};
+             {1}, {0}, {0}, {0}, {0}};
 
     private static String[][] questionIdeaPairings =
            {{TutorialServer.INTRO},
@@ -46,7 +46,9 @@ public class QuestionServer {
             {TutorialServer.INNER_JOIN, TutorialServer.AND_OR},
             {TutorialServer.COALESCE, TutorialServer.DISTINCT},
             {TutorialServer.SUM, TutorialServer.GROUP_BY},
-            {TutorialServer.AVG, TutorialServer.GROUP_BY}};
+            {TutorialServer.AVG, TutorialServer.GROUP_BY},
+            {TutorialServer.MAX, TutorialServer.ALIASES, TutorialServer.SUBQUERIES},
+            {TutorialServer.COUNT, TutorialServer.ALIASES, TutorialServer.SUBQUERIES, TutorialServer.DISTINCT}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -92,7 +94,11 @@ public class QuestionServer {
                     "Write a query that returns the department that makes the most along with that " +
                             "department's total aggregate salary.",
                     "Write a query that returns the department with the highest average salary " +
-                            "along with that average salary."};
+                            "along with that average salary.",
+                    "Write a query that returns the name, department, and salary (in this column order) " +
+                            "of each professor who is the highest earning in their department.",
+                    "Write a query that returns the name and salary (in this column order) " +
+                            "of each professor who is either a top 3 or bottom 3 earner (include ties)."};
 
     private Question[] allQuestions = new Question[questions.length];
 

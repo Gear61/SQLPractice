@@ -19,9 +19,9 @@ public class AnswerServer
                     "SELECT Professor_Name, Salary FROM SALARIES ORDER BY Salary ASC LIMIT 1;",
                     "SELECT Department FROM SALARIES WHERE Professor_Name = \"Zaniolo\";",
                     "SELECT Professor_Name FROM SALARIES WHERE Professor_Name LIKE 'C%';",
-                    "SELECT DISTINCT Salary from SALARIES AS S1 where 2 = " +
-                            "(SELECT COUNT (DISTINCT SALARY) from SALARIES AS S2 where S1.SALARY < S2.SALARY);",
-                    "SELECT DISTINCT a.First_Name, a.Last_Name from CHECKED_OUT AS a, " +
+                    "SELECT DISTINCT Salary FROM SALARIES AS S1 WHERE 2 = " +
+                            "(SELECT COUNT(DISTINCT SALARY) FROM SALARIES AS S2 WHERE S1.SALARY < S2.SALARY);",
+                    "SELECT DISTINCT a.First_Name, a.Last_Name FROM CHECKED_OUT AS a, " +
                             "CHECKED_OUT AS b where a.Last_Name = b.Last_Name " +
                             "AND a.First_Name != b.First_Name",
                     "SELECT DISTINCT First_Name, Last_Name FROM CHECKED_OUT INNER JOIN BOOKS " +
@@ -47,7 +47,17 @@ public class AnswerServer
                     "SELECT Department, SUM(Salary) FROM SALARIES GROUP BY DEPARTMENT " +
                             "ORDER BY SUM(Salary) DESC LIMIT 1;",
                     "SELECT Department, AVG(Salary) FROM SALARIES GROUP BY DEPARTMENT " +
-                            "ORDER BY AVG(Salary) DESC LIMIT 1;"};
+                            "ORDER BY AVG(Salary) DESC LIMIT 1;",
+                    "SELECT Professor_Name, Department, Salary FROM SALARIES AS a " +
+                            "WHERE a.Salary = (SELECT MAX(Salary) FROM SALARIES AS b " +
+                            "WHERE b.Department = a.Department);",
+                    "SELECT Professor_Name, Salary FROM Salaries WHERE Salary >= " +
+                            "(SELECT DISTINCT Salary from SALARIES AS S1 " +
+                            "WHERE 2 = (SELECT COUNT(DISTINCT SALARY) FROM SALARIES AS S2 " +
+                            "WHERE S1.SALARY < S2.SALARY)) OR SALARY <= " +
+                            "(SELECT DISTINCT Salary from SALARIES AS S3 " +
+                            "WHERE 2 = (SELECT COUNT(DISTINCT SALARY) FROM SALARIES AS S4 " +
+                            "WHERE S3.SALARY > S4.SALARY));"};
 
     public static String getAnswer(int position)
     {
