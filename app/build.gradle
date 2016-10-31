@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 141
         versionName "1.4.1"
         generatedDensities = []
@@ -26,14 +26,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.1'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.github.rey5137:material:1.2.1'
-    compile('com.github.afollestad.material-dialogs:core:0.8.5.8@aar') {
-        transitive = true
-    }
-    compile 'com.android.support:support-v13:23.4.0'
+    compile 'com.afollestad.material-dialogs:core:0.9.0.2'
+    compile 'com.android.support:support-v13:24.2.1'
 }
