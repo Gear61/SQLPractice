@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.joanzapata.iconify.fonts.IoniconsIcons;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,7 +40,7 @@ public class MainActivity extends StandardActivity {
             return;
         }
 
-        setContentView(R.layout.question_list);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
         if (PreferencesManager.get().getFirstTimeUser()) {
@@ -99,7 +99,7 @@ public class MainActivity extends StandardActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        Utils.loadMenuIcon(menu, R.id.settings, FontAwesomeIcons.fa_gear);
+        Utils.loadMenuIcon(menu, R.id.settings, IoniconsIcons.ion_android_settings);
         return true;
     }
 

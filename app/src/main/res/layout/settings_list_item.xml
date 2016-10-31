@@ -10,20 +10,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="12dp"
         android:orientation="horizontal">
 
         <com.joanzapata.iconify.widget.IconTextView
             android:id="@+id/option_icon"
             android:gravity="center"
             android:layout_gravity="center_vertical"
-            android:layout_height="25dp"
-            android:layout_width="25dp"
-            android:textSize="22dp"/>
+            android:layout_height="24dp"
+            android:layout_width="24dp"
+            android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/settings_option"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

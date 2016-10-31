@@ -7,8 +7,8 @@
     <string name="question_list_intro">Simply click on a question to get started!</string>
     <string name="our_table">Relevant Table(s):</string>
     <string name="completion_status">Completion Status of Question</string>
-    <string name="x_icon">{fa-close}</string>
-    <string name="check_icon">{fa-check}</string>
+    <string name="x_icon">{ion-close}</string>
+    <string name="check_icon">{ion-checkmark}</string>
 
     <!-- Query Submission Form -->
     <string name="submit_query">Run Query!</string>
@@ -25,14 +25,11 @@
 
     <string name="please_rate">
         Hey, it looks like you\'re a frequent user of SQL Practice PRO!
-        If you have a couple seconds, I would be incredibly grateful if you could rate this app in the Play Store.
-        Don\'t worry, I won\'t bother you with this ever again no matter what you choose.
-        Thank you again for even downloading this app to begin with.
+        If you have a couple seconds, please rate this app in the Play Store.
+        Every rating goes a long way towards motivating me to continue improving this app!
     </string>
     <string name="will_rate">Sure, I\'ll help</string>
     <string name="no_im_good">No, I\'m good</string>
 
-    <string name="page_load_progress">Page Load Progress</string>
-    <string name="loading_material">Loading instructional content&#8230;</string>
     <string name="webpage_fail">We failed to load this webpage. Please try again later.</string>
 </resources>

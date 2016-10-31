@@ -18,15 +18,15 @@
     <string name="send_email">Send email</string>
 
     <!-- Icons -->
-    <string name="email_icon">{fa-envelope}</string>
-    <string name="android_icon">{fa-android}</string>
-    <string name="rate_icon">{fa-thumbs-up}</string>
-    <string name="github_icon">{fa-github}</string>
+    <string name="email_icon">{ion-email}</string>
+    <string name="android_icon">{ion-social-android}</string>
+    <string name="like_icon">{ion-thumbsup}</string>
+    <string name="github_icon">{ion-social-github}</string>
     <string name="database_icon">{fa-database}</string>
     <string-array name="settings_icons">
         <item>@string/email_icon</item>
         <item>@string/android_icon</item>
-        <item>@string/rate_icon</item>
+        <item>@string/like_icon</item>
         <item>@string/github_icon</item>
         <item>@string/database_icon</item>
     </string-array>
