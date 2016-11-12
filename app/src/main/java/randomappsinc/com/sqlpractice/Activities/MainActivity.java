@@ -99,15 +99,21 @@ public class MainActivity extends StandardActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_ios_bookmarks);
         Utils.loadMenuIcon(menu, R.id.settings, IoniconsIcons.ion_android_settings);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
-            return true;
+        switch (item.getItemId()) {
+            case R.id.library:
+                startActivity(new Intent(this, LibraryActivity.class));
+                return true;
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

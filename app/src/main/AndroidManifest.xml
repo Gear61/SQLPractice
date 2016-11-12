@@ -20,14 +20,14 @@
             android:windowSoftInputMode="stateHidden">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
-            android:label="@string/answer_checker_label"
             android:name=".Activities.AnswerCheckerActivity"
+            android:label="@string/answer_checker_label"
             android:configChanges="orientation|screenSize">
         </activity>
 
@@ -38,14 +38,14 @@
         </activity>
 
         <activity
-            android:label="@string/settings"
             android:name=".Activities.SettingsActivity"
+            android:label="@string/settings"
             android:configChanges="orientation|screenSize">
         </activity>
 
         <activity
-            android:label="@string/database_tables_title"
             android:name=".Activities.DatabaseTablesActivity"
+            android:label="@string/database_tables_title"
             android:configChanges="orientation|screenSize">
         </activity>
 
@@ -54,5 +54,10 @@
             android:configChanges="orientation|screenSize">
         </activity>
 
+        <activity
+            android:name=".Activities.LibraryActivity"
+            android:label="@string/library"
+            android:configChanges="orientation|screenSize">
+        </activity>
     </application>
 </manifest>

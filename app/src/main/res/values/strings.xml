@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SQL Practice PRO</string>
+    <string name="library">Library</string>
     <string name="settings">Settings</string>
 
     <!-- Question List View -->

@@ -1,6 +1,8 @@
 package randomappsinc.com.sqlpractice.Misc;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,7 +40,7 @@ public class TutorialServer {
     }
 
     private TutorialServer() {
-        ideaToUrl = new HashMap<>();
+        ideaToUrl = new LinkedHashMap<>();
         ideaToUrl.put(INTRO, "http://www.w3schools.com/sql/sql_select.asp");
         ideaToUrl.put(DISTINCT, "http://www.w3schools.com/sql/sql_distinct.asp");
         ideaToUrl.put(WHERE, "http://www.w3schools.com/sql/sql_where.asp");
@@ -61,5 +63,13 @@ public class TutorialServer {
 
     public String getUrl(String idea) {
         return ideaToUrl.get(idea);
+    }
+
+    public List<String> getLessons() {
+        List<String> lessons = new ArrayList<>();
+        for (String lesson : ideaToUrl.keySet()) {
+            lessons.add(lesson);
+        }
+        return lessons;
     }
 }

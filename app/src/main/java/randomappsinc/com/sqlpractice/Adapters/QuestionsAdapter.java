@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.joanzapata.iconify.widget.IconTextView;
-
 import butterknife.Bind;
 import butterknife.BindColor;
-import butterknife.BindString;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
@@ -37,27 +34,21 @@ public class QuestionsAdapter extends BaseAdapter {
         }
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         return questionList.length;
     }
 
-    public String getItem(int position)
-    {
+    public String getItem(int position) {
         return questionList[position];
     }
 
-    public long getItemId(int position)
-    {
+    public long getItemId(int position) {
         return position;
     }
 
     public class QuestionViewHolder {
         @Bind(R.id.question_number) TextView questionNumber;
-        @Bind(R.id.completion_icon) IconTextView completionIcon;
-
-        @BindString(R.string.check_icon) String checkIcon;
-        @BindString(R.string.x_icon) String xIcon;
+        @Bind(R.id.completion_icon) TextView completionIcon;
 
         @BindColor(R.color.green) int green;
         @BindColor(R.color.red) int red;
@@ -68,10 +59,10 @@ public class QuestionsAdapter extends BaseAdapter {
 
         public void loadQuestion(int position) {
             if (PreferencesManager.get().hasCompletedQuestion(position)) {
-                completionIcon.setText(checkIcon);
+                completionIcon.setText(R.string.check_icon);
                 completionIcon.setTextColor(green);
             } else {
-                completionIcon.setText(xIcon);
+                completionIcon.setText(R.string.x_icon);
                 completionIcon.setTextColor(red);
             }
 
