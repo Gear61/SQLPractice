@@ -3,11 +3,15 @@ package randomappsinc.com.sqlpractice.Fragments;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -15,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Activities.AnswerCheckerActivity;
 import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
+import randomappsinc.com.sqlpractice.Database.AnswerServer;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Database.SchemaServer;
 import randomappsinc.com.sqlpractice.Misc.Constants;
@@ -45,7 +50,7 @@ public class QuestionFragment extends Fragment {
 
     private SchemaServer schemaServer;
     private QuestionServer questionServer;
-    int currentQuestion;
+    private int currentQuestion;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,6 +99,24 @@ public class QuestionFragment extends Fragment {
         } else {
             Utils.showSnackbar(parent, invalidSelect);
         }
+    }
+
+    @OnClick(R.id.view_answer)
+    public void giveUp() {
+        final String answer = AnswerServer.getAnswer(currentQuestion);
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.our_answer_query)
+                .content(answer)
+                .positiveText(android.R.string.yes)
+                .neutralText(R.string.copy_answer)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Utils.copyTextToClipboard(answer);
+                        Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
+                    }
+                })
+                .show();
     }
 
     @Override

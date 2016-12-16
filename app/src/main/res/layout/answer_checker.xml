@@ -66,9 +66,9 @@
                 app:rd_style="@style/button_ripple"/>
 
             <com.rey.material.widget.Button
-                style="@style/regular_button"
                 android:id="@+id/view_answer"
                 android:text="@string/view_our_answer"
+                style="@style/regular_button"
                 app:rd_style="@style/button_ripple"/>
         </LinearLayout>
     </ScrollView>
