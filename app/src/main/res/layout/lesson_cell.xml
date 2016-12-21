@@ -1,17 +1,8 @@
-<com.balysv.materialripple.MaterialRippleLayout
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lesson_name"
+    android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
-    app:mrl_rippleInAdapter="true"
-    app:mrl_rippleDuration="200"
-    app:mrl_rippleColor="@color/app_turquoise">
-
-    <TextView
-        android:id="@+id/lesson_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/dark_gray"/>
-</com.balysv.materialripple.MaterialRippleLayout>
+    android:textSize="18dp"
+    android:textColor="@color/dark_gray"/>

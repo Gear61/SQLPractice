@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.joanzapata.iconify.fonts.IoniconsIcons;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -66,8 +66,8 @@ public class QuestionActivity extends StandardActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.question_menu, menu);
-        Utils.loadMenuIcon(menu, R.id.random, FontAwesomeIcons.fa_random);
-        Utils.loadMenuIcon(menu, R.id.instructional_materials, FontAwesomeIcons.fa_info_circle);
+        Utils.loadMenuIcon(menu, R.id.random, IoniconsIcons.ion_shuffle);
+        Utils.loadMenuIcon(menu, R.id.instructional_materials, IoniconsIcons.ion_information_circled);
         return true;
     }
 

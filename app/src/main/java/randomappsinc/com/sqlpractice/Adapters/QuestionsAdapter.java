@@ -21,7 +21,6 @@ public class QuestionsAdapter extends BaseAdapter {
     private Context context;
     private String[] questionList = new String[QuestionServer.getNumQuestions()];
 
-    // Creates the "Question 1, Question 2, etc..." list
     public QuestionsAdapter(Context context) {
         this.context = context;
         populateList();
@@ -48,6 +47,7 @@ public class QuestionsAdapter extends BaseAdapter {
 
     public class QuestionViewHolder {
         @Bind(R.id.question_number) TextView questionNumber;
+        @Bind(R.id.tagged_lessons) TextView taggedLessons;
         @Bind(R.id.completion_icon) TextView completionIcon;
 
         @BindColor(R.color.green) int green;
@@ -66,12 +66,11 @@ public class QuestionsAdapter extends BaseAdapter {
                 completionIcon.setTextColor(red);
             }
 
-            // Load in "Question X"
             questionNumber.setText(getItem(position));
+            taggedLessons.setText(QuestionServer.getQuestionServer().getQuestion(position).getIdeasList());
         }
     }
 
-    // Renders the ListView item that the user has scrolled to or is about to scroll to
     public View getView(int position, View view, ViewGroup parent) {
         QuestionViewHolder holder;
         if (view == null) {

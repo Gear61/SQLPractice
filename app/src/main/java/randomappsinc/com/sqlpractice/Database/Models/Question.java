@@ -3,6 +3,7 @@ package randomappsinc.com.sqlpractice.Database.Models;
 /**
  * Created by alexanderchiou on 10/31/15.
  */
+
 // Represents a question.
 // Has the question text and an array of integers signifying which tables it's linked to
 public class Question {
@@ -26,5 +27,16 @@ public class Question {
 
     public String[] getIdeas() {
         return ideas;
+    }
+
+    public String getIdeasList() {
+        StringBuilder ideasList = new StringBuilder();
+        for (int i = 0; i < ideas.length; i++) {
+            if (i > 0) {
+                ideasList.append(", ");
+            }
+            ideasList.append(ideas[i]);
+        }
+        return ideasList.toString();
     }
 }

@@ -1,35 +1,62 @@
-<com.balysv.materialripple.MaterialRippleLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:mrl_rippleInAdapter="true"
-    app:mrl_rippleDuration="200"
-    app:mrl_rippleColor="@color/app_turquoise"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        card_view:contentPadding="8dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="3dp"
+        card_view:cardElevation="2dp">
 
-        <TextView
-            android:id="@+id/question_number"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/completion_icon"
-            android:layout_marginRight="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textSize="18dp"
-            android:textColor="@color/dark_gray"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:id="@+id/completion_icon"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:textSize="20dp"/>
-    </RelativeLayout>
-</com.balysv.materialripple.MaterialRippleLayout>
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/completion_icon"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_height="20dp"
+                android:layout_width="20dp"
+                android:gravity="center"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@id/completion_icon"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/question_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="20dp"
+                    android:textColor="@color/header_black"/>
+
+                <TextView
+                    android:id="@+id/tagged_lessons"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="18dp"
+                    android:textColor="@color/dark_gray"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>
