@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:padding="10dp"
+            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -21,41 +21,40 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/their_answers"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <TableLayout
                 android:id="@+id/their_answers_table"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </TableLayout>
 
             <TextView
                 android:id="@+id/correct_answers"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/correct_answers"/>
 
             <TableLayout
                 android:id="@+id/correct_answers_table"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </TableLayout>
+                android:layout_height="wrap_content"/>
 
             <com.rey.material.widget.Button
-                style="@style/regular_button"
                 android:id="@+id/advance_forward"
                 android:text="@string/advance_forward"
                 android:visibility="gone"
+                style="@style/regular_button"
                 app:rd_style="@style/button_ripple"/>
 
             <com.rey.material.widget.Button

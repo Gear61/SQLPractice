@@ -14,7 +14,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.Bind;
-import butterknife.BindString;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Database.AnswerChecker;
@@ -37,12 +36,6 @@ public class AnswerCheckerActivity extends StandardActivity {
     @Bind(R.id.advance_forward) Button nextQuestion;
     @Bind(R.id.retry_question) Button retry;
 
-    @BindString(R.string.correct_answer) String correctAnswer;
-    @BindString(R.string.incorrect_answer) String wrongAnswer;
-    @BindString(R.string.invalid_query) String invalidQuery;
-    @BindString(R.string.empty_resultset) String emptyResults;
-    @BindString(R.string.query_results_preamble) String resultsPreamble;
-
     private int questionNum;
 
     @Override
@@ -64,22 +57,22 @@ public class AnswerCheckerActivity extends StandardActivity {
     private void displayResponse(ResponseBundle score) {
         if (score.getWasCorrect()) {
             PreferencesManager.get().addCompletedQuestion(questionNum);
-            verdict.setText(correctAnswer);
+            verdict.setText(R.string.correct_answer);
             if (questionNum != QuestionServer.getNumQuestions() - 1) {
                 nextQuestion.setVisibility(View.VISIBLE);
             }
         } else {
             retry.setVisibility(View.VISIBLE);
-            verdict.setText(wrongAnswer);
+            verdict.setText(R.string.incorrect_answer);
         }
 
         // They got it wrong
         if (score.userResults().getData() == null) {
-            theirAnswers.setText(invalidQuery);
+            theirAnswers.setText(R.string.invalid_query);
         } else if (score.userResults().getData().length == 0) {
-            theirAnswers.setText(emptyResults);
+            theirAnswers.setText(R.string.empty_resultset);
         } else {
-            theirAnswers.setText(resultsPreamble);
+            theirAnswers.setText(R.string.query_results_preamble);
             // Logic to display their table
             createTable((TableLayout) findViewById(R.id.their_answers_table),
                     score.userResults().getColumns(), score.userResults().getData());

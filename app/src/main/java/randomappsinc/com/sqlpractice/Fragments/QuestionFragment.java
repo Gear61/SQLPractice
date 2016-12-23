@@ -20,6 +20,8 @@ import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Activities.AnswerCheckerActivity;
 import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.Database.AnswerServer;
+import randomappsinc.com.sqlpractice.Database.MisterDataSource;
+import randomappsinc.com.sqlpractice.Database.Models.ResultSet;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Database.SchemaServer;
 import randomappsinc.com.sqlpractice.Misc.Constants;
@@ -91,13 +93,16 @@ public class QuestionFragment extends Fragment {
 
     @OnClick(R.id.submit_query)
     public void checkAnswer() {
-        if (Utils.isValidSelect(queryHelper.getText().toString())) {
+        Utils.hideKeyboard(getActivity());
+        String userQuery = queryHelper.getText().toString().trim();
+        ResultSet results = (new MisterDataSource()).getResultsOfQuery(userQuery);
+        if (results.getData() != null) {
             Intent intent = new Intent(getActivity(), AnswerCheckerActivity.class);
             intent.putExtra(Constants.QUESTION_NUMBER_KEY, currentQuestion);
-            intent.putExtra(Constants.USER_QUERY_KEY, queryHelper.getText().toString());
+            intent.putExtra(Constants.USER_QUERY_KEY, userQuery);
             getActivity().startActivityForResult(intent, 1);
         } else {
-            Utils.showSnackbar(parent, invalidSelect);
+            Utils.showLongSnackbar(parent, String.format(invalidSelect, results.getException()));
         }
     }
 

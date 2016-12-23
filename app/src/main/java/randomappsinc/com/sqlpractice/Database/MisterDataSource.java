@@ -14,7 +14,7 @@ import randomappsinc.com.sqlpractice.Database.Models.Schema;
 public class MisterDataSource {
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
-    SchemaServer schemaServer;
+    private SchemaServer schemaServer;
 
     // Constructor
     public MisterDataSource() {
@@ -128,7 +128,7 @@ public class MisterDataSource {
         return numRows;
     }
 
-    public ResultSet getData(String queryString) {
+    public ResultSet getResultsOfQuery(String queryString) {
         open();
         try {
             Cursor cursor = database.rawQuery(queryString, null);
@@ -141,7 +141,7 @@ public class MisterDataSource {
             // If no data was gotten, return null
             if (row == 0) {
                 String[][] empty = {};
-                return new ResultSet(columns, empty);
+                return new ResultSet(columns, empty, "");
             }
 
             String[][] ourData = new String[row][col];
@@ -181,10 +181,14 @@ public class MisterDataSource {
             }
             cursor.close();
             close();
-            return new ResultSet(columns, ourData);
-        }
-        catch (SQLiteException e) {
-            return new ResultSet(null, null);
+            return new ResultSet(columns, ourData, "");
+        } catch (SQLiteException exception) {
+            String[] pieces = exception.getMessage().split(" \\(code");
+            if (pieces.length > 0) {
+                return new ResultSet(null, null, pieces[0]);
+            } else {
+                return new ResultSet(null, null, exception.getMessage());
+            }
         }
     }
 }

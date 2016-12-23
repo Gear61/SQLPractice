@@ -1,17 +1,17 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/background_light_gray"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         card_view:contentPadding="8dp"
         card_view:cardUseCompatPadding="true"
         card_view:cardBackgroundColor="@color/white"
@@ -29,7 +29,7 @@
                 android:layout_height="20dp"
                 android:layout_width="20dp"
                 android:gravity="center"
-                android:textSize="20dp" />
+                android:textSize="20dp"/>
 
             <LinearLayout
                 android:layout_centerVertical="true"

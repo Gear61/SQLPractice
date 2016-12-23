@@ -29,8 +29,26 @@ public class Utils {
         Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);
         View view = snackbar.getView();
         view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
-        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(context.getResources().getColor(R.color.white));
+        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(context.getResources().getColor(R.color.white));
+        snackbar.show();
+    }
+
+    public static void showLongSnackbar(View parent, String content) {
+        Context context = MyApplication.getAppContext();
+        final Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_INDEFINITE);
+        View view = snackbar.getView();
+        view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
+        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(context.getResources().getColor(R.color.white));
+        textView.setMaxLines(8);
+        snackbar.setAction(R.string.dismiss, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+        snackbar.setActionTextColor(context.getResources().getColor(R.color.white));
         snackbar.show();
     }
 
@@ -40,10 +58,6 @@ public class Utils {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
-
-    public static boolean isValidSelect(String query) {
-        return query.trim().toLowerCase().startsWith("select");
     }
 
     // For the choose multiple names at once case. We're just generating indices

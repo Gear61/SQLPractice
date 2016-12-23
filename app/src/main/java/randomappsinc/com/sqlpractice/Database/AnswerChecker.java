@@ -17,18 +17,17 @@ public class AnswerChecker {
 
     public ResponseBundle checkAnswer(int questionNumber, String userQuery) {
         // Get both results sets, set up wasCorrect. Innocent until proven guilty
-        ResultSet userPackage = dataSource.getData(userQuery);
-        ResultSet correctAnswersPackage = dataSource.getData(AnswerServer.getAnswer(questionNumber));
+        ResultSet userPackage = dataSource.getResultsOfQuery(userQuery);
+        ResultSet correctAnswersPackage = dataSource.getResultsOfQuery(AnswerServer.getAnswer(questionNumber));
         String[][] userResult = userPackage.getData();
         String[][] correctAnswers = correctAnswersPackage.getData();
         boolean wasCorrect = true;
 
         if (userResult == null || userResult.length == 0) {
             wasCorrect = false;
-        }
-        else {
+        } else {
             // HashSet to store the rows fetched by the users
-            HashSet<String> UserAnswers = new HashSet <String>();
+            HashSet<String> UserAnswers = new HashSet<>();
             for (int i = 0; i < userResult.length; i++) {
                 // Have flying pie delimiters to separate our columns
                 String currentRow = "~~|}";

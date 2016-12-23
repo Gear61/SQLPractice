@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="question_number">Question #%d</string>
-    <string name="invalid_select">Please enter in a valid SELECT statement.</string>
+    <string name="invalid_select">Your query wasn\'t a valid SELECT query. Error: %s</string>
+    <string name="dismiss">Dismiss</string>
 
     <string name="random_question">Random question</string>
     <string name="instructional_materials">Instructional materials</string>
