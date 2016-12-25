@@ -12,12 +12,12 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
+        android:foreground="?android:attr/selectableItemBackground"
         card_view:contentPadding="8dp"
         card_view:cardUseCompatPadding="true"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="3dp"
-        card_view:cardElevation="2dp"
-        android:foreground="?android:attr/selectableItemBackground">
+        card_view:cardElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
