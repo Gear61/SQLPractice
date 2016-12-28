@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="query">Query:</string>
+    <string name="returns">Returns:</string>
+    <string name="instructional_materials_sandbox">Instruction Materials</string>
+    <string name="sandbox_description">Available Tables:</string>
+</resources>

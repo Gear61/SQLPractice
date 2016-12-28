@@ -59,5 +59,15 @@
             android:label="@string/library"
             android:configChanges="orientation|screenSize">
         </activity>
+        
+        <activity android:name=".Activities.SandboxActivity"
+            android:label="@string/sandbox"
+            android:configChanges="orientation|screenSize">
+        </activity>
+
+        <activity android:name=".Activities.SandboxResultActivity"
+            android:label="@string/sandbox"
+            android:configChanges="orientation|screenSize" >
+        </activity>
     </application>
 </manifest>
