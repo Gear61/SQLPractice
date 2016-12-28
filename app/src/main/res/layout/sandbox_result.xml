@@ -20,7 +20,7 @@
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/user_query"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -30,6 +30,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/returns"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/empty_result_sandbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"/>
             <TableLayout
                 android:id="@+id/result_table_sandbox"
                 android:layout_marginTop="8dp"

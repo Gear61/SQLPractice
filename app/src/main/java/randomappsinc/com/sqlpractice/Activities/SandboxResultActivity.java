@@ -25,7 +25,7 @@ public class SandboxResultActivity extends StandardActivity {
 
     @Bind(R.id.result_table_sandbox)    TableLayout mResultTable;
     @Bind(R.id.user_query)    TextView mUserQuery;
-
+    @Bind(R.id.empty_result_sandbox) TextView mEmptyResult;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +39,12 @@ public class SandboxResultActivity extends StandardActivity {
 
         mUserQuery.setText(query);
         ResultSet results = (new MisterDataSource()).getResultsOfQuery(query);
-        createTable((TableLayout) findViewById(R.id.result_table_sandbox),
-                results.getColumns(), results.getData());
+        if (results.getData().length == 0) {
+            mEmptyResult.setText(getString(R.string.empty_result));
+        } else {
+            createTable((TableLayout) findViewById(R.id.result_table_sandbox),
+                    results.getColumns(), results.getData());
+        }
     }
 
     public void createTable(TableLayout table, String[] columns, String[][] data) {
