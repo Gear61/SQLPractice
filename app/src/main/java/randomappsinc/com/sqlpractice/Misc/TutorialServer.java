@@ -51,7 +51,7 @@ public class TutorialServer {
         ideaToUrl.put(LIMIT, "http://www.techonthenet.com/sql/select_limit.php");
         ideaToUrl.put(MIN, "http://www.w3schools.com/sql/sql_func_min.asp");
         ideaToUrl.put(LIKE, "http://www.w3schools.com/sql/sql_like.asp");
-        ideaToUrl.put(ALIASES, "www.w3schools.com/sql/sql_alias.asp");
+        ideaToUrl.put(ALIASES, "http://www.w3schools.com/sql/sql_alias.asp");
         ideaToUrl.put(INNER_JOIN, "http://www.w3schools.com/sql/sql_join_inner.asp");
         ideaToUrl.put(AVG, "http://www.w3schools.com/sql/sql_func_avg.asp");
         ideaToUrl.put(SQLITE_METADATA, "https://www.sqlite.org/faq.html#q7");
