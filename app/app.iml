@@ -150,6 +150,5 @@
     <orderEntry type="library" exported="" name="core-0.9.0.2" level="project" />
     <orderEntry type="library" exported="" name="design-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="android-android-24" level="project" />
   </component>
 </module>

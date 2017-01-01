@@ -58,6 +58,12 @@ public class SandboxActivity extends StandardActivity {
         mQueryAutocompleteTextView.setText("");
     }
 
+    @Override
+    protected void onPause() {
+        Utils.hideKeyboard(this);
+        super.onPause();
+    }
+
     @OnClick(R.id.submit_query_sandbox)
     public void submitQuery() {
         Utils.hideKeyboard(this);
