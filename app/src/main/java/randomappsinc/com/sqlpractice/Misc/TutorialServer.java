@@ -65,6 +65,10 @@ public class TutorialServer {
         return ideaToUrl.get(idea);
     }
 
+    public static String[] getAllTutorials() {
+        return new String[]{INTRO, DISTINCT, WHERE, GROUP_BY, MAX, SUBQUERIES, ORDER_BY, LIMIT, MIN, LIKE, ALIASES, INNER_JOIN, AVG, SQLITE_METADATA, COUNT, AND_OR, COALESCE, SUM};
+    }
+
     public List<String> getLessons() {
         List<String> lessons = new ArrayList<>();
         for (String lesson : ideaToUrl.keySet()) {

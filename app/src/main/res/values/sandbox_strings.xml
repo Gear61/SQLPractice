@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="query">Query:</string>
+    <string name="returns">Returns:</string>
+    <string name="instructional_materials_sandbox">Instruction Materials</string>
+    <string name="sandbox_description">Available Tables:</string>
+    <string name="empty_result">Your query did not return anything.</string>
+</resources>

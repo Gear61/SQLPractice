@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sandbox_description"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/all_tables_sandbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <AutoCompleteTextView
+                android:id="@+id/query_entry_sandbox"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/text_input_border"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.rey.material.widget.Button
+                android:id="@+id/submit_query_sandbox"
+                android:text="@string/submit_query"
+                style="@style/regular_button"
+                app:rd_style="@style/button_ripple"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

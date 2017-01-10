@@ -3,6 +3,7 @@
     <string name="app_name">SQL Practice PRO</string>
     <string name="library">Library</string>
     <string name="settings">Settings</string>
+    <string name="sandbox">Sandbox</string>
 
     <!-- Question List View -->
     <string name="question_list_intro">Simply click on a question to get started!</string>

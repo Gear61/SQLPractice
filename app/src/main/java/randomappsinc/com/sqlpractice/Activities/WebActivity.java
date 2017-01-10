@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -40,7 +41,8 @@ public class WebActivity extends StandardActivity {
             @SuppressWarnings("deprecation")
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Utils.showSnackbar(parent, getString(R.string.webpage_fail));
+                //WebView displays error message by itself so it's probably not necessary do display another one, also this snackbar appears when page loaded from cache.
+//                Utils.showSnackbar(parent, getString(R.string.webpage_fail));
             }
 
             @TargetApi(android.os.Build.VERSION_CODES.M)
@@ -49,7 +51,7 @@ public class WebActivity extends StandardActivity {
                 onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
             }
         });
-
+        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         webView.loadUrl(TutorialServer.get().getUrl(idea));
     }
 }
