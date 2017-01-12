@@ -3,7 +3,9 @@
     <string name="app_name">SQL Practice PRO</string>
     <string name="library">Library</string>
     <string name="settings">Settings</string>
-    <string name="sandbox">Sandbox</string>
+    <string name="sandbox_mode">Sandbox Mode</string>
+
+    <string name="close">Close</string>
 
     <!-- Question List View -->
     <string name="question_list_intro">Simply click on a question to get started!</string>
@@ -14,10 +16,6 @@
 
     <!-- Query Submission Form -->
     <string name="submit_query">Run Query!</string>
-
-    <!-- Activity Descriptions -->
-    <string name="question_activity_display_message">Question Prompt</string>
-    <string name="answer_checker_activity_display_message">Answer Checker</string>
 
     <string name="welcome">Welcome</string>
     <string name="ask_for_help">Hey there, I\'m Alex! I\'m always looking to make my work as awesome as possible
@@ -32,6 +30,4 @@
     </string>
     <string name="will_rate">Sure, I\'ll help</string>
     <string name="no_im_good">No, I\'m good</string>
-
-    <string name="webpage_fail">We failed to load this webpage. Please try again later.</string>
 </resources>

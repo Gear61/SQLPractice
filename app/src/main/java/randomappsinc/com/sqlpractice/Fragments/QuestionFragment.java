@@ -84,7 +84,7 @@ public class QuestionFragment extends Fragment {
         // Load the problem
         questionPrompt.setText(questionServer.getQuestion(currentQuestion).giveQuestionText());
 
-        // Set up Auto Complete
+        // Set up autocomplete
         QueryACAdapter adapter = new QueryACAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line,
                 schemaServer.serveSomeTables(relevantTables), queryHelper);
         queryHelper.setAdapter(adapter);

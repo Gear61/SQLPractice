@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/sandox_mod"
-        android:title="@string/sandbox"
+        android:id="@+id/sandbox_mode"
+        android:title="@string/sandbox_mode"
         app:showAsAction="ifRoom"/>
 
     <item
@@ -16,5 +16,4 @@
         android:id="@+id/settings"
         android:title="@string/settings"
         app:showAsAction="ifRoom"/>
-
 </menu>

@@ -1,10 +1,8 @@
 package randomappsinc.com.sqlpractice.Activities;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -22,17 +20,15 @@ import randomappsinc.com.sqlpractice.R;
  */
 
 public class SandboxResultActivity extends StandardActivity {
-
-    @Bind(R.id.result_table_sandbox)    TableLayout mResultTable;
-    @Bind(R.id.user_query)    TextView mUserQuery;
-    @Bind(R.id.empty_result_sandbox) TextView mEmptyResult;
+    @Bind(R.id.sandbox_results_table) TableLayout mResultTable;
+    @Bind(R.id.user_query) TextView mUserQuery;
+    @Bind(R.id.sandbox_empty_results) TextView mEmptyResult;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sandbox_result);
         ButterKnife.bind(this);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String query = getIntent().getStringExtra(Constants.USER_QUERY_KEY);
@@ -40,10 +36,10 @@ public class SandboxResultActivity extends StandardActivity {
         mUserQuery.setText(query);
         ResultSet results = (new MisterDataSource()).getResultsOfQuery(query);
         if (results.getData().length == 0) {
-            mEmptyResult.setText(getString(R.string.empty_result));
+            mEmptyResult.setVisibility(View.VISIBLE);
         } else {
-            createTable((TableLayout) findViewById(R.id.result_table_sandbox),
-                    results.getColumns(), results.getData());
+            mResultTable.setVisibility(View.VISIBLE);
+            createTable((TableLayout) findViewById(R.id.sandbox_results_table), results.getColumns(), results.getData());
         }
     }
 
@@ -61,7 +57,7 @@ public class SandboxResultActivity extends StandardActivity {
         }
         topRow.setOrientation(LinearLayout.HORIZONTAL);
 
-        // add the TableRow to the TableLayout
+        // Add the TableRow to the TableLayout
         table.addView(topRow);
 
         for (String[] dataRow : data) {

@@ -101,7 +101,7 @@ public class MainActivity extends StandardActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_ios_bookmarks);
         Utils.loadMenuIcon(menu, R.id.settings, IoniconsIcons.ion_android_settings);
-        Utils.loadMenuIcon(menu, R.id.sandox_mod, IoniconsIcons.ion_android_desktop);
+        Utils.loadMenuIcon(menu, R.id.sandbox_mode, IoniconsIcons.ion_android_desktop);
         return true;
     }
 
@@ -113,7 +113,7 @@ public class MainActivity extends StandardActivity {
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
-            case R.id.sandox_mod:
+            case R.id.sandbox_mode:
                 startActivity(new Intent(this, SandboxActivity.class));
             default:
                 return super.onOptionsItemSelected(item);

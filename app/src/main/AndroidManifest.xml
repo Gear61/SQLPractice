@@ -60,14 +60,17 @@
             android:configChanges="orientation|screenSize">
         </activity>
         
-        <activity android:name=".Activities.SandboxActivity"
-            android:label="@string/sandbox"
+        <activity
+            android:name=".Activities.SandboxActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/sandbox_mode"
             android:configChanges="orientation|screenSize">
         </activity>
 
-        <activity android:name=".Activities.SandboxResultActivity"
-            android:label="@string/sandbox"
-            android:configChanges="orientation|screenSize" >
+        <activity
+            android:name=".Activities.SandboxResultActivity"
+            android:label="@string/sandbox_results"
+            android:configChanges="orientation|screenSize">
         </activity>
     </application>
 </manifest>

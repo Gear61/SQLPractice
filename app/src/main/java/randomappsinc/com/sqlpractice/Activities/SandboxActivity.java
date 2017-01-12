@@ -30,30 +30,23 @@ import randomappsinc.com.sqlpractice.R;
  */
 
 public class SandboxActivity extends StandardActivity {
-
-    @Bind(R.id.query_entry_sandbox)  AutoCompleteTextView mQueryAutocompleteTextView;
-    @Bind(R.id.parent)  View parentView;
-    @Bind(R.id.all_tables_sandbox)  TextView mAllTablesTextView;
+    @Bind(R.id.query_entry_sandbox) AutoCompleteTextView mQueryAutocompleteTextView;
+    @Bind(R.id.parent) View parent;
+    @Bind(R.id.all_tables_description) TextView mAllTablesTextView;
     @BindString(R.string.invalid_select)  String invalidSelect;
-
-    private SchemaServer schemaServer;
-    private int[] relevantTables;
-    private int tablesCount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sandbox);
         ButterKnife.bind(this);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //set adapter on AutoCompleteTextView
-        schemaServer = SchemaServer.getSchemaServer();
         populateTableDescriptions();
-        populateRelevantTables();
+
+        // Set up autocomplete
         QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
-                schemaServer.serveSomeTables(relevantTables), mQueryAutocompleteTextView);
+                SchemaServer.getSchemaServer().serveAllTables(), mQueryAutocompleteTextView);
         mQueryAutocompleteTextView.setAdapter(adapter);
         mQueryAutocompleteTextView.setText("");
     }
@@ -72,40 +65,13 @@ public class SandboxActivity extends StandardActivity {
         if (results.getData() != null) {
             Intent intent = new Intent(this, SandboxResultActivity.class);
             intent.putExtra(Constants.USER_QUERY_KEY, userQuery);
-            this.startActivity(intent);
+            startActivity(intent);
         } else {
-            Utils.showLongSnackbar(parentView, String.format(invalidSelect, results.getException()));
+            Utils.showLongSnackbar(parent, String.format(invalidSelect, results.getException()));
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sandbox_menu, menu);
-        Utils.loadMenuIcon(menu, R.id.instructional_materials_sandbox, IoniconsIcons.ion_information_circled);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        switch (item.getItemId()) {
-            case R.id.instructional_materials_sandbox:
-                new MaterialDialog.Builder(this)
-                        .title(R.string.instructional_materials_sandbox)
-                        .items(TutorialServer.getAllTutorials())
-                        .itemsCallback(new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                openWebPage(text.toString());
-                            }
-                        })
-                        .show();
-        }
-
-        return true;
-    }
-
-    private void openWebPage(String helpURL ) {
+    private void openWebPage(String helpURL) {
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(WebActivity.IDEA_KEY, helpURL);
         startActivity(intent);
@@ -117,18 +83,37 @@ public class SandboxActivity extends StandardActivity {
         for (int i = 0; i < allTables.length; i++) {
             if (i != 0) {
                 tableDescriptions.append("\n\n");
-                tablesCount++;
             }
             tableDescriptions.append(allTables[i].getDescription());
         }
         mAllTablesTextView.setText(tableDescriptions.toString());
     }
 
-    private void populateRelevantTables() {
-        relevantTables = new int[tablesCount];
-        for (int i = 0; i<tablesCount;i++) {
-            relevantTables[i] = i;
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sandbox_menu, menu);
+        Utils.loadMenuIcon(menu, R.id.instructional_materials, IoniconsIcons.ion_information_circled);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.instructional_materials:
+                new MaterialDialog.Builder(this)
+                        .title(R.string.materials_title)
+                        .items(TutorialServer.get().getLessonsArray())
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                                openWebPage(text.toString());
+                            }
+                        })
+                        .positiveText(R.string.close)
+                        .show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

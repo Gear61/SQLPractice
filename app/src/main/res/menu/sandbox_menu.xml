@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/instructional_materials_sandbox"
-        android:title="@string/instructional_materials_sandbox"
+    <item
+        android:id="@+id/instructional_materials"
+        android:title="@string/instructional_materials"
         app:showAsAction="ifRoom"/>
 </menu>

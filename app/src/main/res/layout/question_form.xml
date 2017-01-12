@@ -14,36 +14,29 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="12dp">
 
             <TextView
-                android:id="@+id/relevant_tables"
-                android:textSize="20sp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/our_table"
-                android:textStyle="bold" />
+                style="@style/header"/>
 
             <TextView
                 android:id="@+id/table_design"
-                android:textSize="16sp"
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                style="@style/table_description"/>
 
             <TextView
                 android:id="@+id/problem"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="4dp"
                 android:textSize="18sp"
+                android:textColor="@color/dark_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <AutoCompleteTextView
                 android:id="@+id/query_entry"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/text_input_border"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
