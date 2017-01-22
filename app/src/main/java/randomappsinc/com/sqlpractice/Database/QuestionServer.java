@@ -30,7 +30,7 @@ public class QuestionServer {
             {TutorialServer.MIN, TutorialServer.SUBQUERIES},
             {TutorialServer.WHERE},
             {TutorialServer.LIKE},
-            {TutorialServer.ALIASES, TutorialServer.SUBQUERIES},
+            {TutorialServer.DISTINCT, TutorialServer.ORDER_BY, TutorialServer.LIMIT},
             {TutorialServer.ALIASES, TutorialServer.SUBQUERIES, TutorialServer.AND_OR},
             {TutorialServer.INNER_JOIN},
             {TutorialServer.INNER_JOIN, TutorialServer.AND_OR},
@@ -48,7 +48,7 @@ public class QuestionServer {
             {TutorialServer.SUM, TutorialServer.GROUP_BY},
             {TutorialServer.AVG, TutorialServer.GROUP_BY},
             {TutorialServer.MAX, TutorialServer.ALIASES, TutorialServer.SUBQUERIES},
-            {TutorialServer.COUNT, TutorialServer.ALIASES, TutorialServer.SUBQUERIES, TutorialServer.DISTINCT}};
+            {TutorialServer.DISTINCT, TutorialServer.ORDER_BY, TutorialServer.LIMIT, TutorialServer.SUBQUERIES}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =

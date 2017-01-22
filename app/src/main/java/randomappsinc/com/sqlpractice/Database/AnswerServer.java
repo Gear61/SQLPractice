@@ -3,8 +3,7 @@ package randomappsinc.com.sqlpractice.Database;
 /**
  * Created by alexanderchiou on 10/31/15.
  */
-public class AnswerServer
-{
+public class AnswerServer {
     // Answers stored here in this ghetto hard-coded array
     private static String[] answers =
             {"SELECT * FROM SALARIES;",
@@ -19,8 +18,7 @@ public class AnswerServer
                     "SELECT Professor_Name, Salary FROM SALARIES ORDER BY Salary ASC LIMIT 1;",
                     "SELECT Department FROM SALARIES WHERE Professor_Name = \"Zaniolo\";",
                     "SELECT Professor_Name FROM SALARIES WHERE Professor_Name LIKE 'C%';",
-                    "SELECT DISTINCT Salary FROM SALARIES AS S1 WHERE 2 = " +
-                            "(SELECT COUNT(DISTINCT SALARY) FROM SALARIES AS S2 WHERE S1.SALARY < S2.SALARY);",
+                    "SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary DESC LIMIT 1 OFFSET 2",
                     "SELECT DISTINCT a.First_Name, a.Last_Name FROM CHECKED_OUT AS a, " +
                             "CHECKED_OUT AS b where a.Last_Name = b.Last_Name " +
                             "AND a.First_Name != b.First_Name",
@@ -51,13 +49,9 @@ public class AnswerServer
                     "SELECT Professor_Name, Department, Salary FROM SALARIES AS a " +
                             "WHERE a.Salary = (SELECT MAX(Salary) FROM SALARIES AS b " +
                             "WHERE b.Department = a.Department);",
-                    "SELECT Professor_Name, Salary FROM Salaries WHERE Salary >= " +
-                            "(SELECT DISTINCT Salary from SALARIES AS S1 " +
-                            "WHERE 2 = (SELECT COUNT(DISTINCT SALARY) FROM SALARIES AS S2 " +
-                            "WHERE S1.SALARY < S2.SALARY)) OR SALARY <= " +
-                            "(SELECT DISTINCT Salary from SALARIES AS S3 " +
-                            "WHERE 2 = (SELECT COUNT(DISTINCT SALARY) FROM SALARIES AS S4 " +
-                            "WHERE S3.SALARY > S4.SALARY));"};
+                    "SELECT Professor_Name, Salary FROM SALARIES WHERE Salary " +
+                            ">= (SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary DESC LIMIT 1 OFFSET 2) " +
+                            "OR Salary <= (SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary ASC LIMIT 1 OFFSET 2);"};
 
     public static String getAnswer(int position)
     {

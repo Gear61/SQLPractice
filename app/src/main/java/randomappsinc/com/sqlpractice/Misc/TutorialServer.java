@@ -48,7 +48,7 @@ public class TutorialServer {
         ideaToUrl.put(MAX, "http://www.w3schools.com/sql/sql_func_max.asp");
         ideaToUrl.put(SUBQUERIES, "http://www.tutorialspoint.com/sql/sql-sub-queries.htm");
         ideaToUrl.put(ORDER_BY, "http://www.w3schools.com/sql/sql_orderby.asp");
-        ideaToUrl.put(LIMIT, "http://www.techonthenet.com/sql/select_limit.php");
+        ideaToUrl.put(LIMIT, "https://www.tutorialspoint.com/sqlite/sqlite_limit_clause.htm");
         ideaToUrl.put(MIN, "http://www.w3schools.com/sql/sql_func_min.asp");
         ideaToUrl.put(LIKE, "http://www.w3schools.com/sql/sql_like.asp");
         ideaToUrl.put(ALIASES, "http://www.w3schools.com/sql/sql_alias.asp");
