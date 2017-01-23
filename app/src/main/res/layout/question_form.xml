@@ -34,11 +34,7 @@
 
             <AutoCompleteTextView
                 android:id="@+id/query_entry"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/text_input_border"
-                android:padding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                style="@style/query_input"/>
 
             <com.rey.material.widget.Button
                 android:id="@+id/submit_query"

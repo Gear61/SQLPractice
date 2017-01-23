@@ -16,6 +16,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.Models.Column;
 import randomappsinc.com.sqlpractice.Database.Models.Schema;
 import randomappsinc.com.sqlpractice.R;
@@ -30,11 +32,11 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     // SQLite constructs
     private static ArrayList<String> items = new ArrayList<>();
 
-    private ArrayList<String> constants = new ArrayList<String>
+    private ArrayList<String> constants = new ArrayList<>
             (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
                     "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
                     "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG", "sql", "sqlite_master",
-                    "tbl_name", "type", "table", "BETWEEN", "COALESCE"));
+                    "tbl_name", "type", "table", "BETWEEN", "COALESCE", "OFFSET"));
 
     private ArrayList<String> itemsAll;
     private ArrayList<String> suggestions;
@@ -85,14 +87,15 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     }
 
     private void setProgressTracker() {
-        this.userQuery.addTextChangedListener(new TextWatcher() {
+        userQuery.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
             @Override
             public void afterTextChanged(Editable arg0) {}
+
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 currentInput = s.toString();
             }
         });
@@ -100,18 +103,14 @@ public class QueryACAdapter extends ArrayAdapter<String> {
 
     // Set it up so that selecting an item doesn't erase everything
     private void setUpAC() {
-        this.userQuery.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        userQuery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-                    throws IllegalArgumentException, IllegalStateException
-            {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) throws IllegalArgumentException, IllegalStateException {
                 String[] pieces = currentInput.split(" ");
                 String autoFill = "";
                 if (pieces[pieces.length - 1].contains("(")) {
                     autoFill += pieces[pieces.length - 1].split("\\(")[0] + "(";
-                }
-                else if (pieces[pieces.length - 1].contains("\"")) {
+                } else if (pieces[pieces.length - 1].contains("\"")) {
                     autoFill += pieces[pieces.length - 1].split("\"")[0] + "\"";
                 }
                 autoFill += parent.getItemAtPosition(position).toString();
@@ -126,34 +125,39 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         });
     }
 
-    public static class ViewHolder {
-        public TextView suggestion;
+    public class SuggestionViewHolder {
+        @Bind(R.id.suggestion) TextView suggestion;
+
+        public SuggestionViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+
+        public void loadSuggestion(int position) {
+            suggestion.setText(getItem(position));
+        }
     }
 
     public View getView(int position, View view, ViewGroup parent) {
-        ViewHolder holder;
+        SuggestionViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R.layout.acquery_item, parent, false);
-            holder = new ViewHolder();
-            holder.suggestion = (TextView) view.findViewById(R.id.suggestion);
+            holder = new SuggestionViewHolder(view);
             view.setTag(holder);
+        } else {
+            holder = (SuggestionViewHolder) view.getTag();
         }
-        else {
-            holder = (ViewHolder) view.getTag();
-        }
-
-        holder.suggestion.setText(items.get(position));
+        holder.loadSuggestion(position);
         return view;
     }
 
     @Override
-    public android.widget.Filter getFilter() {
+    public Filter getFilter() {
         return nameFilter;
     }
 
     @SuppressLint("DefaultLocale")
-    Filter nameFilter = new Filter() {
+    private Filter nameFilter = new Filter() {
         public String convertResultToString(Object resultValue) {
             return (resultValue).toString();
         }
