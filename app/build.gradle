@@ -8,8 +8,8 @@ android {
         applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 171
-        versionName "1.7.1"
+        versionCode 172
+        versionName "1.7.2"
     }
     buildTypes {
         release {
