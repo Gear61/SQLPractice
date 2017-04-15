@@ -45,9 +45,7 @@ public class AnswerServer {
                             "ORDER BY SUM(Salary) DESC LIMIT 1;",
                     "SELECT Department, AVG(Salary) FROM SALARIES GROUP BY DEPARTMENT " +
                             "ORDER BY AVG(Salary) DESC LIMIT 1;",
-                    "SELECT Professor_Name, Department, Salary FROM SALARIES AS a " +
-                            "WHERE a.Salary = (SELECT MAX(Salary) FROM SALARIES AS b " +
-                            "WHERE b.Department = a.Department);",
+                    "SELECT Professor_Name, Department, Max(Salary) FROM SALARIES GROUP BY Department;",
                     "SELECT Professor_Name, Salary FROM SALARIES WHERE Salary " +
                             ">= (SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary DESC LIMIT 1 OFFSET 2) " +
                             "OR Salary <= (SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary ASC LIMIT 1 OFFSET 2);"};
