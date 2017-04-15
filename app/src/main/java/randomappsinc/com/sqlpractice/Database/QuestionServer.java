@@ -47,7 +47,7 @@ public class QuestionServer {
             {TutorialServer.COALESCE, TutorialServer.DISTINCT},
             {TutorialServer.SUM, TutorialServer.GROUP_BY},
             {TutorialServer.AVG, TutorialServer.GROUP_BY},
-            {TutorialServer.MAX, TutorialServer.ALIASES, TutorialServer.SUBQUERIES},
+            {TutorialServer.MAX, TutorialServer.GROUP_BY},
             {TutorialServer.DISTINCT, TutorialServer.ORDER_BY, TutorialServer.LIMIT, TutorialServer.SUBQUERIES}};
 
     // Questions stored here in this ghetto hard-coded array
