@@ -20,6 +20,7 @@ import randomappsinc.com.sqlpractice.Adapters.QuestionsAdapter;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
+import randomappsinc.com.sqlpractice.Misc.TutorialServer;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
@@ -96,6 +97,12 @@ public class MainActivity extends StandardActivity {
         questionsAdapter.notifyDataSetChanged();
     }
 
+    private void openWebPage(String helpURL) {
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra(WebActivity.IDEA_KEY, helpURL);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -108,7 +115,17 @@ public class MainActivity extends StandardActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.library:
-                startActivity(new Intent(this, LibraryActivity.class));
+                new MaterialDialog.Builder(this)
+                        .title(R.string.library)
+                        .items(TutorialServer.get().getLessonsArray())
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                                openWebPage(text.toString());
+                            }
+                        })
+                        .positiveText(R.string.close)
+                        .show();
                 return true;
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));

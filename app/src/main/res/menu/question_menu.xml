@@ -5,7 +5,7 @@
         android:title="@string/random_question"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/instructional_materials"
+    <item android:id="@+id/library"
         android:title="@string/instructional_materials"
         app:showAsAction="ifRoom"/>
 </menu>

@@ -53,12 +53,6 @@
             android:name=".Activities.WebActivity"
             android:configChanges="orientation|screenSize">
         </activity>
-
-        <activity
-            android:name=".Activities.LibraryActivity"
-            android:label="@string/library"
-            android:configChanges="orientation|screenSize">
-        </activity>
         
         <activity
             android:name=".Activities.SandboxActivity"

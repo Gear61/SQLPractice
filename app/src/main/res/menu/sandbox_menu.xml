@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/instructional_materials"
-        android:title="@string/instructional_materials"
+        android:id="@+id/library"
+        android:title="@string/library"
         app:showAsAction="ifRoom"/>
 </menu>

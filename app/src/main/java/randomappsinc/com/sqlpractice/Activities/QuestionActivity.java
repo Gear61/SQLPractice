@@ -67,7 +67,7 @@ public class QuestionActivity extends StandardActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.question_menu, menu);
         Utils.loadMenuIcon(menu, R.id.random, IoniconsIcons.ion_shuffle);
-        Utils.loadMenuIcon(menu, R.id.instructional_materials, IoniconsIcons.ion_information_circled);
+        Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_information_circled);
         return true;
     }
 
@@ -79,7 +79,7 @@ public class QuestionActivity extends StandardActivity {
                 int newPosition = Utils.getRandomQuestionIndex(currentPosition);
                 questionPager.setCurrentItem(newPosition, true);
                 return true;
-            case R.id.instructional_materials:
+            case R.id.library:
                 new MaterialDialog.Builder(this)
                         .title(R.string.materials_title)
                         .items(QuestionServer.getQuestionServer().getQuestion(currentPosition).getIdeas())

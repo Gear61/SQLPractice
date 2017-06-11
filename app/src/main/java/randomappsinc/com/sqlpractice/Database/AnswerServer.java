@@ -48,7 +48,8 @@ public class AnswerServer {
                     "SELECT Professor_Name, Department, Max(Salary) FROM SALARIES GROUP BY Department;",
                     "SELECT Professor_Name, Salary FROM SALARIES WHERE Salary " +
                             ">= (SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary DESC LIMIT 1 OFFSET 2) " +
-                            "OR Salary <= (SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary ASC LIMIT 1 OFFSET 2);"};
+                            "OR Salary <= (SELECT DISTINCT Salary FROM SALARIES ORDER BY Salary ASC LIMIT 1 OFFSET 2);",
+                    "SELECT Department, Count() FROM SALARIES GROUP BY Department;"};
 
     public static String getAnswer(int position)
     {

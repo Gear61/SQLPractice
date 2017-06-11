@@ -92,16 +92,16 @@ public class SandboxActivity extends StandardActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.sandbox_menu, menu);
-        Utils.loadMenuIcon(menu, R.id.instructional_materials, IoniconsIcons.ion_information_circled);
+        Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_ios_bookmarks);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.instructional_materials:
+            case R.id.library:
                 new MaterialDialog.Builder(this)
-                        .title(R.string.materials_title)
+                        .title(R.string.library)
                         .items(TutorialServer.get().getLessonsArray())
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
