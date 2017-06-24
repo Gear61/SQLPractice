@@ -1,9 +1,9 @@
-If you would like to contribute, fork this repo and submit a pull request. If it involves UI changes, attaching a .gif showing your changes would be very much appreciated.
+If you would like to contribute, fork this repo and submit a pull request. If it involves UI changes, attaching a .gif or video showing your changes would be very much appreciated.
 
 License
 =======
 
-    Copyright 2015-2016 Alexander Chiou
+    Copyright 2015-present Alexander Chiou
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
