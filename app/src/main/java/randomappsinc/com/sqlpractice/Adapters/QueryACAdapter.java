@@ -2,6 +2,7 @@ package randomappsinc.com.sqlpractice.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,53 +31,39 @@ import randomappsinc.com.sqlpractice.R;
  */
 // Auto-Complete adapter for the query to make users' lives easier
 public class QueryACAdapter extends ArrayAdapter<String> {
-    private Context context;
-
-    // SQLite constructs
-    private static ArrayList<String> items = new ArrayList<>();
-
-    private ArrayList<String> constants = new ArrayList<>
+    private static final ArrayList<String> CONSTANTS = new ArrayList<>
             (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
                     "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
                     "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG", "sql", "sqlite_master",
                     "tbl_name", "type", "table", "BETWEEN", "COALESCE", "OFFSET"));
 
-    private ArrayList<String> itemsAll;
-    private ArrayList<String> suggestions;
+    private Context context;
+    private Set<String> itemsAll;
     private AutoCompleteTextView userQuery;
     private String currentInput;
     private Schema[] currentSchemas;
 
     public QueryACAdapter(Context context, int viewResourceId, Schema[] currentSchemas, AutoCompleteTextView userQuery) {
-        super(context, viewResourceId, items);
+        super(context, viewResourceId, new ArrayList<String>());
         this.context = context;
         this.userQuery = userQuery;
         this.currentSchemas = currentSchemas;
+        this.itemsAll = new HashSet<>();
+        this.itemsAll.addAll(CONSTANTS);
 
         setUpAC();
         setProgressTracker();
-        addConstants();
         addTableInformation();
         addRowInformation();
-
-        this.itemsAll = (ArrayList<String>) QueryACAdapter.items.clone();
-        this.suggestions = new ArrayList<>();
-    }
-
-    // Add SQLite keywords (SELECT, FROM, WHERE, etc) to suggestions
-    private void addConstants() {
-        for (int i = 0; i < constants.size(); i++) {
-            items.add(constants.get(i));
-        }
     }
 
     // Add table terms (table name, column names) to suggestions
     private void addTableInformation() {
         for (Schema schema : currentSchemas) {
-            items.add(schema.getName());
+            itemsAll.add(schema.getName());
             Column[] allCols = schema.getColumns();
             for (Column column : allCols) {
-                items.add(column.getRowName());
+                itemsAll.add(column.getRowName());
             }
         }
     }
@@ -82,7 +72,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     // Ain't nobody got time to type out Computer Science or Zaniolo
     private void addRowInformation() {
         for (Schema schema : currentSchemas) {
-            items.addAll(schema.createSuggestions());
+            itemsAll.addAll(schema.createSuggestions());
         }
     }
 
@@ -137,7 +127,8 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         }
     }
 
-    public View getView(int position, View view, ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View view, @NonNull ViewGroup parent) {
         SuggestionViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -152,6 +143,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     }
 
     @Override
+    @NonNull
     public Filter getFilter() {
         return nameFilter;
     }
@@ -165,7 +157,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         @SuppressLint("DefaultLocale")
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            suggestions.clear();
+            Set<String> newSuggestions = new HashSet<>();
             if (constraint != null) {
                 String pieces[] = constraint.toString().split(" ");
                 String target = pieces[pieces.length - 1];
@@ -173,23 +165,22 @@ public class QueryACAdapter extends ArrayAdapter<String> {
                 target = pieces[pieces.length - 1];
                 pieces = target.split("\"");
                 target = pieces[pieces.length - 1];
-                if (!target.equals("")) {
-                    // Linear search to populate suggestions
-                    for (int i = 0, j = 0; i < itemsAll.size() && j <= 10; i++) {
-                        if (itemsAll.get(i).toLowerCase().startsWith((target.toLowerCase()))
-                                && !itemsAll.get(i).toLowerCase().equals(target.toLowerCase())
-                                && !suggestions.contains(itemsAll.get(i))) {
-                            j++;
-                            suggestions.add(itemsAll.get(i));
+                if (!target.trim().isEmpty()) {
+                    for (String potential : itemsAll) {
+                        if (potential.toLowerCase().startsWith(target.toLowerCase())
+                                && !potential.toLowerCase().equals(target.toLowerCase())) {
+                            newSuggestions.add(potential);
+                            if (newSuggestions.size() >= 10) {
+                                break;
+                            }
                         }
                     }
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = suggestions;
-                filterResults.count = suggestions.size();
+                filterResults.values = newSuggestions;
+                filterResults.count = newSuggestions.size();
                 return filterResults;
-            }
-            else {
+            } else {
                 return new FilterResults();
             }
         }
@@ -197,12 +188,10 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             @SuppressWarnings("unchecked")
-            ArrayList<String> filteredList = (ArrayList<String>) results.values;
+            Set<String> filteredList = (Set<String>) results.values;
             if (results.count > 0) {
                 clear();
-                for (String c : filteredList) {
-                    add(c);
-                }
+                addAll(filteredList);
                 notifyDataSetChanged();
             }
         }
