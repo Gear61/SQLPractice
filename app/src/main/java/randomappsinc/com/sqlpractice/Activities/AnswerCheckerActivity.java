@@ -31,6 +31,8 @@ import randomappsinc.com.sqlpractice.R;
 // Evaluates the answer that the user gave from QuestionActivity
 public class AnswerCheckerActivity extends StandardActivity {
     @Bind(R.id.parent) View parent;
+    @Bind(R.id.correct_answers_table) TableLayout correctTable;
+    @Bind(R.id.their_answers_table) TableLayout theirTable;
     @Bind(R.id.verdict) TextView verdict;
     @Bind(R.id.their_answers) TextView theirAnswers;
     @Bind(R.id.advance_forward) Button nextQuestion;
@@ -74,17 +76,15 @@ public class AnswerCheckerActivity extends StandardActivity {
         } else {
             theirAnswers.setText(R.string.query_results_preamble);
             // Logic to display their table
-            createTable((TableLayout) findViewById(R.id.their_answers_table),
-                    score.userResults().getColumns(), score.userResults().getData());
+            createTable(theirTable, score.userResults().getColumns(), score.userResults().getData());
         }
         // Logic to display our answers table
-        createTable((TableLayout) findViewById(R.id.correct_answers_table),
-                score.correctAnswers().getColumns(), score.correctAnswers().getData());
+        createTable(correctTable, score.correctAnswers().getColumns(), score.correctAnswers().getData());
     }
 
     public void createTable(TableLayout table, String[] columns, String[][] data) {
         TableLayout.LayoutParams dataParams = new TableLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.1f);
-        dataParams.setMargins(0, 0, 5, 0);
+        dataParams.setMargins(0, 0, 4, 0);
 
         LinearLayout topRow = new LinearLayout(this);
         for (String column : columns) {

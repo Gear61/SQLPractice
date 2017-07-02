@@ -35,17 +35,17 @@ public class SandboxResultActivity extends StandardActivity {
 
         mUserQuery.setText(query);
         ResultSet results = (new MisterDataSource()).getResultsOfQuery(query);
-        if (results.getData().length == 0) {
+        if (results.getData() == null || results.getData().length == 0) {
             mEmptyResult.setVisibility(View.VISIBLE);
         } else {
             mResultTable.setVisibility(View.VISIBLE);
-            createTable((TableLayout) findViewById(R.id.sandbox_results_table), results.getColumns(), results.getData());
+            createTable(results.getColumns(), results.getData());
         }
     }
 
-    public void createTable(TableLayout table, String[] columns, String[][] data) {
+    public void createTable(String[] columns, String[][] data) {
         TableLayout.LayoutParams dataParams = new TableLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.1f);
-        dataParams.setMargins(0, 0, 5, 0);
+        dataParams.setMargins(0, 0, 4, 0);
 
         LinearLayout topRow = new LinearLayout(this);
         for (String column : columns) {
@@ -58,7 +58,7 @@ public class SandboxResultActivity extends StandardActivity {
         topRow.setOrientation(LinearLayout.HORIZONTAL);
 
         // Add the TableRow to the TableLayout
-        table.addView(topRow);
+        mResultTable.addView(topRow);
 
         for (String[] dataRow : data) {
             LinearLayout tuple = new LinearLayout(this);
@@ -69,7 +69,7 @@ public class SandboxResultActivity extends StandardActivity {
                 tuple.addView(text);
             }
             tuple.setOrientation(LinearLayout.HORIZONTAL);
-            table.addView(tuple);
+            mResultTable.addView(tuple);
         }
     }
 }
