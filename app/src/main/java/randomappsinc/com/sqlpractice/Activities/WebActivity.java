@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,6 +33,15 @@ public class WebActivity extends StandardActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        webView.setWebViewClient(new WebViewClient() {
+            @SuppressWarnings("deprecation")
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
         webView.loadUrl(TutorialServer.get().getUrl(idea));
     }
 }
