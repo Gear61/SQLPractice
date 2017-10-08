@@ -5,10 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by alexanderchiou on 6/29/16.
- */
 public class TutorialServer {
+
     public static final String INTRO = "SELECT Introduction";
     public static final String DISTINCT = "DISTINCT";
     public static final String WHERE = "WHERE";

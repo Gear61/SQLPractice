@@ -8,10 +8,8 @@ import android.database.sqlite.SQLiteException;
 import randomappsinc.com.sqlpractice.Database.Models.ResultSet;
 import randomappsinc.com.sqlpractice.Database.Models.Schema;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 public class MisterDataSource {
+
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
     private SchemaServer schemaServer;

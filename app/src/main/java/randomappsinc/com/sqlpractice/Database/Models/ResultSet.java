@@ -1,9 +1,7 @@
 package randomappsinc.com.sqlpractice.Database.Models;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 public class ResultSet {
+
     private String[] columns;
     private String[][] data;
     private String exception;

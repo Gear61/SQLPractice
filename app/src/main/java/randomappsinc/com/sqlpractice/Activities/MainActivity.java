@@ -13,7 +13,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.Adapters.QuestionsAdapter;
@@ -25,8 +25,9 @@ import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
 public class MainActivity extends StandardActivity {
-    @Bind(R.id.parent) View parent;
-    @Bind(R.id.question_list) ListView questionList;
+
+    @BindView(R.id.parent) View parent;
+    @BindView(R.id.question_list) ListView questionList;
 
     private QuestionsAdapter questionsAdapter;
 

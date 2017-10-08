@@ -3,17 +3,15 @@ package randomappsinc.com.sqlpractice.Activities;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.Models.Schema;
 import randomappsinc.com.sqlpractice.Database.SchemaServer;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 11/3/15.
- */
 public class DatabaseTablesActivity extends StandardActivity {
-    @Bind(R.id.all_tables) TextView allTableDescriptions;
+
+    @BindView(R.id.all_tables) TextView allTableDescriptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

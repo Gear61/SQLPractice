@@ -6,24 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-import butterknife.Bind;
 import butterknife.BindString;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.Adapters.SettingsAdapter;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 11/2/15.
- */
 public class SettingsActivity extends StandardActivity {
+
     public static final String SUPPORT_EMAIL = "chessnone@gmail.com";
     public static final String OTHER_APPS_URL = "https://play.google.com/store/apps/dev?id=9093438553713389916";
     public static final String REPO_URL = "https://github.com/Gear61/SQLPractice";
 
-    @Bind(R.id.parent) View parent;
-    @Bind(R.id.settings_options) ListView settingsOptions;
+    @BindView(R.id.parent) View parent;
+    @BindView(R.id.settings_options) ListView settingsOptions;
     @BindString(R.string.feedback_subject) String feedbackSubject;
     @BindString(R.string.send_email) String sendEmail;
 

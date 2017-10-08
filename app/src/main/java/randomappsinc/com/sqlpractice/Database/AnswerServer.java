@@ -1,9 +1,7 @@
 package randomappsinc.com.sqlpractice.Database;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 public class AnswerServer {
+
     // Answers stored here in this ghetto hard-coded array
     private static String[] answers =
             {"SELECT * FROM SALARIES;",

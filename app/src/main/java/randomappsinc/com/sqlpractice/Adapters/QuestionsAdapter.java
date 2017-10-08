@@ -7,17 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import butterknife.Bind;
 import butterknife.BindColor;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 public class QuestionsAdapter extends BaseAdapter {
+
     private Context context;
     private String[] questionList = new String[QuestionServer.getNumQuestions()];
 
@@ -29,7 +27,7 @@ public class QuestionsAdapter extends BaseAdapter {
     // Fills in "Question 1, Question 2, etc..." list
     private void populateList() {
         for (int i = 1; i <= QuestionServer.getNumQuestions(); i++) {
-            this.questionList[i-1] = String.format(context.getString(R.string.question_number), i);
+            this.questionList[i - 1] = String.format(context.getString(R.string.question_number), i);
         }
     }
 
@@ -46,9 +44,9 @@ public class QuestionsAdapter extends BaseAdapter {
     }
 
     public class QuestionViewHolder {
-        @Bind(R.id.question_number) TextView questionNumber;
-        @Bind(R.id.tagged_lessons) TextView taggedLessons;
-        @Bind(R.id.completion_icon) TextView completionIcon;
+        @BindView(R.id.question_number) TextView questionNumber;
+        @BindView(R.id.tagged_lessons) TextView taggedLessons;
+        @BindView(R.id.completion_icon) TextView completionIcon;
 
         @BindColor(R.color.green) int green;
         @BindColor(R.color.red) int red;

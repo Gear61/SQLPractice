@@ -1,10 +1,7 @@
 package randomappsinc.com.sqlpractice.Database;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
-public class RowServer
-{
+public class RowServer {
+
     // Database rows stored here in this ghetto hard-coded array
     private static String[][][] rows = {
             // SALARIES (Professor_Name (TEXT), Department (TEXT), Salary (INT))

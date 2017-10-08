@@ -3,12 +3,10 @@ package randomappsinc.com.sqlpractice.Database.Models;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 // Represents a schema (collection of columns + names)
 // Knows how to create itself, populate itself, and give basic information about itself
 public class Schema {
+
     private Column[] columns;
     private String tableName;
     private String[][] rows;

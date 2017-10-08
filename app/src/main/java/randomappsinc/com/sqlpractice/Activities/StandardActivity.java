@@ -6,10 +6,8 @@ import android.view.MenuItem;
 
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 11/6/15.
- */
 public class StandardActivity extends AppCompatActivity {
+
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);

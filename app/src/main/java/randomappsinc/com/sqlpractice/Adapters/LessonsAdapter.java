@@ -9,16 +9,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Misc.TutorialServer;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 11/12/16.
- */
-
 public class LessonsAdapter extends BaseAdapter {
+
     private Context context;
     private List<String> lessons;
 
@@ -42,7 +39,7 @@ public class LessonsAdapter extends BaseAdapter {
     }
 
     public class LessonViewHolder {
-        @Bind(R.id.lesson_name) TextView lessonName;
+        @BindView(R.id.lesson_name) TextView lessonName;
 
         public LessonViewHolder(View view) {
             ButterKnife.bind(this, view);

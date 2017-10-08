@@ -6,16 +6,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import randomappsinc.com.sqlpractice.Database.Models.Schema;
 import randomappsinc.com.sqlpractice.Misc.MyApplication;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 public class MySQLiteHelper extends SQLiteOpenHelper {
+
     private static final String DATABASE_NAME = "sqltester.db";
     private static final int DATABASE_VERSION = 1;
     private static SQLiteDatabase database;
 
-    SchemaServer schemaServer;
-    Schema[] allSchemas;
+    private SchemaServer schemaServer;
+    private Schema[] allSchemas;
 
     public MySQLiteHelper() {
         super(MyApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);

@@ -3,12 +3,10 @@ package randomappsinc.com.sqlpractice.Database;
 import randomappsinc.com.sqlpractice.Database.Models.Question;
 import randomappsinc.com.sqlpractice.Misc.TutorialServer;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 // This class contains the questions our app contains
 public class QuestionServer {
-    public static QuestionServer instance;
+
+    private static QuestionServer instance;
 
     private static int[][] questionTablePairings =
             {{0}, {0}, {0}, {0}, {0},

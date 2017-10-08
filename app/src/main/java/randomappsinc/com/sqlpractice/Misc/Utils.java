@@ -20,10 +20,8 @@ import java.util.List;
 import randomappsinc.com.sqlpractice.Database.QuestionServer;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 public class Utils {
+
     public static void showSnackbar(View parent, String content) {
         Context context = MyApplication.getAppContext();
         Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);

@@ -1,24 +1,20 @@
 package randomappsinc.com.sqlpractice.Activities;
 
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Misc.TutorialServer;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 6/28/16.
- */
 public class WebActivity extends StandardActivity {
+
     public static final String IDEA_KEY = "idea";
 
-    @Bind(R.id.parent) View parent;
-    @Bind(R.id.webview) WebView webView;
+    @BindView(R.id.webview) WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

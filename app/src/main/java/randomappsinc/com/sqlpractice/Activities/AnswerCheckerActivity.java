@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Database.AnswerChecker;
@@ -25,18 +25,16 @@ import randomappsinc.com.sqlpractice.Misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 // Evaluates the answer that the user gave from QuestionActivity
 public class AnswerCheckerActivity extends StandardActivity {
-    @Bind(R.id.parent) View parent;
-    @Bind(R.id.correct_answers_table) TableLayout correctTable;
-    @Bind(R.id.their_answers_table) TableLayout theirTable;
-    @Bind(R.id.verdict) TextView verdict;
-    @Bind(R.id.their_answers) TextView theirAnswers;
-    @Bind(R.id.advance_forward) Button nextQuestion;
-    @Bind(R.id.retry_question) Button retry;
+
+    @BindView(R.id.parent) View parent;
+    @BindView(R.id.correct_answers_table) TableLayout correctTable;
+    @BindView(R.id.their_answers_table) TableLayout theirTable;
+    @BindView(R.id.verdict) TextView verdict;
+    @BindView(R.id.their_answers) TextView theirAnswers;
+    @BindView(R.id.advance_forward) Button nextQuestion;
+    @BindView(R.id.retry_question) Button retry;
 
     private int questionNum;
 

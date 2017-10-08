@@ -10,8 +10,8 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
-import butterknife.Bind;
 import butterknife.BindString;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnPageChange;
 import randomappsinc.com.sqlpractice.Adapters.QuestionsPagerAdapter;
@@ -20,12 +20,10 @@ import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 // Loads questions for users to answer
 public class QuestionActivity extends StandardActivity {
-    @Bind(R.id.question_pager) ViewPager questionPager;
+
+    @BindView(R.id.question_pager) ViewPager questionPager;
     @BindString(R.string.question_number) String questionNumber;
 
     @Override

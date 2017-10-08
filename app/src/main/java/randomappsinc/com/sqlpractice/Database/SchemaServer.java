@@ -3,13 +3,11 @@ package randomappsinc.com.sqlpractice.Database;
 import randomappsinc.com.sqlpractice.Database.Models.Column;
 import randomappsinc.com.sqlpractice.Database.Models.Schema;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 // Class for serving the tables to be created to the MySQLiteHelper
 public class SchemaServer {
+
     // Our singleton
-    public static SchemaServer instance = null;
+    private static SchemaServer instance = null;
 
     // Hardcoded table names + columns here
     // TABLE NAMES

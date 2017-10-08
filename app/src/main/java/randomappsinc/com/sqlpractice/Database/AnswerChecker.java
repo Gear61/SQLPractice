@@ -5,11 +5,9 @@ import java.util.HashSet;
 import randomappsinc.com.sqlpractice.Database.Models.ResponseBundle;
 import randomappsinc.com.sqlpractice.Database.Models.ResultSet;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 public class AnswerChecker {
-    public MisterDataSource dataSource;
+
+    private MisterDataSource dataSource;
 
     public AnswerChecker() {
         dataSource = new MisterDataSource();

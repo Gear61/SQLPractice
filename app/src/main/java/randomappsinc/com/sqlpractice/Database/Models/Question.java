@@ -1,12 +1,9 @@
 package randomappsinc.com.sqlpractice.Database.Models;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
-
 // Represents a question.
 // Has the question text and an array of integers signifying which tables it's linked to
 public class Question {
+
     private String questionText;
     private int[] neededTables;
     private String[] ideas;

@@ -8,21 +8,18 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.MisterDataSource;
 import randomappsinc.com.sqlpractice.Database.Models.ResultSet;
 import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created on 12/28/2016.
- */
-
 public class SandboxResultActivity extends StandardActivity {
-    @Bind(R.id.sandbox_results_table) TableLayout mResultTable;
-    @Bind(R.id.user_query) TextView mUserQuery;
-    @Bind(R.id.sandbox_empty_results) TextView mEmptyResult;
+
+    @BindView(R.id.sandbox_results_table) TableLayout mResultTable;
+    @BindView(R.id.user_query) TextView mUserQuery;
+    @BindView(R.id.sandbox_empty_results) TextView mEmptyResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

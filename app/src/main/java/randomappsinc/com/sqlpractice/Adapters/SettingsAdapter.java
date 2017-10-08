@@ -9,14 +9,12 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 11/3/15.
- */
 public class SettingsAdapter extends BaseAdapter {
+
     private String[] optionNames;
     private String[] optionIcons;
     private Context context;
@@ -43,8 +41,8 @@ public class SettingsAdapter extends BaseAdapter {
     }
 
     public static class SettingsViewHolder {
-        @Bind(R.id.option_icon) IconTextView settingsIcon;
-        @Bind(R.id.settings_option) TextView settingsOption;
+        @BindView(R.id.option_icon) IconTextView settingsIcon;
+        @BindView(R.id.settings_option) TextView settingsOption;
 
         public SettingsViewHolder(View view) {
             ButterKnife.bind(this, view);

@@ -19,17 +19,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.Database.Models.Column;
 import randomappsinc.com.sqlpractice.Database.Models.Schema;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 10/31/15.
- */
 // Auto-Complete adapter for the query to make users' lives easier
 public class QueryACAdapter extends ArrayAdapter<String> {
+
     private static final ArrayList<String> CONSTANTS = new ArrayList<>
             (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
                     "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
@@ -115,7 +113,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     }
 
     public class SuggestionViewHolder {
-        @Bind(R.id.suggestion) TextView suggestion;
+        @BindView(R.id.suggestion) TextView suggestion;
 
         public SuggestionViewHolder(View view) {
             ButterKnife.bind(this, view);

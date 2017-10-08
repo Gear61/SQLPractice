@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
-import butterknife.Bind;
 import butterknife.BindString;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
@@ -25,14 +25,11 @@ import randomappsinc.com.sqlpractice.Misc.TutorialServer;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created on 12/27/2016.
- */
-
 public class SandboxActivity extends StandardActivity {
-    @Bind(R.id.query_entry_sandbox) AutoCompleteTextView mQueryAutocompleteTextView;
-    @Bind(R.id.parent) View parent;
-    @Bind(R.id.all_tables_description) TextView mAllTablesTextView;
+
+    @BindView(R.id.query_entry_sandbox) AutoCompleteTextView mQueryAutocompleteTextView;
+    @BindView(R.id.parent) View parent;
+    @BindView(R.id.all_tables_description) TextView mAllTablesTextView;
     @BindString(R.string.invalid_select)  String invalidSelect;
 
     @Override

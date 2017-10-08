@@ -13,10 +13,11 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import butterknife.Bind;
 import butterknife.BindString;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import randomappsinc.com.sqlpractice.Activities.AnswerCheckerActivity;
 import randomappsinc.com.sqlpractice.Adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.Database.AnswerServer;
@@ -28,10 +29,8 @@ import randomappsinc.com.sqlpractice.Misc.Constants;
 import randomappsinc.com.sqlpractice.Misc.Utils;
 import randomappsinc.com.sqlpractice.R;
 
-/**
- * Created by alexanderchiou on 6/19/16.
- */
 public class QuestionFragment extends Fragment {
+
     public static QuestionFragment create(int position) {
         QuestionFragment questionFragment = new QuestionFragment();
 
@@ -43,26 +42,27 @@ public class QuestionFragment extends Fragment {
     }
 
     // Question form views
-    @Bind(R.id.table_design) TextView tableDesign;
-    @Bind(R.id.problem) TextView questionPrompt;
-    @Bind(R.id.query_entry) AutoCompleteTextView queryHelper;
-    @Bind(R.id.parent) View parent;
+    @BindView(R.id.table_design) TextView tableDesign;
+    @BindView(R.id.problem) TextView questionPrompt;
+    @BindView(R.id.query_entry) AutoCompleteTextView queryHelper;
+    @BindView(R.id.parent) View parent;
 
     @BindString(R.string.invalid_select) String invalidSelect;
 
-    private SchemaServer schemaServer;
-    private QuestionServer questionServer;
-    private int currentQuestion;
+    private SchemaServer mSchemaServer;
+    private QuestionServer mQuestionServer;
+    private int mCurrentQuestion;
+    private Unbinder mUnbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.question_form, container, false);
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
 
-        schemaServer = SchemaServer.getSchemaServer();
-        questionServer = QuestionServer.getQuestionServer();
+        mSchemaServer = SchemaServer.getSchemaServer();
+        mQuestionServer = QuestionServer.getQuestionServer();
 
-        currentQuestion = getArguments().getInt(Constants.QUESTION_NUMBER_KEY, 0);
+        mCurrentQuestion = getArguments().getInt(Constants.QUESTION_NUMBER_KEY, 0);
         setUpQuestion();
 
         return rootView;
@@ -72,21 +72,21 @@ public class QuestionFragment extends Fragment {
     private void setUpQuestion() {
         // Get descriptions of the tables we're supposed to use.
         String tableDescriptions = "";
-        int[] relevantTables = questionServer.getQuestion(currentQuestion).giveNeededTables();
+        int[] relevantTables = mQuestionServer.getQuestion(mCurrentQuestion).giveNeededTables();
         for (int i = 0; i < relevantTables.length; i++) {
             if (i != 0) {
                 tableDescriptions += "\n\n";
             }
-            tableDescriptions += schemaServer.serveTable(relevantTables[i]).getDescription();
+            tableDescriptions += mSchemaServer.serveTable(relevantTables[i]).getDescription();
         }
         tableDesign.setText(tableDescriptions);
 
         // Load the problem
-        questionPrompt.setText(questionServer.getQuestion(currentQuestion).giveQuestionText());
+        questionPrompt.setText(mQuestionServer.getQuestion(mCurrentQuestion).giveQuestionText());
 
         // Set up autocomplete
         QueryACAdapter adapter = new QueryACAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line,
-                schemaServer.serveSomeTables(relevantTables), queryHelper);
+                mSchemaServer.serveSomeTables(relevantTables), queryHelper);
         queryHelper.setAdapter(adapter);
         queryHelper.setText("");
     }
@@ -98,7 +98,7 @@ public class QuestionFragment extends Fragment {
         ResultSet results = (new MisterDataSource()).getResultsOfQuery(userQuery);
         if (results.getData() != null) {
             Intent intent = new Intent(getActivity(), AnswerCheckerActivity.class);
-            intent.putExtra(Constants.QUESTION_NUMBER_KEY, currentQuestion);
+            intent.putExtra(Constants.QUESTION_NUMBER_KEY, mCurrentQuestion);
             intent.putExtra(Constants.USER_QUERY_KEY, userQuery);
             getActivity().startActivityForResult(intent, 1);
         } else {
@@ -108,7 +108,7 @@ public class QuestionFragment extends Fragment {
 
     @OnClick(R.id.view_answer)
     public void giveUp() {
-        final String answer = AnswerServer.getAnswer(currentQuestion);
+        final String answer = AnswerServer.getAnswer(mCurrentQuestion);
         new MaterialDialog.Builder(getActivity())
                 .title(R.string.our_answer_query)
                 .content(answer)
@@ -127,6 +127,6 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 }

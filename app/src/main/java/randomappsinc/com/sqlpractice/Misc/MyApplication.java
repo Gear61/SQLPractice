@@ -7,10 +7,8 @@ import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.IoniconsModule;
 
-/**
- * Created by alexanderchiou on 11/2/15.
- */
 public class MyApplication extends Application {
+
     private static Context context;
 
     public void onCreate() {

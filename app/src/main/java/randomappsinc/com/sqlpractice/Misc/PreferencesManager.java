@@ -6,10 +6,8 @@ import android.preference.PreferenceManager;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by alexanderchiou on 11/2/15.
- */
 public class PreferencesManager {
+
     private SharedPreferences prefs;
 
     private static final String FIRST_TIME_KEY = "firstTime";
