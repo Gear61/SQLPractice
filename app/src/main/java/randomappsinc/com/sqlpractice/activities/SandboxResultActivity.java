@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.MisterDataSource;
 import randomappsinc.com.sqlpractice.database.models.ResultSet;
 import randomappsinc.com.sqlpractice.misc.Constants;
-import randomappsinc.com.sqlpractice.R;
 
 public class SandboxResultActivity extends StandardActivity {
 

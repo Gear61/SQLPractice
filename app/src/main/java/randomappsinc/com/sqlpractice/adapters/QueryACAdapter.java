@@ -21,9 +21,9 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.models.Column;
 import randomappsinc.com.sqlpractice.database.models.Schema;
-import randomappsinc.com.sqlpractice.R;
 
 // Auto-Complete adapter for the query to make users' lives easier
 public class QueryACAdapter extends ArrayAdapter<String> {

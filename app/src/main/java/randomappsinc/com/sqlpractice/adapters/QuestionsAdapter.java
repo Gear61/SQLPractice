@@ -10,9 +10,9 @@ import android.widget.TextView;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
 import randomappsinc.com.sqlpractice.misc.PreferencesManager;
-import randomappsinc.com.sqlpractice.R;
 
 public class QuestionsAdapter extends BaseAdapter {
 

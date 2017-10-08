@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import randomappsinc.com.sqlpractice.database.QuestionServer;
 import randomappsinc.com.sqlpractice.R;
+import randomappsinc.com.sqlpractice.database.QuestionServer;
 
 public class Utils {
 

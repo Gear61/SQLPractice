@@ -16,14 +16,14 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.AnswerChecker;
 import randomappsinc.com.sqlpractice.database.AnswerServer;
-import randomappsinc.com.sqlpractice.database.models.ResponseBundle;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
+import randomappsinc.com.sqlpractice.database.models.ResponseBundle;
 import randomappsinc.com.sqlpractice.misc.Constants;
 import randomappsinc.com.sqlpractice.misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.misc.Utils;
-import randomappsinc.com.sqlpractice.R;
 
 // Evaluates the answer that the user gave from QuestionActivity
 public class AnswerCheckerActivity extends StandardActivity {

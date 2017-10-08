@@ -18,16 +18,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.activities.AnswerCheckerActivity;
 import randomappsinc.com.sqlpractice.adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.database.AnswerServer;
 import randomappsinc.com.sqlpractice.database.MisterDataSource;
-import randomappsinc.com.sqlpractice.database.models.ResultSet;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
 import randomappsinc.com.sqlpractice.database.SchemaServer;
+import randomappsinc.com.sqlpractice.database.models.ResultSet;
 import randomappsinc.com.sqlpractice.misc.Constants;
 import randomappsinc.com.sqlpractice.misc.Utils;
-import randomappsinc.com.sqlpractice.R;
 
 public class QuestionFragment extends Fragment {
 

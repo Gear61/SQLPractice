@@ -11,8 +11,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import randomappsinc.com.sqlpractice.misc.TutorialServer;
 import randomappsinc.com.sqlpractice.R;
+import randomappsinc.com.sqlpractice.misc.TutorialServer;
 
 public class LessonsAdapter extends BaseAdapter {
 

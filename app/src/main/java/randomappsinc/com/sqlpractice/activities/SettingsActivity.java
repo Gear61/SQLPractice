@@ -10,9 +10,9 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.SettingsAdapter;
 import randomappsinc.com.sqlpractice.misc.Utils;
-import randomappsinc.com.sqlpractice.R;
 
 public class SettingsActivity extends StandardActivity {
 

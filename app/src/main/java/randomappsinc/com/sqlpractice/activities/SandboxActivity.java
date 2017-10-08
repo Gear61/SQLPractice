@@ -15,15 +15,15 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.database.MisterDataSource;
+import randomappsinc.com.sqlpractice.database.SchemaServer;
 import randomappsinc.com.sqlpractice.database.models.ResultSet;
 import randomappsinc.com.sqlpractice.database.models.Schema;
-import randomappsinc.com.sqlpractice.database.SchemaServer;
 import randomappsinc.com.sqlpractice.misc.Constants;
 import randomappsinc.com.sqlpractice.misc.TutorialServer;
 import randomappsinc.com.sqlpractice.misc.Utils;
-import randomappsinc.com.sqlpractice.R;
 
 public class SandboxActivity extends StandardActivity {
 

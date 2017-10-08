@@ -5,9 +5,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import randomappsinc.com.sqlpractice.database.models.Schema;
-import randomappsinc.com.sqlpractice.database.SchemaServer;
 import randomappsinc.com.sqlpractice.R;
+import randomappsinc.com.sqlpractice.database.SchemaServer;
+import randomappsinc.com.sqlpractice.database.models.Schema;
 
 public class DatabaseTablesActivity extends StandardActivity {
 

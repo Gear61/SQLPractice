@@ -14,11 +14,11 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnPageChange;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsPagerAdapter;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
 import randomappsinc.com.sqlpractice.misc.Constants;
 import randomappsinc.com.sqlpractice.misc.Utils;
-import randomappsinc.com.sqlpractice.R;
 
 // Loads questions for users to answer
 public class QuestionActivity extends StandardActivity {

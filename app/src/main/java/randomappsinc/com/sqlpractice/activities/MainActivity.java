@@ -16,13 +16,13 @@ import com.joanzapata.iconify.fonts.IoniconsIcons;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
+import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsAdapter;
 import randomappsinc.com.sqlpractice.database.MisterDataSource;
 import randomappsinc.com.sqlpractice.misc.Constants;
 import randomappsinc.com.sqlpractice.misc.PreferencesManager;
 import randomappsinc.com.sqlpractice.misc.TutorialServer;
 import randomappsinc.com.sqlpractice.misc.Utils;
-import randomappsinc.com.sqlpractice.R;
 
 public class MainActivity extends StandardActivity {
 
