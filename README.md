@@ -1,4 +1,7 @@
-If you would like to contribute, fork this repo and submit a pull request. If it involves UI changes, attaching a .gif or video showing your changes would be very much appreciated.
+## Download
+
+<a href="https://play.google.com/store/apps/details?id=randomappsinc.com.sqlpracticeplus" target="_blank">
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="100"/></a>
 
 License
 =======
