@@ -43,20 +43,20 @@ public class TutorialServer {
         ideaToUrl.put(DISTINCT, "http://www.w3schools.com/sql/sql_distinct.asp");
         ideaToUrl.put(WHERE, "http://www.w3schools.com/sql/sql_where.asp");
         ideaToUrl.put(GROUP_BY, "http://www.w3schools.com/sql/sql_groupby.asp");
-        ideaToUrl.put(MAX, "http://www.w3schools.com/sql/sql_func_max.asp");
+        ideaToUrl.put(MAX, "https://www.w3schools.com/sql/sql_min_max.asp");
         ideaToUrl.put(SUBQUERIES, "http://www.tutorialspoint.com/sql/sql-sub-queries.htm");
         ideaToUrl.put(ORDER_BY, "http://www.w3schools.com/sql/sql_orderby.asp");
         ideaToUrl.put(LIMIT, "https://www.tutorialspoint.com/sqlite/sqlite_limit_clause.htm");
-        ideaToUrl.put(MIN, "http://www.w3schools.com/sql/sql_func_min.asp");
+        ideaToUrl.put(MIN, "https://www.w3schools.com/sql/sql_min_max.asp");
         ideaToUrl.put(LIKE, "http://www.w3schools.com/sql/sql_like.asp");
         ideaToUrl.put(ALIASES, "http://www.w3schools.com/sql/sql_alias.asp");
         ideaToUrl.put(INNER_JOIN, "http://www.w3schools.com/sql/sql_join_inner.asp");
-        ideaToUrl.put(AVG, "http://www.w3schools.com/sql/sql_func_avg.asp");
+        ideaToUrl.put(AVG, "https://www.w3schools.com/sql/sql_count_avg_sum.asp");
         ideaToUrl.put(SQLITE_METADATA, "https://www.sqlite.org/faq.html#q7");
-        ideaToUrl.put(COUNT, "http://www.w3schools.com/sql/sql_func_count.asp");
+        ideaToUrl.put(COUNT, "https://www.w3schools.com/sql/sql_count_avg_sum.asp");
         ideaToUrl.put(AND_OR, "http://www.w3schools.com/sql/sql_and_or.asp");
         ideaToUrl.put(COALESCE, "http://stackoverflow.com/a/6134463");
-        ideaToUrl.put(SUM, "http://www.w3schools.com/sql/sql_func_sum.asp");
+        ideaToUrl.put(SUM, "https://www.w3schools.com/sql/sql_count_avg_sum.asp");
     }
 
     public String getUrl(String idea) {
