@@ -1,6 +1,5 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
     android:background="@color/white"
     android:layout_width="match_parent"
@@ -38,17 +37,15 @@
                 android:id="@+id/query_entry"
                 style="@style/query_input"/>
 
-            <com.rey.material.widget.Button
+            <Button
                 android:id="@+id/submit_query"
                 android:text="@string/submit_query"
-                style="@style/regular_button"
-                app:rd_style="@style/button_ripple"/>
+                style="@style/rounded_button"/>
 
-            <com.rey.material.widget.Button
+            <Button
                 android:id="@+id/view_answer"
                 android:text="@string/view_our_answer"
-                style="@style/regular_button"
-                app:rd_style="@style/button_ripple"/>
+                style="@style/rounded_button"/>
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

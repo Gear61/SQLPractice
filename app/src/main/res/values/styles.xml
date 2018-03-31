@@ -5,20 +5,13 @@
         <item name="colorAccent">@color/app_turquoise</item>
     </style>
 
-    <style name="regular_button">
+    <style name="rounded_button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:background">@drawable/button_background</item>
-        <item name="android:layout_marginTop">10dp</item>
-    </style>
-
-    <style name="button_ripple">
-        <item name="rd_rippleType">touch</item>
-        <item name="rd_backgroundAnimDuration">0</item>
-        <item name="rd_backgroundColor">@android:color/transparent</item>
-        <item name="rd_maxRippleRadius">match_view</item>
-        <item name="rd_rippleAnimDuration">150</item>
+        <item name="android:background">@drawable/rounded_button_background</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
     <style name="header">

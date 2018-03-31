@@ -1,6 +1,5 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
     android:background="@color/white"
     android:layout_width="match_parent"
@@ -50,25 +49,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <com.rey.material.widget.Button
+            <Button
                 android:id="@+id/advance_forward"
                 android:text="@string/advance_forward"
                 android:visibility="gone"
-                style="@style/regular_button"
-                app:rd_style="@style/button_ripple"/>
+                style="@style/rounded_button"/>
 
-            <com.rey.material.widget.Button
+            <Button
                 android:id="@+id/retry_question"
                 android:text="@string/retry_question"
                 android:visibility="gone"
-                style="@style/regular_button"
-                app:rd_style="@style/button_ripple"/>
+                style="@style/rounded_button"/>
 
-            <com.rey.material.widget.Button
+            <Button
                 android:id="@+id/view_answer"
                 android:text="@string/view_our_answer"
-                style="@style/regular_button"
-                app:rd_style="@style/button_ripple"/>
+                style="@style/rounded_button"/>
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>
