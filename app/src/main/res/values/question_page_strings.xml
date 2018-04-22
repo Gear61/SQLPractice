@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="question_number">Question #%d</string>
+    <string name="your_query_here">Your query here</string>
     <string name="invalid_select">Your query wasn\'t a valid SELECT query. Error: %s</string>
     <string name="dismiss">Dismiss</string>
 

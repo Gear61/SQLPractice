@@ -15,7 +15,7 @@
     <string name="check_icon">{ion-checkmark}</string>
 
     <!-- Query Submission Form -->
-    <string name="submit_query">Run Query!</string>
+    <string name="submit_query">Execute Query</string>
 
     <string name="welcome">Welcome</string>
     <string name="ask_for_help">Hey there, I\'m Alex! I\'m always looking to make my work as awesome as possible

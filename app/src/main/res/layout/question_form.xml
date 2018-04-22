@@ -37,12 +37,12 @@
                 android:id="@+id/query_entry"
                 style="@style/query_input"/>
 
-            <Button
+            <TextView
                 android:id="@+id/submit_query"
                 android:text="@string/submit_query"
                 style="@style/rounded_button"/>
 
-            <Button
+            <TextView
                 android:id="@+id/view_answer"
                 android:text="@string/view_our_answer"
                 style="@style/rounded_button"/>

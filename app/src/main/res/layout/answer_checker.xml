@@ -49,19 +49,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <Button
+            <TextView
                 android:id="@+id/advance_forward"
                 android:text="@string/advance_forward"
                 android:visibility="gone"
                 style="@style/rounded_button"/>
 
-            <Button
+            <TextView
                 android:id="@+id/retry_question"
                 android:text="@string/retry_question"
                 android:visibility="gone"
                 style="@style/rounded_button"/>
 
-            <Button
+            <TextView
                 android:id="@+id/view_answer"
                 android:text="@string/view_our_answer"
                 style="@style/rounded_button"/>

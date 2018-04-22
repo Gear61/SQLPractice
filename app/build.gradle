@@ -7,8 +7,8 @@ android {
         applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 182
-        versionName "1.8.2"
+        versionCode 183
+        versionName "1.8.3"
     }
     buildTypes {
         release {
@@ -22,14 +22,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:27.1.0'
-    compile 'com.android.support:design:27.1.0'
-    compile 'com.android.support:support-v13:27.1.0'
-    compile 'com.android.support:cardview-v7:27.1.0'
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:support-v13:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
-    compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
-    compile 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    implementation 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 }

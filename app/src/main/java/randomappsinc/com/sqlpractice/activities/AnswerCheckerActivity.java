@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -33,8 +32,8 @@ public class AnswerCheckerActivity extends StandardActivity {
     @BindView(R.id.their_answers_table) TableLayout theirTable;
     @BindView(R.id.verdict) TextView verdict;
     @BindView(R.id.their_answers) TextView theirAnswers;
-    @BindView(R.id.advance_forward) Button nextQuestion;
-    @BindView(R.id.retry_question) Button retry;
+    @BindView(R.id.advance_forward) TextView nextQuestion;
+    @BindView(R.id.retry_question) TextView retry;
 
     private int questionNum;
 
