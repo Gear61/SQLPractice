@@ -1,9 +1,9 @@
 package randomappsinc.com.sqlpractice.fragments;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,10 +51,11 @@ public class QuestionFragment extends Fragment {
     private QuestionServer questionServer;
     private int currentQuestion;
     private DataSource dataSource;
+    private MaterialDialog answerDialog;
     private Unbinder unbinder;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.question_form, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
@@ -71,18 +72,32 @@ public class QuestionFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         dataSource = new DataSource(getActivity());
+        final String answer = AnswerServer.getAnswer(currentQuestion);
+        answerDialog = new MaterialDialog.Builder(getActivity())
+                .title(R.string.our_answer_query)
+                .content(answer)
+                .positiveText(android.R.string.yes)
+                .neutralText(R.string.copy_answer)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Utils.copyTextToClipboard(answer, getActivity());
+                        Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
+                    }
+                })
+                .show();
     }
 
     // Sets up a question given the number
     private void setUpQuestion() {
         // Get descriptions of the tables we're supposed to use.
-        String tableDescriptions = "";
+        StringBuilder tableDescriptions = new StringBuilder();
         int[] relevantTables = questionServer.getQuestion(currentQuestion).giveNeededTables();
         for (int i = 0; i < relevantTables.length; i++) {
             if (i != 0) {
-                tableDescriptions += "\n\n";
+                tableDescriptions.append("\n\n");
             }
-            tableDescriptions += schemaServer.serveTable(relevantTables[i]).getDescription();
+            tableDescriptions.append(schemaServer.serveTable(relevantTables[i]).getDescription());
         }
         tableDesign.setText(tableDescriptions);
 
@@ -113,20 +128,7 @@ public class QuestionFragment extends Fragment {
 
     @OnClick(R.id.view_answer)
     public void giveUp() {
-        final String answer = AnswerServer.getAnswer(currentQuestion);
-        new MaterialDialog.Builder(getActivity())
-                .title(R.string.our_answer_query)
-                .content(answer)
-                .positiveText(android.R.string.yes)
-                .neutralText(R.string.copy_answer)
-                .onNeutral(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        Utils.copyTextToClipboard(answer, getActivity());
-                        Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
-                    }
-                })
-                .show();
+        answerDialog.show();
     }
 
     @Override

@@ -27,9 +27,9 @@ import randomappsinc.com.sqlpractice.utils.Utils;
 
 public class SandboxActivity extends StandardActivity {
 
-    @BindView(R.id.query_entry_sandbox) AutoCompleteTextView mQueryAutocompleteTextView;
+    @BindView(R.id.query_entry_sandbox) AutoCompleteTextView queryAutocompleteTextView;
     @BindView(R.id.parent) View parent;
-    @BindView(R.id.all_tables_description) TextView mAllTablesTextView;
+    @BindView(R.id.all_tables_description) TextView allTablesTextView;
     @BindString(R.string.invalid_select)  String invalidSelect;
 
     private MaterialDialog libraryDialog;
@@ -59,21 +59,15 @@ public class SandboxActivity extends StandardActivity {
 
         // Set up autocomplete
         QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
-                SchemaServer.getSchemaServer().serveAllTables(), mQueryAutocompleteTextView);
-        mQueryAutocompleteTextView.setAdapter(adapter);
-        mQueryAutocompleteTextView.setText("");
-    }
-
-    @Override
-    protected void onPause() {
-        Utils.hideKeyboard(this);
-        super.onPause();
+                SchemaServer.getSchemaServer().serveAllTables(), queryAutocompleteTextView);
+        queryAutocompleteTextView.setAdapter(adapter);
+        queryAutocompleteTextView.setText("");
     }
 
     @OnClick(R.id.submit_query_sandbox)
     public void submitQuery() {
         Utils.hideKeyboard(this);
-        String userQuery = mQueryAutocompleteTextView.getText().toString().trim();
+        String userQuery = queryAutocompleteTextView.getText().toString().trim();
         ResultSet results = dataSource.getResultsOfQuery(userQuery);
         if (results.getData() != null) {
             Intent intent = new Intent(this, SandboxResultActivity.class);
@@ -99,7 +93,7 @@ public class SandboxActivity extends StandardActivity {
             }
             tableDescriptions.append(allTables[i].getDescription());
         }
-        mAllTablesTextView.setText(tableDescriptions.toString());
+        allTablesTextView.setText(tableDescriptions.toString());
     }
 
     @Override

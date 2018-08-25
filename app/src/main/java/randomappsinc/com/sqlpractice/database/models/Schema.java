@@ -1,6 +1,7 @@
 package randomappsinc.com.sqlpractice.database.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 // Represents a schema (collection of columns + names)
@@ -46,10 +47,8 @@ public class Schema {
 
     public ArrayList<String> createSuggestions() {
         HashSet<String> noDupes = new HashSet<>();
-        for (int i = 0; i < rows.length; i++) {
-            for (int j = 0; j < rows[0].length; j++) {
-                noDupes.add(rows[i][j]);
-            }
+        for (String[] row : rows) {
+            Collections.addAll(noDupes, row);
         }
         return new ArrayList<>(noDupes);
     }

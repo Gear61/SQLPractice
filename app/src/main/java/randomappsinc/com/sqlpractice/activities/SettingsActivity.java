@@ -62,8 +62,11 @@ public class SettingsActivity extends StandardActivity {
                 break;
             case 4:
                 intent = new Intent(this, DatabaseTablesActivity.class);
+                break;
         }
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
+        if (intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+        }
     }
 }

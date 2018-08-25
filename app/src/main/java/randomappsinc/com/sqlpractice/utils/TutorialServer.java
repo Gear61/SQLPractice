@@ -63,10 +63,8 @@ public class TutorialServer {
         return ideaToUrl.get(idea);
     }
 
-    public List<String> getLessons() {
-        List<String> lessons = new ArrayList<>();
-        lessons.addAll(ideaToUrl.keySet());
-        return lessons;
+    private List<String> getLessons() {
+        return new ArrayList<>(ideaToUrl.keySet());
     }
 
     public String[] getLessonsArray() {

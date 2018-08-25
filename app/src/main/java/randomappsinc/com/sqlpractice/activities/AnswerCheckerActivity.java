@@ -36,6 +36,7 @@ public class AnswerCheckerActivity extends StandardActivity {
 
     private int questionNum;
     private PreferencesManager preferencesManager;
+    private MaterialDialog answerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,21 @@ public class AnswerCheckerActivity extends StandardActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         preferencesManager = new PreferencesManager(this);
+
+        final String answer = AnswerServer.getAnswer(questionNum);
+        answerDialog = new MaterialDialog.Builder(this)
+                .title(R.string.our_answer_query)
+                .content(answer)
+                .positiveText(android.R.string.yes)
+                .neutralText(R.string.copy_answer)
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Utils.copyTextToClipboard(answer, AnswerCheckerActivity.this);
+                        Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
+                    }
+                })
+                .show();
 
         // Grab relevant data needed to evaluate answers from Question Activity
         questionNum = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
@@ -121,20 +137,7 @@ public class AnswerCheckerActivity extends StandardActivity {
 
     @OnClick(R.id.view_answer)
     public void giveUp() {
-        final String answer = AnswerServer.getAnswer(questionNum);
-        new MaterialDialog.Builder(this)
-                .title(R.string.our_answer_query)
-                .content(answer)
-                .positiveText(android.R.string.yes)
-                .neutralText(R.string.copy_answer)
-                .onNeutral(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        Utils.copyTextToClipboard(answer, AnswerCheckerActivity.this);
-                        Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
-                    }
-                })
-                .show();
+        answerDialog.show();
     }
 
     @OnClick(R.id.advance_forward)

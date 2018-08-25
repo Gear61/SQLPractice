@@ -33,7 +33,7 @@ public class QuestionActivity extends StandardActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        questionPager.setAdapter(new QuestionsPagerAdapter(getFragmentManager()));
+        questionPager.setAdapter(new QuestionsPagerAdapter(getSupportFragmentManager()));
 
         int initialQuestion = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
         if (initialQuestion == 0) {

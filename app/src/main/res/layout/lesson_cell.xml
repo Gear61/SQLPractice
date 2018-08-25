@@ -1,8 +1,0 @@
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lesson_name"
-    android:padding="12dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="18dp"
-    android:textColor="@color/dark_gray"/>
