@@ -1,9 +1,11 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background_light_gray"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:ignore="SpUsage, RtlHardcoded">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -45,7 +47,6 @@
                     android:id="@+id/question_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:textSize="20dp"
                     android:textColor="@color/header_black"/>
 
@@ -54,7 +55,6 @@
                     android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:textSize="18dp"
                     android:textColor="@color/dark_gray"/>
             </LinearLayout>

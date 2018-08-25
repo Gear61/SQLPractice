@@ -85,7 +85,7 @@ public class QuestionFragment extends Fragment {
                         Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
                     }
                 })
-                .show();
+                .build();
     }
 
     // Sets up a question given the number

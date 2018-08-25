@@ -60,7 +60,7 @@ public class AnswerCheckerActivity extends StandardActivity {
                         Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
                     }
                 })
-                .show();
+                .build();
 
         // Grab relevant data needed to evaluate answers from Question Activity
         questionNum = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
