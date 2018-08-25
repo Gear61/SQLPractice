@@ -1,5 +1,6 @@
 package randomappsinc.com.sqlpractice.database;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,15 +9,15 @@ import android.database.sqlite.SQLiteException;
 import randomappsinc.com.sqlpractice.database.models.ResultSet;
 import randomappsinc.com.sqlpractice.database.models.Schema;
 
-public class MisterDataSource {
+public class DataSource {
 
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
     private SchemaServer schemaServer;
 
     // Constructor
-    public MisterDataSource() {
-        dbHelper = new MySQLiteHelper();
+    public DataSource(Context context) {
+        dbHelper = new MySQLiteHelper(context);
         schemaServer = SchemaServer.getSchemaServer();
     }
 
@@ -36,9 +37,9 @@ public class MisterDataSource {
     public void refreshTables() {
         // Create any missing tables
         String[] allTables = schemaServer.serveAllTableNames();
-        for (int i = 0; i < allTables.length; i++) {
-            if (!tableExists(allTables[i])) {
-                createTable(allTables[i]);
+        for (String table : allTables) {
+            if (!tableExists(table)) {
+                createTable(table);
             }
         }
 
@@ -47,39 +48,39 @@ public class MisterDataSource {
 
         // For each of those tables, check its current row count with what it should be
         // Then destroy/rebuild it if those numbers don't match
-        for (int i = 0; i < targetTables.length; i++) {
-            if (getNumRowsInTable(targetTables[i]) !=
-                    schemaServer.serveTable(targetTables[i]).numRows()) {
-                clearTable(targetTables[i]);
-                repopulateTable(targetTables[i]);
+        for (String targetTable : targetTables) {
+            if (getNumRowsInTable(targetTable) !=
+                    schemaServer.serveTable(targetTable).numRows()) {
+                clearTable(targetTable);
+                repopulateTable(targetTable);
             }
         }
     }
 
     // Clear a table's contents based on name
-    public void clearTable(String tableName) {
+    private void clearTable(String tableName) {
         open();
         database.delete(tableName, null, null);
         close();
     }
 
     // Repopulate a table based on name
-    public void repopulateTable(String tableName) {
+    private void repopulateTable(String tableName) {
         open();
-        Schema mrTable = schemaServer.serveTable(tableName);
-        String[] Inserts = mrTable.insertStatements();
+        Schema table = schemaServer.serveTable(tableName);
+        String[] inserts = table.insertStatements();
 
-        if (Inserts != null) {
+        if (inserts != null) {
             // Run each of the table's inserts
-            for (int j = 0; j < Inserts.length; j++) {
-                database.execSQL(Inserts[j]);
+            for (String insert : inserts) {
+                database.execSQL(insert);
             }
         }
         close();
     }
 
     // Creates a table
-    public void createTable(String tableName) {
+    private void createTable(String tableName) {
         open();
 
         // Create the table
@@ -92,9 +93,10 @@ public class MisterDataSource {
     }
 
     // Checks to see if the table with the given name exists
-    public boolean tableExists(String tableName) {
+    private boolean tableExists(String tableName) {
         open();
-        Cursor cursor = database.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
+        Cursor cursor = database.rawQuery("select DISTINCT tbl_name from sqlite_master " +
+                "where tbl_name = '" + tableName+ "'", null);
         if (cursor != null) {
             if (cursor.getCount() > 0) {
                 cursor.close();
@@ -108,7 +110,7 @@ public class MisterDataSource {
     }
 
     // Return the number of tuples in a certain table. This number may be outdated
-    public int getNumRowsInTable(String tableName) {
+    private int getNumRowsInTable(String tableName) {
         open();
         int numRows = 0;
         String query = "SELECT COUNT(*) FROM " + tableName + ";";

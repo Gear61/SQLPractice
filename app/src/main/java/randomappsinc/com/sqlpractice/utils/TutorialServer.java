@@ -1,4 +1,4 @@
-package randomappsinc.com.sqlpractice.misc;
+package randomappsinc.com.sqlpractice.utils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

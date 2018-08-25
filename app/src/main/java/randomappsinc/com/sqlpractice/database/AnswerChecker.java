@@ -1,5 +1,7 @@
 package randomappsinc.com.sqlpractice.database;
 
+import android.content.Context;
+
 import java.util.HashSet;
 
 import randomappsinc.com.sqlpractice.database.models.ResponseBundle;
@@ -7,10 +9,10 @@ import randomappsinc.com.sqlpractice.database.models.ResultSet;
 
 public class AnswerChecker {
 
-    private MisterDataSource dataSource;
+    private DataSource dataSource;
 
-    public AnswerChecker() {
-        dataSource = new MisterDataSource();
+    public AnswerChecker(Context context) {
+        dataSource = new DataSource(context);
     }
 
     public ResponseBundle checkAnswer(int questionNumber, String userQuery) {

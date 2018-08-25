@@ -1,5 +1,6 @@
-package randomappsinc.com.sqlpractice.misc;
+package randomappsinc.com.sqlpractice.utils;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -13,24 +14,9 @@ public class PreferencesManager {
     private static final String FIRST_TIME_KEY = "firstTime";
     private static final String COMPLETED_QUESTIONS_KEY = "completedQuestions";
     private static final String NUM_APP_OPENS_KEY = "numAppOpens";
-    private static PreferencesManager instance;
 
-    public static PreferencesManager get() {
-        if (instance == null) {
-            instance = getSync();
-        }
-        return instance;
-    }
-
-    private static synchronized PreferencesManager getSync() {
-        if (instance == null) {
-            instance = new PreferencesManager();
-        }
-        return instance;
-    }
-
-    private PreferencesManager() {
-        prefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
+    public PreferencesManager(Context context) {
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public boolean getFirstTimeUser() {

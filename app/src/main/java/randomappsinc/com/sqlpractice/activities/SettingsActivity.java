@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.SettingsAdapter;
-import randomappsinc.com.sqlpractice.misc.Utils;
+import randomappsinc.com.sqlpractice.utils.Utils;
 
 public class SettingsActivity extends StandardActivity {
 

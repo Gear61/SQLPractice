@@ -20,11 +20,10 @@ import randomappsinc.com.sqlpractice.database.AnswerChecker;
 import randomappsinc.com.sqlpractice.database.AnswerServer;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
 import randomappsinc.com.sqlpractice.database.models.ResponseBundle;
-import randomappsinc.com.sqlpractice.misc.Constants;
-import randomappsinc.com.sqlpractice.misc.PreferencesManager;
-import randomappsinc.com.sqlpractice.misc.Utils;
+import randomappsinc.com.sqlpractice.utils.Constants;
+import randomappsinc.com.sqlpractice.utils.PreferencesManager;
+import randomappsinc.com.sqlpractice.utils.Utils;
 
-// Evaluates the answer that the user gave from QuestionActivity
 public class AnswerCheckerActivity extends StandardActivity {
 
     @BindView(R.id.parent) View parent;
@@ -36,6 +35,7 @@ public class AnswerCheckerActivity extends StandardActivity {
     @BindView(R.id.retry_question) TextView retry;
 
     private int questionNum;
+    private PreferencesManager preferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +44,20 @@ public class AnswerCheckerActivity extends StandardActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        preferencesManager = new PreferencesManager(this);
+
         // Grab relevant data needed to evaluate answers from Question Activity
         questionNum = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
         String userQuery = getIntent().getStringExtra(Constants.USER_QUERY_KEY);
 
         // Grab an evaluation of user's answer and display it
-        AnswerChecker mrAnswer = new AnswerChecker();
+        AnswerChecker mrAnswer = new AnswerChecker(this);
         displayResponse(mrAnswer.checkAnswer(questionNum, userQuery));
     }
 
     private void displayResponse(ResponseBundle score) {
         if (score.getWasCorrect()) {
-            PreferencesManager.get().addCompletedQuestion(questionNum);
+            preferencesManager.addCompletedQuestion(questionNum);
             verdict.setText(R.string.correct_answer);
             if (questionNum != QuestionServer.getNumQuestions() - 1) {
                 nextQuestion.setVisibility(View.VISIBLE);
@@ -80,7 +82,10 @@ public class AnswerCheckerActivity extends StandardActivity {
     }
 
     public void createTable(TableLayout table, String[] columns, String[][] data) {
-        TableLayout.LayoutParams dataParams = new TableLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.1f);
+        TableLayout.LayoutParams dataParams = new TableLayout.LayoutParams(
+                0,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                0.1f);
         dataParams.setMargins(0, 0, 4, 0);
 
         LinearLayout topRow = new LinearLayout(this);
@@ -125,7 +130,7 @@ public class AnswerCheckerActivity extends StandardActivity {
                 .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        Utils.copyTextToClipboard(answer);
+                        Utils.copyTextToClipboard(answer, AnswerCheckerActivity.this);
                         Utils.showSnackbar(parent, getString(R.string.copy_confirmation));
                     }
                 })

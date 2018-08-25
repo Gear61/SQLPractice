@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 14
-        targetSdkVersion 27
-        versionCode 183
-        versionName "1.8.3"
+        targetSdkVersion 28
+        versionCode 184
+        versionName "1.8.4"
     }
     buildTypes {
         release {
@@ -23,10 +23,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:support-v13:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
+    implementation 'com.android.support:design:28.0.0-rc01'
+    implementation 'com.android.support:support-v13:28.0.0-rc01'
+    implementation 'com.android.support:cardview-v7:28.0.0-rc01'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'

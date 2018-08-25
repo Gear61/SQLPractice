@@ -1,7 +1,7 @@
 package randomappsinc.com.sqlpractice.database;
 
 import randomappsinc.com.sqlpractice.database.models.Question;
-import randomappsinc.com.sqlpractice.misc.TutorialServer;
+import randomappsinc.com.sqlpractice.utils.TutorialServer;
 
 // This class contains the questions our app contains
 public class QuestionServer {

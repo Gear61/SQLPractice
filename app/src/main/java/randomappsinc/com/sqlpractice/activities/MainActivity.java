@@ -13,21 +13,23 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsAdapter;
-import randomappsinc.com.sqlpractice.database.MisterDataSource;
-import randomappsinc.com.sqlpractice.misc.Constants;
-import randomappsinc.com.sqlpractice.misc.PreferencesManager;
-import randomappsinc.com.sqlpractice.misc.TutorialServer;
-import randomappsinc.com.sqlpractice.misc.Utils;
+import randomappsinc.com.sqlpractice.database.DataSource;
+import randomappsinc.com.sqlpractice.utils.Constants;
+import randomappsinc.com.sqlpractice.utils.PreferencesManager;
+import randomappsinc.com.sqlpractice.utils.TutorialServer;
+import randomappsinc.com.sqlpractice.utils.Utils;
 
 public class MainActivity extends StandardActivity {
 
     @BindView(R.id.parent) View parent;
     @BindView(R.id.question_list) ListView questionList;
+    @BindString(R.string.question_number) String questionTemplate;
 
     private QuestionsAdapter questionsAdapter;
 
@@ -45,22 +47,23 @@ public class MainActivity extends StandardActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        if (PreferencesManager.get().getFirstTimeUser()) {
+        PreferencesManager preferencesManager = new PreferencesManager(this);
+        if (preferencesManager.getFirstTimeUser()) {
             new MaterialDialog.Builder(this)
                     .title(R.string.welcome)
                     .content(R.string.ask_for_help)
                     .positiveText(android.R.string.yes)
                     .show();
-            PreferencesManager.get().setFirstTimeUser(false);
+            preferencesManager.setFirstTimeUser(false);
         }
 
-        MisterDataSource m_dataSource = new MisterDataSource();
-        m_dataSource.refreshTables();
+        DataSource dataSource = new DataSource(this);
+        dataSource.refreshTables();
 
-        questionsAdapter = new QuestionsAdapter(this);
+        questionsAdapter = new QuestionsAdapter(this, questionTemplate);
         questionList.setAdapter(questionsAdapter);
 
-        if (PreferencesManager.get().shouldAskToRate()) {
+        if (preferencesManager.shouldAskToRate()) {
             showPleaseRateDialog();
         }
     }
@@ -107,9 +110,9 @@ public class MainActivity extends StandardActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_ios_bookmarks);
-        Utils.loadMenuIcon(menu, R.id.settings, IoniconsIcons.ion_android_settings);
-        Utils.loadMenuIcon(menu, R.id.sandbox_mode, IoniconsIcons.ion_android_desktop);
+        Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_ios_bookmarks, this);
+        Utils.loadMenuIcon(menu, R.id.settings, IoniconsIcons.ion_android_settings, this);
+        Utils.loadMenuIcon(menu, R.id.sandbox_mode, IoniconsIcons.ion_android_desktop, this);
         return true;
     }
 

@@ -17,8 +17,8 @@ import butterknife.OnPageChange;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsPagerAdapter;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
-import randomappsinc.com.sqlpractice.misc.Constants;
-import randomappsinc.com.sqlpractice.misc.Utils;
+import randomappsinc.com.sqlpractice.utils.Constants;
+import randomappsinc.com.sqlpractice.utils.Utils;
 
 // Loads questions for users to answer
 public class QuestionActivity extends StandardActivity {
@@ -64,8 +64,8 @@ public class QuestionActivity extends StandardActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.question_menu, menu);
-        Utils.loadMenuIcon(menu, R.id.random, IoniconsIcons.ion_shuffle);
-        Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_information_circled);
+        Utils.loadMenuIcon(menu, R.id.random, IoniconsIcons.ion_shuffle, this);
+        Utils.loadMenuIcon(menu, R.id.library, IoniconsIcons.ion_information_circled, this);
         return true;
     }
 

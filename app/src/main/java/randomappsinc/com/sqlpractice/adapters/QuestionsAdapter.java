@@ -12,22 +12,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
-import randomappsinc.com.sqlpractice.misc.PreferencesManager;
+import randomappsinc.com.sqlpractice.utils.PreferencesManager;
 
 public class QuestionsAdapter extends BaseAdapter {
 
-    private Context context;
     private String[] questionList = new String[QuestionServer.getNumQuestions()];
+    private PreferencesManager preferencesManager;
 
-    public QuestionsAdapter(Context context) {
-        this.context = context;
-        populateList();
+    public QuestionsAdapter(Context context, String questionTemplate) {
+        preferencesManager = new PreferencesManager(context);
+        populateList(questionTemplate);
     }
 
     // Fills in "Question 1, Question 2, etc..." list
-    private void populateList() {
+    private void populateList(String questionTemplate) {
         for (int i = 1; i <= QuestionServer.getNumQuestions(); i++) {
-            this.questionList[i - 1] = String.format(context.getString(R.string.question_number), i);
+            this.questionList[i - 1] = String.format(questionTemplate, i);
         }
     }
 
@@ -51,12 +51,12 @@ public class QuestionsAdapter extends BaseAdapter {
         @BindColor(R.color.green) int green;
         @BindColor(R.color.red) int red;
 
-        public QuestionViewHolder(View view) {
+        QuestionViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
 
-        public void loadQuestion(int position) {
-            if (PreferencesManager.get().hasCompletedQuestion(position)) {
+        void loadQuestion(int position) {
+            if (preferencesManager.hasCompletedQuestion(position)) {
                 completionIcon.setText(R.string.check_icon);
                 completionIcon.setTextColor(green);
             } else {
@@ -72,8 +72,12 @@ public class QuestionsAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         QuestionViewHolder holder;
         if (view == null) {
-            LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = vi.inflate(R.layout.question_list_item, parent, false);
+            LayoutInflater inflater = (LayoutInflater) parent.getContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if (inflater == null) {
+                throw new RuntimeException("Unable to get a layout inflater to render questions");
+            }
+            view = inflater.inflate(R.layout.question_list_item, parent, false);
             holder = new QuestionViewHolder(view);
             view.setTag(holder);
         } else {

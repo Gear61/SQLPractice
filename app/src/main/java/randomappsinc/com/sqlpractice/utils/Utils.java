@@ -1,4 +1,4 @@
-package randomappsinc.com.sqlpractice.misc;
+package randomappsinc.com.sqlpractice.utils;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -23,21 +23,21 @@ import randomappsinc.com.sqlpractice.database.QuestionServer;
 public class Utils {
 
     public static void showSnackbar(View parent, String content) {
-        Context context = MyApplication.getAppContext();
+        Context context = parent.getContext();
         Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);
         View view = snackbar.getView();
         view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
-        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = view.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(context.getResources().getColor(R.color.white));
         snackbar.show();
     }
 
     public static void showLongSnackbar(View parent, String content) {
-        Context context = MyApplication.getAppContext();
+        Context context = parent.getContext();
         final Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_INDEFINITE);
         View view = snackbar.getView();
         view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
-        TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = view.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(context.getResources().getColor(R.color.white));
         textView.setMaxLines(8);
         snackbar.setAction(R.string.dismiss, new View.OnClickListener() {
@@ -70,16 +70,18 @@ public class Utils {
         return list.get(0);
     }
 
-    public static void copyTextToClipboard(String text) {
-        Context context = MyApplication.getAppContext();
+    public static void copyTextToClipboard(String text, Context context) {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Activity.CLIPBOARD_SERVICE);
+        if (clipboard == null) {
+            return;
+        }
         ClipData clip = ClipData.newPlainText(context.getString(R.string.answer_query), text);
         clipboard.setPrimaryClip(clip);
     }
 
-    public static void loadMenuIcon(Menu menu, int itemId, Icon icon) {
+    public static void loadMenuIcon(Menu menu, int itemId, Icon icon, Context context) {
         menu.findItem(itemId).setIcon(
-                new IconDrawable(MyApplication.getAppContext(), icon)
+                new IconDrawable(context, icon)
                         .colorRes(R.color.white)
                         .actionBarSize());
     }
