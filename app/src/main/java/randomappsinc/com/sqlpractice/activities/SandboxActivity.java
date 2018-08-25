@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
 import butterknife.BindString;
@@ -21,18 +20,18 @@ import randomappsinc.com.sqlpractice.database.DataSource;
 import randomappsinc.com.sqlpractice.database.SchemaServer;
 import randomappsinc.com.sqlpractice.database.models.ResultSet;
 import randomappsinc.com.sqlpractice.database.models.Schema;
+import randomappsinc.com.sqlpractice.dialogs.LibraryDialog;
 import randomappsinc.com.sqlpractice.utils.Constants;
-import randomappsinc.com.sqlpractice.utils.TutorialServer;
 import randomappsinc.com.sqlpractice.utils.Utils;
 
-public class SandboxActivity extends StandardActivity {
+public class SandboxActivity extends StandardActivity implements LibraryDialog.Listener {
 
     @BindView(R.id.query_entry_sandbox) AutoCompleteTextView queryAutocompleteTextView;
     @BindView(R.id.parent) View parent;
     @BindView(R.id.all_tables_description) TextView allTablesTextView;
     @BindString(R.string.invalid_select)  String invalidSelect;
 
-    private MaterialDialog libraryDialog;
+    private LibraryDialog libraryDialog;
     private DataSource dataSource;
 
     @Override
@@ -42,17 +41,7 @@ public class SandboxActivity extends StandardActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        libraryDialog = new MaterialDialog.Builder(this)
-                .title(R.string.library)
-                .items(TutorialServer.get().getLessonsArray())
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        openWebPage(text.toString());
-                    }
-                })
-                .positiveText(R.string.close)
-                .build();
+        libraryDialog = new LibraryDialog(this, this);
         dataSource = new DataSource(this);
 
         populateTableDescriptions();
@@ -78,7 +67,8 @@ public class SandboxActivity extends StandardActivity {
         }
     }
 
-    private void openWebPage(String helpURL) {
+    @Override
+    public void openWebPage(String helpURL) {
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(WebActivity.IDEA_KEY, helpURL);
         startActivity(intent);

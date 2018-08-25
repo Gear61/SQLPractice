@@ -20,18 +20,19 @@ import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsAdapter;
 import randomappsinc.com.sqlpractice.database.DataSource;
+import randomappsinc.com.sqlpractice.dialogs.LibraryDialog;
 import randomappsinc.com.sqlpractice.utils.Constants;
 import randomappsinc.com.sqlpractice.utils.PreferencesManager;
-import randomappsinc.com.sqlpractice.utils.TutorialServer;
 import randomappsinc.com.sqlpractice.utils.Utils;
 
-public class MainActivity extends StandardActivity {
+public class MainActivity extends StandardActivity implements LibraryDialog.Listener {
 
     @BindView(R.id.parent) View parent;
     @BindView(R.id.question_list) ListView questionList;
     @BindString(R.string.question_number) String questionTemplate;
 
     private QuestionsAdapter questionsAdapter;
+    private LibraryDialog libraryDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,8 @@ public class MainActivity extends StandardActivity {
         if (preferencesManager.shouldAskToRate()) {
             showPleaseRateDialog();
         }
+
+        libraryDialog = new LibraryDialog(this, this);
     }
 
     private void showPleaseRateDialog() {
@@ -101,7 +104,8 @@ public class MainActivity extends StandardActivity {
         questionsAdapter.notifyDataSetChanged();
     }
 
-    private void openWebPage(String helpURL) {
+    @Override
+    public void openWebPage(String helpURL) {
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(WebActivity.IDEA_KEY, helpURL);
         startActivity(intent);
@@ -119,17 +123,7 @@ public class MainActivity extends StandardActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.library:
-                new MaterialDialog.Builder(this)
-                        .title(R.string.library)
-                        .items(TutorialServer.get().getLessonsArray())
-                        .itemsCallback(new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                                openWebPage(text.toString());
-                            }
-                        })
-                        .positiveText(R.string.close)
-                        .show();
+                libraryDialog.show();
                 return true;
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
