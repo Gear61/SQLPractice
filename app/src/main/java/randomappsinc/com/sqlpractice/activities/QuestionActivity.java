@@ -59,6 +59,7 @@ public class QuestionActivity extends StandardActivity {
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(WebActivity.IDEA_KEY, idea);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.stay);
     }
 
     @Override

@@ -109,6 +109,7 @@ public class MainActivity extends StandardActivity implements LibraryDialog.List
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(WebActivity.IDEA_KEY, helpURL);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.stay);
     }
 
     @Override

@@ -5,6 +5,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.IoniconsIcons;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
@@ -23,6 +26,11 @@ public class WebActivity extends StandardActivity {
         ButterKnife.bind(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar()
+                .setHomeAsUpIndicator(new IconDrawable(this, IoniconsIcons.ion_android_close)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+
         String idea = getIntent().getStringExtra(IDEA_KEY);
         setTitle(idea);
 
@@ -39,5 +47,11 @@ public class WebActivity extends StandardActivity {
         });
 
         webView.loadUrl(TutorialServer.get().getUrl(idea));
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, R.anim.slide_out_bottom);
     }
 }

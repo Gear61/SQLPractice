@@ -72,6 +72,7 @@ public class SandboxActivity extends StandardActivity implements LibraryDialog.L
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(WebActivity.IDEA_KEY, helpURL);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.stay);
     }
 
     public void populateTableDescriptions() {
