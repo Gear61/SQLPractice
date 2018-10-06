@@ -47,6 +47,9 @@ public class AnswerCheckerActivity extends StandardActivity {
 
         preferencesManager = new PreferencesManager(this);
 
+        // Grab relevant data needed to evaluate answers from Question Activity
+        questionNum = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
+
         final String answer = AnswerServer.getAnswer(questionNum);
         answerDialog = new MaterialDialog.Builder(this)
                 .title(R.string.our_answer_query)
@@ -62,8 +65,6 @@ public class AnswerCheckerActivity extends StandardActivity {
                 })
                 .build();
 
-        // Grab relevant data needed to evaluate answers from Question Activity
-        questionNum = getIntent().getIntExtra(Constants.QUESTION_NUMBER_KEY, 0);
         String userQuery = getIntent().getStringExtra(Constants.USER_QUERY_KEY);
 
         // Grab an evaluation of user's answer and display it
