@@ -37,14 +37,6 @@ public class MainActivity extends StandardActivity implements LibraryDialog.List
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Kill activity if it's not on top of the stack due to Samsung bug
-        if (!isTaskRoot() && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-            finish();
-            return;
-        }
-
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
