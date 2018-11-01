@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.view.ViewPager
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/question_pager"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/question_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+    android:layout_height="match_parent"/>

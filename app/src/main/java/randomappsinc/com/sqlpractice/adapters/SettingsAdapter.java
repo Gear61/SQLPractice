@@ -17,10 +17,8 @@ public class SettingsAdapter extends BaseAdapter {
 
     private String[] optionNames;
     private String[] optionIcons;
-    private Context context;
 
     public SettingsAdapter(Context context) {
-        this.context = context;
         this.optionNames = context.getResources().getStringArray(R.array.settings_options);
         this.optionIcons = context.getResources().getStringArray(R.array.settings_icons);
     }
@@ -40,11 +38,11 @@ public class SettingsAdapter extends BaseAdapter {
         return getItem(position).hashCode();
     }
 
-    public static class SettingsViewHolder {
+    static class SettingsViewHolder {
         @BindView(R.id.option_icon) IconTextView settingsIcon;
         @BindView(R.id.settings_option) TextView settingsOption;
 
-        public SettingsViewHolder(View view) {
+        SettingsViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }
@@ -52,8 +50,10 @@ public class SettingsAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         SettingsViewHolder holder;
         if (view == null) {
-            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = vi.inflate(R.layout.settings_list_item, parent, false);
+            LayoutInflater inflater = (LayoutInflater) parent
+                    .getContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.settings_list_item, parent, false);
             holder = new SettingsViewHolder(view);
             view.setTag(holder);
         }

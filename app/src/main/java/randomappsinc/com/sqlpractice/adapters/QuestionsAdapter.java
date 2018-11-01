@@ -43,7 +43,7 @@ public class QuestionsAdapter extends BaseAdapter {
         return position;
     }
 
-    public class QuestionViewHolder {
+    class QuestionViewHolder {
         @BindView(R.id.question_number) TextView questionNumber;
         @BindView(R.id.tagged_lessons) TextView taggedLessons;
         @BindView(R.id.completion_icon) TextView completionIcon;
