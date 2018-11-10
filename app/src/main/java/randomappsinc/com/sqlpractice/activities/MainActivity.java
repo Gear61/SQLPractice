@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -15,7 +15,6 @@ import com.joanzapata.iconify.fonts.IoniconsIcons;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsAdapter;
 import randomappsinc.com.sqlpractice.database.DataSource;
@@ -25,9 +24,10 @@ import randomappsinc.com.sqlpractice.utils.PreferencesManager;
 import randomappsinc.com.sqlpractice.utils.ToastUtils;
 import randomappsinc.com.sqlpractice.utils.Utils;
 
-public class MainActivity extends StandardActivity implements LibraryDialog.Listener {
+public class MainActivity extends StandardActivity
+        implements LibraryDialog.Listener, QuestionsAdapter.Listener {
 
-    @BindView(R.id.question_list) ListView questionList;
+    @BindView(R.id.question_list) RecyclerView questionList;
     @BindString(R.string.question_number) String questionTemplate;
 
     private QuestionsAdapter questionsAdapter;
@@ -51,7 +51,7 @@ public class MainActivity extends StandardActivity implements LibraryDialog.List
         DataSource dataSource = new DataSource(this);
         dataSource.refreshTables();
 
-        questionsAdapter = new QuestionsAdapter(this, questionTemplate);
+        questionsAdapter = new QuestionsAdapter(this, questionTemplate, this);
         questionList.setAdapter(questionsAdapter);
 
         if (preferencesManager.shouldAskToRate()) {
@@ -81,8 +81,8 @@ public class MainActivity extends StandardActivity implements LibraryDialog.List
                 .show();
     }
 
-    @OnItemClick(R.id.question_list)
-    public void onItemClick(int position) {
+    @Override
+    public void onQuestionClicked(int position) {
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra(Constants.QUESTION_NUMBER_KEY, position);
         startActivity(intent);

@@ -1,27 +1,35 @@
 package randomappsinc.com.sqlpractice.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
 import randomappsinc.com.sqlpractice.utils.PreferencesManager;
 
-public class QuestionsAdapter extends BaseAdapter {
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.QuestionViewHolder> {
+
+    public interface Listener {
+        void onQuestionClicked(int position);
+    }
 
     private String[] questionList = new String[QuestionServer.getNumQuestions()];
     private PreferencesManager preferencesManager;
+    private Listener listener;
 
-    public QuestionsAdapter(Context context, String questionTemplate) {
+    public QuestionsAdapter(Context context, String questionTemplate, Listener listener) {
         preferencesManager = new PreferencesManager(context);
         populateList(questionTemplate);
+        this.listener = listener;
     }
 
     // Fills in "Question 1, Question 2, etc..." list
@@ -31,19 +39,31 @@ public class QuestionsAdapter extends BaseAdapter {
         }
     }
 
-    public int getCount() {
-        return questionList.length;
-    }
-
-    public String getItem(int position) {
-        return questionList[position];
-    }
-
     public long getItemId(int position) {
         return position;
     }
 
-    class QuestionViewHolder {
+    @NonNull
+    @Override
+    public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.question_list_item,
+                parent,
+                false);
+        return new QuestionViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
+        holder.loadQuestion(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return questionList.length;
+    }
+
+    class QuestionViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.question_number) TextView questionNumber;
         @BindView(R.id.tagged_lessons) TextView taggedLessons;
         @BindView(R.id.completion_icon) TextView completionIcon;
@@ -52,6 +72,7 @@ public class QuestionsAdapter extends BaseAdapter {
         @BindColor(R.color.red) int red;
 
         QuestionViewHolder(View view) {
+            super(view);
             ButterKnife.bind(this, view);
         }
 
@@ -63,27 +84,13 @@ public class QuestionsAdapter extends BaseAdapter {
                 completionIcon.setText(R.string.x_icon);
                 completionIcon.setTextColor(red);
             }
-
-            questionNumber.setText(getItem(position));
+            questionNumber.setText(questionList[position]);
             taggedLessons.setText(QuestionServer.getQuestionServer().getQuestion(position).getIdeasList());
         }
-    }
 
-    public View getView(int position, View view, ViewGroup parent) {
-        QuestionViewHolder holder;
-        if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) parent.getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            if (inflater == null) {
-                throw new RuntimeException("Unable to get a layout inflater to render questions");
-            }
-            view = inflater.inflate(R.layout.question_list_item, parent, false);
-            holder = new QuestionViewHolder(view);
-            view.setTag(holder);
-        } else {
-            holder = (QuestionViewHolder) view.getTag();
+        @OnClick(R.id.parent)
+        void onQuestionClicked() {
+            listener.onQuestionClicked(getAdapterPosition());
         }
-        holder.loadQuestion(position);
-        return view;
     }
 }
