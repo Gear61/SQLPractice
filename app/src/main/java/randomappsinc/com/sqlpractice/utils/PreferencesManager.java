@@ -19,12 +19,10 @@ public class PreferencesManager {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public boolean getFirstTimeUser() {
-        return prefs.getBoolean(FIRST_TIME_KEY, true);
-    }
-
-    public void setFirstTimeUser(boolean firstTimeUser) {
-        prefs.edit().putBoolean(FIRST_TIME_KEY, firstTimeUser).apply();
+    public boolean isFirstTimeUser() {
+        boolean isFirstTimeUser = prefs.getBoolean(FIRST_TIME_KEY, true);
+        prefs.edit().putBoolean(FIRST_TIME_KEY, false).apply();
+        return isFirstTimeUser;
     }
 
     private Set<String> getCompletedQuestions() {

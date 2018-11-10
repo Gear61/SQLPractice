@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         android:foreground="?android:attr/selectableItemBackground"
         card_view:contentPadding="8dp"
         card_view:cardUseCompatPadding="true"
@@ -55,7 +55,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="17dp"
                     android:textColor="@color/dark_gray"/>
             </LinearLayout>
         </RelativeLayout>

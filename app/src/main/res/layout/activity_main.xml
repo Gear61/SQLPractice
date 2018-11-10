@@ -1,16 +1,9 @@
-<android.support.design.widget.CoordinatorLayout
+<ListView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent"
-    android:background="@color/background_light_gray"
+    android:id="@+id/question_list"
+    android:divider="@null"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ListView
-        android:id="@+id/question_list"
-        android:divider="@null"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:clipToPadding="false"/>
-</android.support.design.widget.CoordinatorLayout>
+    android:layout_height="match_parent"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:clipToPadding="false"/>

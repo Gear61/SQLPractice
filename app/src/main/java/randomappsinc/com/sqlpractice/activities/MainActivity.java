@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -23,11 +22,11 @@ import randomappsinc.com.sqlpractice.database.DataSource;
 import randomappsinc.com.sqlpractice.dialogs.LibraryDialog;
 import randomappsinc.com.sqlpractice.utils.Constants;
 import randomappsinc.com.sqlpractice.utils.PreferencesManager;
+import randomappsinc.com.sqlpractice.utils.ToastUtils;
 import randomappsinc.com.sqlpractice.utils.Utils;
 
 public class MainActivity extends StandardActivity implements LibraryDialog.Listener {
 
-    @BindView(R.id.parent) View parent;
     @BindView(R.id.question_list) ListView questionList;
     @BindString(R.string.question_number) String questionTemplate;
 
@@ -41,13 +40,12 @@ public class MainActivity extends StandardActivity implements LibraryDialog.List
         ButterKnife.bind(this);
 
         PreferencesManager preferencesManager = new PreferencesManager(this);
-        if (preferencesManager.getFirstTimeUser()) {
+        if (preferencesManager.isFirstTimeUser()) {
             new MaterialDialog.Builder(this)
                     .title(R.string.welcome)
                     .content(R.string.ask_for_help)
                     .positiveText(android.R.string.yes)
                     .show();
-            preferencesManager.setFirstTimeUser(false);
         }
 
         DataSource dataSource = new DataSource(this);
@@ -74,7 +72,7 @@ public class MainActivity extends StandardActivity implements LibraryDialog.List
                         Uri uri =  Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         if (!(getPackageManager().queryIntentActivities(intent, 0).size() > 0)) {
-                            Utils.showSnackbar(parent, getString(R.string.play_store_error));
+                            ToastUtils.showLongToast(MainActivity.this, R.string.play_store_error);
                             return;
                         }
                         startActivity(intent);

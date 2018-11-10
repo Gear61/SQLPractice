@@ -88,6 +88,7 @@ public class QuestionActivity extends StandardActivity {
                                 openWebpage(text.toString());
                             }
                         })
+                        .positiveText(R.string.close)
                         .show();
                 return true;
             default:
