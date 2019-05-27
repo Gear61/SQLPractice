@@ -39,23 +39,23 @@ public class TutorialServer {
 
     private TutorialServer() {
         ideaToUrl = new LinkedHashMap<>();
-        ideaToUrl.put(INTRO, "http://www.w3schools.com/sql/sql_select.asp");
-        ideaToUrl.put(DISTINCT, "http://www.w3schools.com/sql/sql_distinct.asp");
-        ideaToUrl.put(WHERE, "http://www.w3schools.com/sql/sql_where.asp");
-        ideaToUrl.put(GROUP_BY, "http://www.w3schools.com/sql/sql_groupby.asp");
+        ideaToUrl.put(INTRO, "https://www.w3schools.com/sql/sql_select.asp");
+        ideaToUrl.put(DISTINCT, "https://www.w3schools.com/sql/sql_distinct.asp");
+        ideaToUrl.put(WHERE, "https://www.w3schools.com/sql/sql_where.asp");
+        ideaToUrl.put(GROUP_BY, "https://www.w3schools.com/sql/sql_groupby.asp");
         ideaToUrl.put(MAX, "https://www.w3schools.com/sql/sql_min_max.asp");
-        ideaToUrl.put(SUBQUERIES, "http://www.tutorialspoint.com/sql/sql-sub-queries.htm");
-        ideaToUrl.put(ORDER_BY, "http://www.w3schools.com/sql/sql_orderby.asp");
+        ideaToUrl.put(SUBQUERIES, "https://www.tutorialspoint.com/sql/sql-sub-queries.htm");
+        ideaToUrl.put(ORDER_BY, "https://www.w3schools.com/sql/sql_orderby.asp");
         ideaToUrl.put(LIMIT, "https://www.tutorialspoint.com/sqlite/sqlite_limit_clause.htm");
         ideaToUrl.put(MIN, "https://www.w3schools.com/sql/sql_min_max.asp");
         ideaToUrl.put(LIKE, "http://www.w3schools.com/sql/sql_like.asp");
-        ideaToUrl.put(ALIASES, "http://www.w3schools.com/sql/sql_alias.asp");
-        ideaToUrl.put(INNER_JOIN, "http://www.w3schools.com/sql/sql_join_inner.asp");
+        ideaToUrl.put(ALIASES, "https://www.w3schools.com/sql/sql_alias.asp");
+        ideaToUrl.put(INNER_JOIN, "https://www.w3schools.com/sql/sql_join_inner.asp");
         ideaToUrl.put(AVG, "https://www.w3schools.com/sql/sql_count_avg_sum.asp");
         ideaToUrl.put(SQLITE_METADATA, "https://www.sqlite.org/faq.html#q7");
         ideaToUrl.put(COUNT, "https://www.w3schools.com/sql/sql_count_avg_sum.asp");
-        ideaToUrl.put(AND_OR, "http://www.w3schools.com/sql/sql_and_or.asp");
-        ideaToUrl.put(COALESCE, "http://stackoverflow.com/a/6134463");
+        ideaToUrl.put(AND_OR, "https://www.w3schools.com/sql/sql_and_or.asp");
+        ideaToUrl.put(COALESCE, "https://stackoverflow.com/a/6134463");
         ideaToUrl.put(SUM, "https://www.w3schools.com/sql/sql_count_avg_sum.asp");
     }
 
