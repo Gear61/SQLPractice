@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.support.design.widget.Snackbar;
+import android.graphics.Color;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.joanzapata.iconify.Icon;
 import com.joanzapata.iconify.IconDrawable;
 
@@ -24,28 +27,30 @@ public class Utils {
 
     public static void showSnackbar(View parent, String content) {
         Context context = parent.getContext();
-        Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_LONG);
+        SpannableStringBuilder spannableString = new SpannableStringBuilder(content);
+        spannableString.setSpan(
+                new ForegroundColorSpan(Color.WHITE),
+                0,
+                content.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        Snackbar snackbar = Snackbar.make(parent, spannableString, Snackbar.LENGTH_LONG);
         View view = snackbar.getView();
         view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
-        TextView textView = view.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(context.getResources().getColor(R.color.white));
         snackbar.show();
     }
 
     public static void showLongSnackbar(View parent, String content) {
         Context context = parent.getContext();
+        SpannableStringBuilder spannableString = new SpannableStringBuilder(content);
+        spannableString.setSpan(
+                new ForegroundColorSpan(Color.WHITE),
+                0,
+                content.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         final Snackbar snackbar = Snackbar.make(parent, content, Snackbar.LENGTH_INDEFINITE);
         View view = snackbar.getView();
         view.setBackgroundColor(context.getResources().getColor(R.color.app_turquoise));
-        TextView textView = view.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(context.getResources().getColor(R.color.white));
-        textView.setMaxLines(8);
-        snackbar.setAction(R.string.dismiss, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                snackbar.dismiss();
-            }
-        });
+        snackbar.setAction(R.string.dismiss, v -> snackbar.dismiss());
         snackbar.setActionTextColor(context.getResources().getColor(R.color.white));
         snackbar.show();
     }

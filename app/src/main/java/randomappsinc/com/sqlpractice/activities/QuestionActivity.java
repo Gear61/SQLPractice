@@ -2,10 +2,11 @@ package randomappsinc.com.sqlpractice.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;

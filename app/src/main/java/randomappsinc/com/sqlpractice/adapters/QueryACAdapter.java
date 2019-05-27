@@ -2,7 +2,6 @@ package randomappsinc.com.sqlpractice.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;

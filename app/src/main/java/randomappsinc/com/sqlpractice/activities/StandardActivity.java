@@ -1,8 +1,9 @@
 package randomappsinc.com.sqlpractice.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import randomappsinc.com.sqlpractice.R;
 
