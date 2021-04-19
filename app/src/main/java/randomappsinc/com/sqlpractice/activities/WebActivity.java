@@ -38,7 +38,6 @@ public class WebActivity extends StandardActivity {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         webView.setWebViewClient(new WebViewClient() {
-            @SuppressWarnings("deprecation")
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);

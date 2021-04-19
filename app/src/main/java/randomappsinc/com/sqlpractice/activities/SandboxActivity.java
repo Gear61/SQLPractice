@@ -96,12 +96,10 @@ public class SandboxActivity extends StandardActivity implements LibraryDialog.L
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.library:
-                libraryDialog.show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.library) {
+            libraryDialog.show();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }
