@@ -81,13 +81,13 @@ public class QuestionServer {
                     "Write a query that outputs the SQL statement used to create the above table.",
                     "Write a query that returns the name and salary (in this column order) of all professors who make more than " +
                             "4 times as much as the lowest paid professor.",
-                    "Write a query that returns the amount of unique authors who have written books in this table.",
+                    "Write a query that returns the number of unique authors who have written books in this table.",
                     "Write a query that returns the name and salary (in this column order) of professors who earn " +
                             "between 120000 and 250000 a year (inclusive).",
                     "Write a query that returns all professors (all columns) who either work in the \"Anthropology\" " +
                             "department or makes more than 150000 a year.",
                     "Write a query that returns the highest salary in the \"Computer Science\" department.",
-                    "Write a query that returns the amount of professors who earn more than twice as much as the " +
+                    "Write a query that returns the number of professors who earn more than twice as much as the " +
                             "lowest paid professor in the \"Political Science\" department.",
                     "Write a query that returns the names of all books checked out by Justin (first name) Lee (last name).",
                     "Write a query that returns the full names (full name is first name followed by a space " +
@@ -103,7 +103,7 @@ public class QuestionServer {
                     "Write a query that returns every department and the number of professors in each one " +
                             "(in this column order).",
                     "Write a query that returns the department with the most professors " +
-                            "and that amount (in this column order)."};
+                            "and that number (in this column order)."};
 
     private Question[] allQuestions = new Question[questions.length];
 
