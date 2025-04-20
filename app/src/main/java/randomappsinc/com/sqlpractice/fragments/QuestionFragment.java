@@ -14,12 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import butterknife.BindString;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.activities.AnswerCheckerActivity;
 import randomappsinc.com.sqlpractice.adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.database.AnswerServer;
@@ -29,6 +23,7 @@ import randomappsinc.com.sqlpractice.database.SchemaServer;
 import randomappsinc.com.sqlpractice.database.models.ResultSet;
 import randomappsinc.com.sqlpractice.utils.Constants;
 import randomappsinc.com.sqlpractice.utils.Utils;
+import randomappsinc.com.sqlpractice.R;
 
 public class QuestionFragment extends Fragment {
 

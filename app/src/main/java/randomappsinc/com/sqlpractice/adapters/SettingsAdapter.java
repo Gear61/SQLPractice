@@ -9,14 +9,12 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
 
 public class SettingsAdapter extends BaseAdapter {
 
-    private String[] optionNames;
-    private String[] optionIcons;
+    private final String[] optionNames;
+    private final String[] optionIcons;
 
     public SettingsAdapter(Context context) {
         this.optionNames = context.getResources().getStringArray(R.array.settings_options);
@@ -39,16 +37,19 @@ public class SettingsAdapter extends BaseAdapter {
     }
 
     static class SettingsViewHolder {
-        @BindView(R.id.option_icon) IconTextView settingsIcon;
-        @BindView(R.id.settings_option) TextView settingsOption;
+        IconTextView settingsIcon;
+        TextView settingsOption;
 
         SettingsViewHolder(View view) {
-            ButterKnife.bind(this, view);
+            settingsIcon = view.findViewById(R.id.option_icon);
+            settingsOption = view.findViewById(R.id.settings_option);
         }
     }
 
+    @Override
     public View getView(int position, View view, ViewGroup parent) {
         SettingsViewHolder holder;
+
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) parent
                     .getContext()
@@ -56,8 +57,7 @@ public class SettingsAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.settings_list_item, parent, false);
             holder = new SettingsViewHolder(view);
             view.setTag(holder);
-        }
-        else {
+        } else {
             holder = (SettingsViewHolder) view.getTag();
         }
 

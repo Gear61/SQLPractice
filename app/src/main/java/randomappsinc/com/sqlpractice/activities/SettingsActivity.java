@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import randomappsinc.com.sqlpractice.R;
@@ -38,12 +39,12 @@ public class SettingsActivity extends StandardActivity {
         settingsOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parentView, View view, int position, long id) {
-                onItemClick(position);
+                handleItemClick(position);
             }
         });
     }
 
-    public void onItemClick(int position) {
+    public void handleItemClick(int position) {
         Intent intent = null;
         switch (position) {
             case 0:

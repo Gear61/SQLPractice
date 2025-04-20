@@ -20,8 +20,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.models.Column;
 import randomappsinc.com.sqlpractice.database.models.Schema;
@@ -29,8 +27,8 @@ import randomappsinc.com.sqlpractice.database.models.Schema;
 // Auto-Complete adapter for the query to make users' lives easier
 public class QueryACAdapter extends ArrayAdapter<String> {
 
-    private static final ArrayList<String> CONSTANTS = new ArrayList<>
-            (Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
+    private static final ArrayList<String> CONSTANTS = new ArrayList<>(
+            Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
                     "MIN", "DISTINCT", "DESC", "ASC", "LIMIT", "AND", "OR", "AS", "SUM", "LIKE",
                     "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG", "sql", "sqlite_master",
                     "tbl_name", "type", "table", "BETWEEN", "COALESCE", "OFFSET"));
@@ -55,7 +53,6 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         addRowInformation();
     }
 
-    // Add table terms (table name, column names) to suggestions
     private void addTableInformation() {
         for (Schema schema : currentSchemas) {
             itemsAll.add(schema.getName());
@@ -66,8 +63,6 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         }
     }
 
-    // Adds suggestions from contents of each table.
-    // Ain't nobody got time to type out Computer Science or Zaniolo
     private void addRowInformation() {
         for (Schema schema : currentSchemas) {
             itemsAll.addAll(schema.createSuggestions());
@@ -89,11 +84,11 @@ public class QueryACAdapter extends ArrayAdapter<String> {
         });
     }
 
-    // Set it up so that selecting an item doesn't erase everything
     private void setUpAC() {
         userQuery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) throws IllegalArgumentException, IllegalStateException {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
+                    throws IllegalArgumentException, IllegalStateException {
                 String[] pieces = currentInput.split(" ");
                 String autoFill = "";
                 if (pieces[pieces.length - 1].contains("(")) {
@@ -103,21 +98,22 @@ public class QueryACAdapter extends ArrayAdapter<String> {
                 }
                 autoFill += parent.getItemAtPosition(position).toString();
                 pieces[pieces.length - 1] = autoFill;
-                String longerQuery = "";
+                StringBuilder longerQuery = new StringBuilder();
                 for (String piece : pieces) {
-                    longerQuery += piece + " ";
+                    longerQuery.append(piece).append(" ");
                 }
-                userQuery.setText(longerQuery);
-                userQuery.setSelection(longerQuery.length());
+                String result = longerQuery.toString();
+                userQuery.setText(result);
+                userQuery.setSelection(result.length());
             }
         });
     }
 
     public class SuggestionViewHolder {
-        @BindView(R.id.suggestion) TextView suggestion;
+        public TextView suggestion;
 
         public SuggestionViewHolder(View view) {
-            ButterKnife.bind(this, view);
+            suggestion = view.findViewById(R.id.suggestion);
         }
 
         public void loadSuggestion(int position) {
@@ -126,10 +122,11 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     }
 
     @NonNull
+    @Override
     public View getView(int position, View view, @NonNull ViewGroup parent) {
         SuggestionViewHolder holder;
         if (view == null) {
-            LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R.layout.acquery_item, parent, false);
             holder = new SuggestionViewHolder(view);
             view.setTag(holder);
@@ -147,17 +144,17 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     }
 
     @SuppressLint("DefaultLocale")
-    private Filter nameFilter = new Filter() {
+    private final Filter nameFilter = new Filter() {
+        @Override
         public String convertResultToString(Object resultValue) {
-            return (resultValue).toString();
+            return resultValue.toString();
         }
 
-        @SuppressLint("DefaultLocale")
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             Set<String> newSuggestions = new HashSet<>();
             if (constraint != null) {
-                String pieces[] = constraint.toString().split(" ");
+                String[] pieces = constraint.toString().split(" ");
                 String target = pieces[pieces.length - 1];
                 pieces = target.split("\\(");
                 target = pieces[pieces.length - 1];

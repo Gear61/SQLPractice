@@ -22,12 +22,12 @@ public class LibraryDialog {
         this.dialog = new MaterialDialog.Builder(context)
                 .title(R.string.library)
                 .items(TutorialServer.get().getLessonsArray())
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-                        lessonClickListener.openWebPage(text.toString());
-                    }
-                })
+                .itemsCallback((
+                        dialog,
+                        itemView,
+                        position,
+                        text
+                ) -> lessonClickListener.openWebPage(text.toString()))
                 .positiveText(R.string.close)
                 .build();
     }

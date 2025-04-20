@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "randomappsinc.com.sqlpracticeplus"
-    compileSdkVersion 30
+    namespace = "randomappsinc.com.sqlpractice"
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "randomappsinc.com.sqlpracticeplus"
         minSdkVersion 14
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 189
         versionName "1.8.9"
     }

@@ -79,26 +79,27 @@ public class QuestionActivity extends StandardActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Utils.hideKeyboard(this);
         int currentPosition = questionPager.getCurrentItem();
-        switch (item.getItemId()) {
-            case R.id.random:
-                int newPosition = Utils.getRandomQuestionIndex(currentPosition);
-                questionPager.setCurrentItem(newPosition, true);
-                return true;
-            case R.id.library:
-                new MaterialDialog.Builder(this)
-                        .title(R.string.materials_title)
-                        .items(QuestionServer.getQuestionServer().getQuestion(currentPosition).getIdeas())
-                        .itemsCallback(new MaterialDialog.ListCallback() {
-                            @Override
-                            public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                                openWebpage(text.toString());
-                            }
-                        })
-                        .positiveText(R.string.close)
-                        .show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.random) {
+            int newPosition = Utils.getRandomQuestionIndex(currentPosition);
+            questionPager.setCurrentItem(newPosition, true);
+            return true;
+        } else if (itemId == R.id.library) {
+            new MaterialDialog.Builder(this)
+                    .title(R.string.materials_title)
+                    .items(QuestionServer.getQuestionServer().getQuestion(currentPosition).getIdeas())
+                    .itemsCallback(new MaterialDialog.ListCallback() {
+                        @Override
+                        public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                            openWebpage(text.toString());
+                        }
+                    })
+                    .positiveText(R.string.close)
+                    .show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 }

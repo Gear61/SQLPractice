@@ -114,18 +114,18 @@ public class MainActivity extends StandardActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.library:
-                libraryDialog.show();
-                return true;
-            case R.id.settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-            case R.id.sandbox_mode:
-                startActivity(new Intent(this, SandboxActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == R.id.library) {
+            libraryDialog.show();
+            return true;
+        } else if (itemId == R.id.settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        } else if (itemId == R.id.sandbox_mode) {
+            startActivity(new Intent(this, SandboxActivity.class));
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 }

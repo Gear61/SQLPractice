@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.BindColor;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
 import randomappsinc.com.sqlpractice.utils.PreferencesManager;
@@ -23,23 +20,23 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         void onQuestionClicked(int position);
     }
 
-    private String[] questionList = new String[QuestionServer.getNumQuestions()];
-    private PreferencesManager preferencesManager;
-    private Listener listener;
+    private final String[] questionList = new String[QuestionServer.getNumQuestions()];
+    private final PreferencesManager preferencesManager;
+    private final Listener listener;
 
     public QuestionsAdapter(Context context, String questionTemplate, Listener listener) {
-        preferencesManager = new PreferencesManager(context);
+        this.preferencesManager = new PreferencesManager(context);
         populateList(questionTemplate);
         this.listener = listener;
     }
 
-    // Fills in "Question 1, Question 2, etc..." list
     private void populateList(String questionTemplate) {
         for (int i = 1; i <= QuestionServer.getNumQuestions(); i++) {
-            this.questionList[i - 1] = String.format(questionTemplate, i);
+            questionList[i - 1] = String.format(questionTemplate, i);
         }
     }
 
+    @Override
     public long getItemId(int position) {
         return position;
     }
@@ -48,9 +45,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
     @Override
     public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.question_list_item,
-                parent,
-                false);
+                R.layout.question_list_item, parent, false);
         return new QuestionViewHolder(itemView);
     }
 
@@ -65,16 +60,29 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
     }
 
     class QuestionViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.question_number) TextView questionNumber;
-        @BindView(R.id.tagged_lessons) TextView taggedLessons;
-        @BindView(R.id.completion_icon) TextView completionIcon;
 
-        @BindColor(R.color.green) int green;
-        @BindColor(R.color.red) int red;
+        private final TextView questionNumber;
+        private final TextView taggedLessons;
+        private final TextView completionIcon;
+        private final int green;
+        private final int red;
 
         QuestionViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            questionNumber = view.findViewById(R.id.question_number);
+            taggedLessons = view.findViewById(R.id.tagged_lessons);
+            completionIcon = view.findViewById(R.id.completion_icon);
+
+            green = ContextCompat.getColor(view.getContext(), R.color.green);
+            red = ContextCompat.getColor(view.getContext(), R.color.red);
+
+            // Click listener replacing @OnClick
+            view.findViewById(R.id.parent).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onQuestionClicked(getAdapterPosition());
+                }
+            });
         }
 
         void loadQuestion(int position) {
@@ -87,11 +95,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
             }
             questionNumber.setText(questionList[position]);
             taggedLessons.setText(QuestionServer.getQuestionServer().getQuestion(position).getIdeasList());
-        }
-
-        @OnClick(R.id.parent)
-        void onQuestionClicked() {
-            listener.onQuestionClicked(getAdapterPosition());
         }
     }
 }
