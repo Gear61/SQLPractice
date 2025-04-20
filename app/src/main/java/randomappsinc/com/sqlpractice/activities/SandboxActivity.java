@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
 import randomappsinc.com.sqlpractice.R;
-import randomappsinc.com.sqlpractice.adapters.QueryACAdapter;
+import randomappsinc.com.sqlpractice.adapters.QueryAutocompleteAdapter;
 import randomappsinc.com.sqlpractice.database.DataSource;
 import randomappsinc.com.sqlpractice.database.SchemaServer;
 import randomappsinc.com.sqlpractice.database.models.ResultSet;
@@ -49,7 +49,7 @@ public class SandboxActivity extends StandardActivity implements LibraryDialog.L
         populateTableDescriptions();
 
         // Set up autocomplete
-        QueryACAdapter adapter = new QueryACAdapter(this,
+        QueryAutocompleteAdapter adapter = new QueryAutocompleteAdapter(this,
                 android.R.layout.simple_dropdown_item_1line,
                 SchemaServer.getSchemaServer().serveAllTables(),
                 queryAutocompleteTextView);

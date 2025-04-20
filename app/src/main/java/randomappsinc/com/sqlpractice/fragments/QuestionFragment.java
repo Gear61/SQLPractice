@@ -16,7 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.activities.AnswerCheckerActivity;
-import randomappsinc.com.sqlpractice.adapters.QueryACAdapter;
+import randomappsinc.com.sqlpractice.adapters.QueryAutocompleteAdapter;
 import randomappsinc.com.sqlpractice.database.AnswerServer;
 import randomappsinc.com.sqlpractice.database.DataSource;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
@@ -120,7 +120,7 @@ public class QuestionFragment extends Fragment {
         questionPrompt.setText(questionServer.getQuestion(currentQuestion).giveQuestionText());
 
         // Set up autocomplete
-        QueryACAdapter adapter = new QueryACAdapter(getActivity(),
+        QueryAutocompleteAdapter adapter = new QueryAutocompleteAdapter(getActivity(),
                 android.R.layout.simple_dropdown_item_1line,
                 schemaServer.serveSomeTables(relevantTables),
                 queryHelper);

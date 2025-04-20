@@ -15,15 +15,13 @@ public class WebActivity extends StandardActivity {
 
     public static final String IDEA_KEY = "idea";
 
-    private WebView webView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view);
 
         // Manual binding
-        webView = findViewById(R.id.webview);
+        WebView webView = findViewById(R.id.webview);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(

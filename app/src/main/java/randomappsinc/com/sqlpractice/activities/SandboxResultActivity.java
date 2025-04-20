@@ -16,18 +16,15 @@ import randomappsinc.com.sqlpractice.utils.Constants;
 public class SandboxResultActivity extends StandardActivity {
 
     private TableLayout resultTable;
-    private TextView userQuery;
-    private TextView emptyResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sandbox_result);
 
-        // Manual view binding
         resultTable = findViewById(R.id.sandbox_results_table);
-        userQuery = findViewById(R.id.user_query);
-        emptyResult = findViewById(R.id.sandbox_empty_results);
+        TextView userQuery = findViewById(R.id.user_query);
+        TextView emptyResult = findViewById(R.id.sandbox_empty_results);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

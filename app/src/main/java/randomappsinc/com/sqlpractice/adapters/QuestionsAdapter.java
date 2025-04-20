@@ -76,13 +76,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
             green = ContextCompat.getColor(view.getContext(), R.color.green);
             red = ContextCompat.getColor(view.getContext(), R.color.red);
 
-            // Click listener replacing @OnClick
-            view.findViewById(R.id.parent).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onQuestionClicked(getAdapterPosition());
-                }
-            });
+            view.findViewById(R.id.parent).setOnClickListener(v -> listener.onQuestionClicked(getAdapterPosition()));
         }
 
         void loadQuestion(int position) {

@@ -18,7 +18,6 @@ public class SettingsActivity extends StandardActivity {
     public static final String REPO_URL = "https://github.com/Gear61/SQLPractice";
 
     private View parent;
-    private ListView settingsOptions;
     private String feedbackSubject;
     private String sendEmail;
 
@@ -27,21 +26,15 @@ public class SettingsActivity extends StandardActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        // Manual view binding
         parent = findViewById(R.id.parent);
-        settingsOptions = findViewById(R.id.settings_options);
+        ListView settingsOptions = findViewById(R.id.settings_options);
         feedbackSubject = getString(R.string.feedback_subject);
         sendEmail = getString(R.string.send_email);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         settingsOptions.setAdapter(new SettingsAdapter(this));
-        settingsOptions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parentView, View view, int position, long id) {
-                handleItemClick(position);
-            }
-        });
+        settingsOptions.setOnItemClickListener((parentView, view, position, id) -> handleItemClick(position));
     }
 
     public void handleItemClick(int position) {
@@ -60,7 +53,7 @@ public class SettingsActivity extends StandardActivity {
             case 2:
                 Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
                 intent = new Intent(Intent.ACTION_VIEW, uri);
-                if (!(getPackageManager().queryIntentActivities(intent, 0).size() > 0)) {
+                if (getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
                     Utils.showSnackbar(parent, getString(R.string.play_store_error));
                     return;
                 }

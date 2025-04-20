@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
@@ -25,7 +24,7 @@ import randomappsinc.com.sqlpractice.database.models.Column;
 import randomappsinc.com.sqlpractice.database.models.Schema;
 
 // Auto-Complete adapter for the query to make users' lives easier
-public class QueryACAdapter extends ArrayAdapter<String> {
+public class QueryAutocompleteAdapter extends ArrayAdapter<String> {
 
     private static final ArrayList<String> CONSTANTS = new ArrayList<>(
             Arrays.asList("SELECT", "FROM", "WHERE", "COUNT", "ORDER BY", "GROUP BY", "MAX",
@@ -33,14 +32,14 @@ public class QueryACAdapter extends ArrayAdapter<String> {
                     "INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "OUTER JOIN", "AVG", "sql", "sqlite_master",
                     "tbl_name", "type", "table", "BETWEEN", "COALESCE", "OFFSET"));
 
-    private Context context;
-    private Set<String> itemsAll;
-    private AutoCompleteTextView userQuery;
+    private final Context context;
+    private final Set<String> itemsAll;
+    private final AutoCompleteTextView userQuery;
     private String currentInput;
-    private Schema[] currentSchemas;
+    private final Schema[] currentSchemas;
 
-    public QueryACAdapter(Context context, int viewResourceId, Schema[] currentSchemas, AutoCompleteTextView userQuery) {
-        super(context, viewResourceId, new ArrayList<String>());
+    public QueryAutocompleteAdapter(Context context, int viewResourceId, Schema[] currentSchemas, AutoCompleteTextView userQuery) {
+        super(context, viewResourceId, new ArrayList<>());
         this.context = context;
         this.userQuery = userQuery;
         this.currentSchemas = currentSchemas;
@@ -85,27 +84,23 @@ public class QueryACAdapter extends ArrayAdapter<String> {
     }
 
     private void setUpAC() {
-        userQuery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-                    throws IllegalArgumentException, IllegalStateException {
-                String[] pieces = currentInput.split(" ");
-                String autoFill = "";
-                if (pieces[pieces.length - 1].contains("(")) {
-                    autoFill += pieces[pieces.length - 1].split("\\(")[0] + "(";
-                } else if (pieces[pieces.length - 1].contains("\"")) {
-                    autoFill += pieces[pieces.length - 1].split("\"")[0] + "\"";
-                }
-                autoFill += parent.getItemAtPosition(position).toString();
-                pieces[pieces.length - 1] = autoFill;
-                StringBuilder longerQuery = new StringBuilder();
-                for (String piece : pieces) {
-                    longerQuery.append(piece).append(" ");
-                }
-                String result = longerQuery.toString();
-                userQuery.setText(result);
-                userQuery.setSelection(result.length());
+        userQuery.setOnItemClickListener((parent, view, position, id) -> {
+            String[] pieces = currentInput.split(" ");
+            String autoFill = "";
+            if (pieces[pieces.length - 1].contains("(")) {
+                autoFill += pieces[pieces.length - 1].split("\\(")[0] + "(";
+            } else if (pieces[pieces.length - 1].contains("\"")) {
+                autoFill += pieces[pieces.length - 1].split("\"")[0] + "\"";
             }
+            autoFill += parent.getItemAtPosition(position).toString();
+            pieces[pieces.length - 1] = autoFill;
+            StringBuilder longerQuery = new StringBuilder();
+            for (String piece : pieces) {
+                longerQuery.append(piece).append(" ");
+            }
+            String result = longerQuery.toString();
+            userQuery.setText(result);
+            userQuery.setSelection(result.length());
         });
     }
 
@@ -163,7 +158,7 @@ public class QueryACAdapter extends ArrayAdapter<String> {
                 if (!target.trim().isEmpty()) {
                     for (String potential : itemsAll) {
                         if (potential.toLowerCase().startsWith(target.toLowerCase())
-                                && !potential.toLowerCase().equals(target.toLowerCase())) {
+                                && !potential.equalsIgnoreCase(target)) {
                             newSuggestions.add(potential);
                             if (newSuggestions.size() >= 10) {
                                 break;
