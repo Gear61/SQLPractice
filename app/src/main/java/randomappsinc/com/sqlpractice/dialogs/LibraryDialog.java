@@ -1,7 +1,6 @@
 package randomappsinc.com.sqlpractice.dialogs;
 
 import android.content.Context;
-import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
