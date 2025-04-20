@@ -11,10 +11,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
-import butterknife.BindString;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnPageChange;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsPagerAdapter;
 import randomappsinc.com.sqlpractice.database.QuestionServer;
@@ -24,14 +20,18 @@ import randomappsinc.com.sqlpractice.utils.Utils;
 // Loads questions for users to answer
 public class QuestionActivity extends StandardActivity {
 
-    @BindView(R.id.question_pager) ViewPager questionPager;
-    @BindString(R.string.question_number) String questionNumber;
+    private ViewPager questionPager;
+    private String questionNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_container);
-        ButterKnife.bind(this);
+
+        // Manual binding
+        questionPager = findViewById(R.id.question_pager);
+        questionNumber = getString(R.string.question_number);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         questionPager.setAdapter(new QuestionsPagerAdapter(getSupportFragmentManager()));
@@ -42,11 +42,14 @@ public class QuestionActivity extends StandardActivity {
         } else {
             questionPager.setCurrentItem(initialQuestion);
         }
-    }
 
-    @OnPageChange(R.id.question_pager)
-    public void onQuestionChanged() {
-        setTitle(String.format(questionNumber, questionPager.getCurrentItem() + 1));
+        // Manual listener to replace @OnPageChange
+        questionPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                setTitle(String.format(questionNumber, position + 1));
+            }
+        });
     }
 
     @Override
@@ -72,6 +75,7 @@ public class QuestionActivity extends StandardActivity {
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Utils.hideKeyboard(this);
         int currentPosition = questionPager.getCurrentItem();

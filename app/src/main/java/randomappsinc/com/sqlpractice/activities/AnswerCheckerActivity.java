@@ -13,9 +13,6 @@ import androidx.annotation.NonNull;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.AnswerChecker;
 import randomappsinc.com.sqlpractice.database.AnswerServer;
@@ -27,13 +24,13 @@ import randomappsinc.com.sqlpractice.utils.Utils;
 
 public class AnswerCheckerActivity extends StandardActivity {
 
-    @BindView(R.id.parent) View parent;
-    @BindView(R.id.correct_answers_table) TableLayout correctTable;
-    @BindView(R.id.their_answers_table) TableLayout theirTable;
-    @BindView(R.id.verdict) TextView verdict;
-    @BindView(R.id.their_answers) TextView theirAnswers;
-    @BindView(R.id.advance_forward) TextView nextQuestion;
-    @BindView(R.id.retry_question) TextView retry;
+    private View parent;
+    private TableLayout correctTable;
+    private TableLayout theirTable;
+    private TextView verdict;
+    private TextView theirAnswers;
+    private TextView nextQuestion;
+    private TextView retry;
 
     private int questionNum;
     private PreferencesManager preferencesManager;
@@ -43,7 +40,38 @@ public class AnswerCheckerActivity extends StandardActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.answer_checker);
-        ButterKnife.bind(this);
+
+        // Manual view binding
+        parent = findViewById(R.id.parent);
+        correctTable = findViewById(R.id.correct_answers_table);
+        theirTable = findViewById(R.id.their_answers_table);
+        verdict = findViewById(R.id.verdict);
+        theirAnswers = findViewById(R.id.their_answers);
+        nextQuestion = findViewById(R.id.advance_forward);
+        retry = findViewById(R.id.retry_question);
+
+        // Set click listeners
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retryQuestion();
+            }
+        });
+
+        findViewById(R.id.view_answer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                giveUp();
+            }
+        });
+
+        nextQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                advanceToNextQuestion();
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         preferencesManager = new PreferencesManager(this);
@@ -92,9 +120,9 @@ public class AnswerCheckerActivity extends StandardActivity {
             theirAnswers.setText(R.string.empty_resultset);
         } else {
             theirAnswers.setText(R.string.query_results_preamble);
-            // Logic to display their table
             createTable(theirTable, score.userResults().getColumns(), score.userResults().getData());
         }
+
         // Logic to display our answers table
         createTable(correctTable, score.correctAnswers().getColumns(), score.correctAnswers().getData());
     }
@@ -115,8 +143,6 @@ public class AnswerCheckerActivity extends StandardActivity {
             topRow.addView(text);
         }
         topRow.setOrientation(LinearLayout.HORIZONTAL);
-
-        // add the TableRow to the TableLayout
         table.addView(topRow);
 
         for (String[] dataRow : data) {
@@ -132,17 +158,14 @@ public class AnswerCheckerActivity extends StandardActivity {
         }
     }
 
-    @OnClick(R.id.retry_question)
     public void retryQuestion() {
         finish();
     }
 
-    @OnClick(R.id.view_answer)
     public void giveUp() {
         answerDialog.show();
     }
 
-    @OnClick(R.id.advance_forward)
     public void advanceToNextQuestion() {
         setResult(RESULT_OK);
         finish();

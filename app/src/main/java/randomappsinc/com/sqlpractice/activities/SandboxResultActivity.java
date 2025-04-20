@@ -8,8 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.database.DataSource;
 import randomappsinc.com.sqlpractice.database.models.ResultSet;
@@ -17,22 +15,29 @@ import randomappsinc.com.sqlpractice.utils.Constants;
 
 public class SandboxResultActivity extends StandardActivity {
 
-    @BindView(R.id.sandbox_results_table) TableLayout resultTable;
-    @BindView(R.id.user_query) TextView userQuery;
-    @BindView(R.id.sandbox_empty_results) TextView emptyResult;
+    private TableLayout resultTable;
+    private TextView userQuery;
+    private TextView emptyResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sandbox_result);
-        ButterKnife.bind(this);
+
+        // Manual view binding
+        resultTable = findViewById(R.id.sandbox_results_table);
+        userQuery = findViewById(R.id.user_query);
+        emptyResult = findViewById(R.id.sandbox_empty_results);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String query = getIntent().getStringExtra(Constants.USER_QUERY_KEY);
 
         userQuery.setText(query);
+
         DataSource dataSource = new DataSource(this);
         ResultSet results = dataSource.getResultsOfQuery(query);
+
         if (results.getData() == null || results.getData().length == 0) {
             emptyResult.setVisibility(View.VISIBLE);
         } else {
@@ -57,8 +62,6 @@ public class SandboxResultActivity extends StandardActivity {
             topRow.addView(text);
         }
         topRow.setOrientation(LinearLayout.HORIZONTAL);
-
-        // Add the TableRow to the TableLayout
         resultTable.addView(topRow);
 
         for (String[] dataRow : data) {

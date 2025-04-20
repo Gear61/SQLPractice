@@ -13,9 +13,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
-import butterknife.BindString;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QuestionsAdapter;
 import randomappsinc.com.sqlpractice.database.DataSource;
@@ -28,8 +25,8 @@ import randomappsinc.com.sqlpractice.utils.Utils;
 public class MainActivity extends StandardActivity
         implements LibraryDialog.Listener, QuestionsAdapter.Listener {
 
-    @BindView(R.id.question_list) RecyclerView questionList;
-    @BindString(R.string.question_number) String questionTemplate;
+    private RecyclerView questionList;
+    private String questionTemplate;
 
     private QuestionsAdapter questionsAdapter;
     private LibraryDialog libraryDialog;
@@ -38,7 +35,10 @@ public class MainActivity extends StandardActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
+        // Manual view binding
+        questionList = findViewById(R.id.question_list);
+        questionTemplate = getString(R.string.question_number);
 
         PreferencesManager preferencesManager = new PreferencesManager(this);
         if (preferencesManager.isFirstTimeUser()) {
@@ -70,7 +70,7 @@ public class MainActivity extends StandardActivity
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        Uri uri =  Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+                        Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         if (!(getPackageManager().queryIntentActivities(intent, 0).size() > 0)) {
                             ToastUtils.showLongToast(MainActivity.this, R.string.play_store_error);
@@ -112,6 +112,7 @@ public class MainActivity extends StandardActivity
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.library:
@@ -122,6 +123,7 @@ public class MainActivity extends StandardActivity
                 return true;
             case R.id.sandbox_mode:
                 startActivity(new Intent(this, SandboxActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

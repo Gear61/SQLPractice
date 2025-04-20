@@ -8,8 +8,6 @@ import android.webkit.WebViewClient;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.utils.TutorialServer;
 
@@ -17,17 +15,19 @@ public class WebActivity extends StandardActivity {
 
     public static final String IDEA_KEY = "idea";
 
-    @BindView(R.id.webview) WebView webView;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view);
-        ButterKnife.bind(this);
+
+        // Manual binding
+        webView = findViewById(R.id.webview);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar()
-                .setHomeAsUpIndicator(new IconDrawable(this, IoniconsIcons.ion_android_close)
+        getSupportActionBar().setHomeAsUpIndicator(
+                new IconDrawable(this, IoniconsIcons.ion_android_close)
                         .colorRes(R.color.white)
                         .actionBarSize());
 

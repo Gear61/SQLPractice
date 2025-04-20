@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 
-import butterknife.BindString;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import randomappsinc.com.sqlpractice.R;
 import randomappsinc.com.sqlpractice.adapters.QueryACAdapter;
 import randomappsinc.com.sqlpractice.database.DataSource;
@@ -26,10 +22,10 @@ import randomappsinc.com.sqlpractice.utils.Utils;
 
 public class SandboxActivity extends StandardActivity implements LibraryDialog.Listener {
 
-    @BindView(R.id.query_entry_sandbox) AutoCompleteTextView queryAutocompleteTextView;
-    @BindView(R.id.parent) View parent;
-    @BindView(R.id.all_tables_description) TextView allTablesTextView;
-    @BindString(R.string.invalid_select)  String invalidSelect;
+    private AutoCompleteTextView queryAutocompleteTextView;
+    private View parent;
+    private TextView allTablesTextView;
+    private String invalidSelect;
 
     private LibraryDialog libraryDialog;
     private DataSource dataSource;
@@ -38,7 +34,13 @@ public class SandboxActivity extends StandardActivity implements LibraryDialog.L
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sandbox);
-        ButterKnife.bind(this);
+
+        // Manual view binding
+        queryAutocompleteTextView = findViewById(R.id.query_entry_sandbox);
+        parent = findViewById(R.id.parent);
+        allTablesTextView = findViewById(R.id.all_tables_description);
+        invalidSelect = getString(R.string.invalid_select);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         libraryDialog = new LibraryDialog(this, this);
@@ -47,13 +49,22 @@ public class SandboxActivity extends StandardActivity implements LibraryDialog.L
         populateTableDescriptions();
 
         // Set up autocomplete
-        QueryACAdapter adapter = new QueryACAdapter(this, android.R.layout.simple_dropdown_item_1line,
-                SchemaServer.getSchemaServer().serveAllTables(), queryAutocompleteTextView);
+        QueryACAdapter adapter = new QueryACAdapter(this,
+                android.R.layout.simple_dropdown_item_1line,
+                SchemaServer.getSchemaServer().serveAllTables(),
+                queryAutocompleteTextView);
         queryAutocompleteTextView.setAdapter(adapter);
         queryAutocompleteTextView.setText("");
+
+        // Submit button listener
+        findViewById(R.id.submit_query_sandbox).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitQuery();
+            }
+        });
     }
 
-    @OnClick(R.id.submit_query_sandbox)
     public void submitQuery() {
         Utils.hideKeyboard(this);
         String userQuery = queryAutocompleteTextView.getText().toString().trim();
